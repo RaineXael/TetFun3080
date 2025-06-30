@@ -14,7 +14,7 @@ namespace TetFun3080
 {
     internal class BoardPlayer : IEntity
     {
-        int currentGravity = 3;
+        int currentGravity = 10;
         int gravityTimer;
         private Board board;
         private IRandomizer randomizer;
@@ -48,17 +48,24 @@ namespace TetFun3080
         int dasTime = 10;
 
         bool ghostVisible = true;
+        SpriteFont font;
+
+
+        private float lockInDelay = 3;
+        private float lockInTimer = 0;
 
         public BoardPlayer(AssetManager assets, Board board, IRandomizer randomizer, UserInput input)
         {
             this.board = board;
             this.randomizer = randomizer;
             _block_sprite = new SpriteSheet(assets.GetTexture("Sprites/blocks"));
+            font = assets.GetFont("Fonts/Font1");
             _block_sprite.baseSize = 16;
             GenerateNewPiece(randomizer.GetNextPiece());
             this.input = input;
             boardDrawOffset = board.bufferHeight * 16;
             gravityTimer = currentGravity;
+            lockInTimer = lockInDelay;
         }
 
 
@@ -106,9 +113,10 @@ namespace TetFun3080
 
                 }
             }
-
-          
             
+            spriteBatch.DrawString(font, lockInTimer.ToString(), new Vector2(10, 10), Color.White);
+
+
         }
 
         public void RecieveDamage()
@@ -206,7 +214,7 @@ namespace TetFun3080
             {
                 if (!rotateClockPressed && !lockedIn && !(currentShape == Pieces.O))
                 {
-                    piecePositions = rotator.RotateClockwise(piecePositions, board);
+                    piecePositions = rotator.RotateClockwise(pilot_position,piecePositions, board);
                     rotateClockPressed = true;
                 }
 
@@ -220,7 +228,7 @@ namespace TetFun3080
                 if (!rotateCounterPressed && !lockedIn && !(currentShape == Pieces.O))
                 {
                     rotateCounterPressed = true;
-                    piecePositions = rotator.RotateCounterClockwise(piecePositions, board);
+                    piecePositions = rotator.RotateCounterClockwise(pilot_position,piecePositions, board);
                 }
 
             }
@@ -270,7 +278,8 @@ namespace TetFun3080
                 foreach (Vector2 blockOffset in piecePositions)
                 {
                     Vector2 boardLookupPosition = new Vector2(pilot_position.X + blockOffset.X, originalPos.Y + blockOffset.Y + i);
-                    if(boardLookupPosition.Y >= board.height + board.bufferHeight || board.boardState[(int)(boardLookupPosition.X), (int)(boardLookupPosition.Y)] != 0)
+                    //if(boardLookupPosition.Y >= board.height + board.bufferHeight || board.boardState[(int)(boardLookupPosition.X), (int)(boardLookupPosition.Y)] != 0)
+                    if (!board.CheckIsEmptyCoord(boardLookupPosition))
                     {
                         blockFound = true;
                         return pilot_position + new Vector2(0,i-1);
@@ -341,7 +350,7 @@ namespace TetFun3080
             }
             pilot_position.X++; // Move the piece down by one unit
         }
-
+        bool blockBottomHit = false;
         public void MoveDown()
         {
             foreach(Vector2 blockOffset in piecePositions)
@@ -350,13 +359,20 @@ namespace TetFun3080
                 blockpos.Y += 1;
                 if (blockpos.Y >= board.height+board.bufferHeight ||board.boardState[(int)blockpos.X, (int)blockpos.Y] != 0)
                 {
+                    //Lockinplace run every frame when the bottom is reached.
+                    //Do a timer when done so that still allows player movement & rot.
+                    //Timer resets on piece Y move. 
                     if (!lockedIn)
                     {
                         LockInPiece();
                     }
+                    
+                    
                     return;
                 }
+
             }
+            lockInTimer = lockInDelay;
             pilot_position.Y++; // Move the piece down by one unit
         }
         public void HardDrop()
@@ -396,16 +412,22 @@ namespace TetFun3080
             //Happens when the piece locks into place. 
             //Copies the piece into the board, check board for lines, then generates a new piece.
 
-            board.AddBlock(currentShape, pilot_position, piecePositions);
-            int linesCleared = board.ScanAndRemoveLines();
-            holdAvailable = true;
-            lockedIn = true;
-            lineClearTimer = appearanceDelay;
-            if (linesCleared > 0)
+            if(lockInTimer > 0)
             {
-                lineClearTimer += lineclearDelay; 
+                lockInTimer--;
             }
-          
+            else
+            {
+                board.AddBlock(currentShape, pilot_position, piecePositions);
+                int linesCleared = board.ScanAndRemoveLines();
+                holdAvailable = true;
+                lockedIn = true;
+                lineClearTimer = appearanceDelay;
+                if (linesCleared > 0)
+                {
+                    lineClearTimer += lineclearDelay;
+                }
+            }
         }
 
         public void GenerateNewPiece(Pieces piece)

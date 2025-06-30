@@ -89,7 +89,16 @@ namespace TetFun3080
             return clearedLines;
         }
 
-
+        public bool CheckIsEmptyCoord(Vector2 pos)
+        {
+           //Check if the position is within the board bounds
+            if (pos.X >= 0 && pos.X < width && pos.Y >= 0 && pos.Y < height + bufferHeight && boardState[(int)pos.X, (int)pos.Y] == 0)
+            {
+                //return true if empty and valid
+                return true;
+            }
+            return false;
+        }
 
         internal void AddBlock(Pieces currentShape, Vector2 pilot_position, Vector2[] piecePositions)
         {

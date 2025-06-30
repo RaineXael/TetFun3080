@@ -19,6 +19,13 @@
 /processorParam:Quality=Best
 /build:Audio/joeltet.wav
 
+#begin Fonts/Font1.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Font1.spritefont
+
 #begin Sprites/blocks.png
 /importer:TextureImporter
 /processor:TextureProcessor

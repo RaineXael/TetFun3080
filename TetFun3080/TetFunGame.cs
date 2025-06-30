@@ -49,7 +49,7 @@ namespace TetFun3080
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _assetManager = new AssetManager(Content);
 
-            
+            _assetManager.LoadFont("Fonts/Font1");
             _assetManager.LoadTexture("Sprites/blocks");
             // TODO: use this.Content to load your game content here
         }
