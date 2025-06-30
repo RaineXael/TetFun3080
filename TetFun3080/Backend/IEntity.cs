@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TetFun3080
+namespace TetFun3080.Backend
 {
     internal interface IEntity
     {

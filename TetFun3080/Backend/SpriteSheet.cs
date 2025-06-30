@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 
 
-namespace TetFun3080
+namespace TetFun3080.Backend
 {
     public class SpriteSheet : Sprite
     {
@@ -15,7 +15,7 @@ namespace TetFun3080
 
         public void DrawSheet(SpriteBatch spriteBatch, int index)
         { 
-            spriteBatch.Draw(Texture, Position, new Rectangle(index*baseSize, 0, baseSize, baseSize), Color);
+            spriteBatch.Draw(Texture, Position, new Rectangle(index*baseSize, 0, baseSize, baseSize), Color * Alpha);
         }
     }
 }

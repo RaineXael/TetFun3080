@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TetFun3080
+namespace TetFun3080.Backend
 {
-    internal interface IRandomizer
+    public enum Pieces
     {
-        public Pieces GetNextPiece();
-
+        Z=1, S=2, I=3, O=4, T=5, J=6, L=7,  
     }
 }
