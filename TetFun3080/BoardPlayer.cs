@@ -15,7 +15,7 @@ namespace TetFun3080
 {
     internal class BoardPlayer : IEntity
     {
-        int currentGravity = 10;
+        int currentGravity = 30;
         int gravityTimer;
         private Board board;
         private IRandomizer randomizer;
@@ -63,20 +63,27 @@ namespace TetFun3080
 
         private string soundSkin = "joel";
 
-        public BoardPlayer(AssetManager assets, Board board, IRandomizer randomizer, UserInput input)
+        private Sprite testspr;
+
+        public BoardPlayer(Board board, IRandomizer randomizer, UserInput input)
         {
+            AssetManager.LoadTexture("newSprite.png");
+
             this.board = board;
             this.randomizer = randomizer;
-            _block_sprite = new SpriteSheet(assets.GetTexture("Sprites/blocks"));
-            font = assets.GetFont("Fonts/Font1");
-            pieceDropSoundInstance = assets.GetAudio($"Audio/GameSounds/{soundSkin}/place").CreateInstance();
-            lineclearSoundInstance = assets.GetAudio($"Audio/GameSounds/{soundSkin}/line").CreateInstance();
+            _block_sprite = new SpriteSheet(AssetManager.GetTexture("Sprites/blocks"));
+            testspr = new SpriteSheet(AssetManager.GetTexture("Sprites/blocks"));
+            font = AssetManager.GetFont("Fonts/Font1");
+            pieceDropSoundInstance = AssetManager.GetAudio($"Audio/GameSounds/{soundSkin}/place").CreateInstance();
+            lineclearSoundInstance = AssetManager.GetAudio($"Audio/GameSounds/{soundSkin}/line").CreateInstance();
             _block_sprite.baseSize = 16;
             GenerateNewPiece(randomizer.GetNextPiece());
             this.input = input;
             boardDrawOffset = board.bufferHeight * 16;
             gravityTimer = currentGravity;
             lockInTimer = lockInDelay;
+
+            testspr = new Sprite(AssetManager.GetTexture("newSprite.png"));
         }
 
 
@@ -127,6 +134,8 @@ namespace TetFun3080
             
             spriteBatch.DrawString(font, heldPiece.ToString(), new Vector2(10, 10), Color.White);
             spriteBatch.DrawString(font, level.ToString(), new Vector2(10, 128), Color.White);
+            testspr.Position = new Vector2(180, -48 + board.height*16);
+            testspr.Draw(spriteBatch);
 
         }
 

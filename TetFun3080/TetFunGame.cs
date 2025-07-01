@@ -13,19 +13,19 @@ namespace TetFun3080
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private AssetManager _assetManager;
+      
 
         protected UserInput player1Input;
         protected UserInput player2Input;
 
-        protected string customUserPath = "User/";
+        
 
 
         Sprite aya;
         public TetFunGame()
         {
             _graphics = new GraphicsDeviceManager(this);
-
+            AssetManager._graphics = _graphics;
             _graphics.PreferredBackBufferWidth = 320 * (int)UI_SCALE;
             _graphics.PreferredBackBufferHeight = 180 * (int)UI_SCALE;
 
@@ -34,12 +34,13 @@ namespace TetFun3080
             //IsFixedTimeStep = false;
 
             Ruleset rule = new Ruleset();
-            rule.SaveRulesetToFile(customUserPath + "DefaultRuleset.xml");
-            rule.LoadRulesetFromContent(customUserPath + "DefaultRuleset.xml");
+            rule.SaveRulesetToFile("User/" + "DefaultRuleset.xml");
+            rule.LoadRulesetFromContent("User/" + "DefaultRuleset.xml");
 
 
             _graphics.ApplyChanges();
             Content.RootDirectory = "Content";
+            AssetManager.Content = Content;
             IsMouseVisible = true;
 
             player1Input = new UserInput();
@@ -52,24 +53,22 @@ namespace TetFun3080
             // TODO: Add your initialization logic here
             
             base.Initialize();
-            nya = new BoardPlayer(_assetManager, new Board(),_randomizer, player1Input);
+            nya = new BoardPlayer(new Board(),_randomizer, player1Input);
         }
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _assetManager = new AssetManager(Content);
+            
 
-            _assetManager.LoadFont("Fonts/Font1");
-            _assetManager.LoadTexture("Sprites/blocks");
-            _assetManager.LoadAudio("Audio/GameSounds/tgm/place");
-            _assetManager.LoadAudio("Audio/GameSounds/tgm/line");
-            _assetManager.LoadAudio("Audio/GameSounds/joel/place");
-            _assetManager.LoadAudio("Audio/GameSounds/joel/line");
+            AssetManager.LoadFont("Fonts/Font1");
+            AssetManager.LoadTexture("Sprites/blocks");
+            AssetManager.LoadAudio("Audio/GameSounds/tgm/place");
+            AssetManager.LoadAudio("Audio/GameSounds/tgm/line");
+            AssetManager.LoadAudio("Audio/GameSounds/joel/place");
+            AssetManager.LoadAudio("Audio/GameSounds/joel/line");
             // TODO: use this.Content to load your game content here
 
-            FileStream fileStream = new FileStream(customUserPath + "newSprite.png", FileMode.Open);
-            Texture2D newSprite = Texture2D.FromStream(_graphics.GraphicsDevice, fileStream);
-            fileStream.Dispose();
+            
         }
 
         protected override void Update(GameTime gameTime)
