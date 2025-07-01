@@ -15,14 +15,12 @@ namespace TetFun3080
 {
     internal class BoardPlayer : IEntity
     {
-        int currentGravity = 30;
+        
         int gravityTimer;
         private Board board;
-        private IRandomizer randomizer;
        
         private Vector2 boardPosition;
-        private SpriteSheet _block_sprite;
-
+        
         UserInput input;
 
         public Pieces currentShape = Pieces.I; // Default shape for the pilot piece
@@ -38,50 +36,48 @@ namespace TetFun3080
 
         private Pieces? heldPiece = null;
 
-        private IRotator rotator = new RotatorQuick();
+        private int lineClearTimer = 0; 
+        private int dasTimer = 0;
+        private float lockInTimer = 0;
 
-        private int appearanceDelay = 0; // Delay before the piece appears on the board
-        private int lineclearDelay = 0; // Delay before lines are cleared
-
-        private int lineClearTimer = 0; // Timer for line clearing
-
-        int dasTimer = 0;
-        int dasTime = 10;
-
-        bool ghostVisible = true;
-        SpriteFont font;
+        private bool ghostVisible = true;
 
         int level = 0;
 
-        private bool InstalockOnHardDrop = true;
+        List<Pieces> PieceQueue = new List<Pieces>(); 
 
-        SoundEffectInstance lineclearSoundInstance;
-        SoundEffectInstance pieceDropSoundInstance;
+        private SpriteSheet _block_sprite;
+        private SoundEffectInstance lineclearSoundInstance;
+        private SoundEffectInstance pieceDropSoundInstance;
+        private SpriteFont font;
 
-        private float lockInDelay = 3;
-        private float lockInTimer = 0;
-
-        private string soundSkin = "joel";
+        private string soundSkin =  "tgm";
 
         private Sprite testspr;
 
-        public BoardPlayer(Board board, IRandomizer randomizer, UserInput input)
+        private Ruleset ruleset = new Ruleset(); 
+
+        public BoardPlayer(Board board, UserInput input)
         {
             AssetManager.LoadTexture("newSprite.png");
 
             this.board = board;
-            this.randomizer = randomizer;
+            
             _block_sprite = new SpriteSheet(AssetManager.GetTexture("Sprites/blocks"));
             testspr = new SpriteSheet(AssetManager.GetTexture("Sprites/blocks"));
             font = AssetManager.GetFont("Fonts/Font1");
             pieceDropSoundInstance = AssetManager.GetAudio($"Audio/GameSounds/{soundSkin}/place").CreateInstance();
             lineclearSoundInstance = AssetManager.GetAudio($"Audio/GameSounds/{soundSkin}/line").CreateInstance();
             _block_sprite.baseSize = 16;
-            GenerateNewPiece(randomizer.GetNextPiece());
+            GenerateNewPiece(ruleset.randomizer.GetNextPiece());
+            for(int i = 0; i < 5; i++)
+            {
+                PieceQueue.Add(ruleset.randomizer.GetNextPiece());
+            }
             this.input = input;
             boardDrawOffset = board.bufferHeight * 16;
-            gravityTimer = currentGravity;
-            lockInTimer = lockInDelay;
+            gravityTimer = ruleset.gravity;
+            lockInTimer = ruleset.lockInDelay;
 
             testspr = new Sprite(AssetManager.GetTexture("newSprite.png"));
         }
@@ -112,7 +108,7 @@ namespace TetFun3080
                     int y = (int)pilot_position.Y + (int)piece.Y;
 
                     // Draw the ghost piece if visible
-                    if (ghostVisible)
+                    if (ghostVisible && ruleset.ghostEnabled)
                     {
                         int gx = (int)ghost_position.X + (int)piece.X;
                         int gy = (int)ghost_position.Y + (int)piece.Y;
@@ -131,9 +127,28 @@ namespace TetFun3080
 
                 }
             }
-            
+
+
+            int nextX = board.width + 2;
+            int nextY = 1;
+            int nextSep = 3;
+            for (int i = 0; i < ruleset.visibleNextCount; i++)
+            {
+                foreach (Vector2 piece in GetPiecePositionsFromShape(PieceQueue[i]))
+                {
+                    // Draw the main (solid) piece
+                    int x = nextX + (int)piece.X;
+                    int y = nextY + (int)piece.Y + (nextSep*i);
+
+                    _block_sprite.Position = new Vector2(x * _block_sprite.baseSize, y * _block_sprite.baseSize);
+                    _block_sprite.DrawSheet(spriteBatch,(int)PieceQueue[i]);
+
+
+                }
+            }
+
             spriteBatch.DrawString(font, heldPiece.ToString(), new Vector2(10, 10), Color.White);
-            spriteBatch.DrawString(font, level.ToString(), new Vector2(10, 128), Color.White);
+            spriteBatch.DrawString(font, hardDropPossible.ToString(), new Vector2(10, 128), Color.White);
             testspr.Position = new Vector2(180, -48 + board.height*16);
             testspr.Draw(spriteBatch);
 
@@ -155,7 +170,7 @@ namespace TetFun3080
             gravityTimer--;
             if (gravityTimer < 0)
             {
-                gravityTimer = currentGravity;
+                gravityTimer = ruleset.gravity;
                 MoveDown();
             }
 
@@ -167,7 +182,7 @@ namespace TetFun3080
                 }
                 else
                 {
-                    GenerateNewPiece(randomizer.GetNextPiece());
+                    GenerateNewPieceFromQueue();
                     lockedIn = false;
                 }
             }
@@ -185,6 +200,13 @@ namespace TetFun3080
 
         }
 
+        private void GenerateNewPieceFromQueue()
+        {
+            //take 0 queue item, remove it, and generate a new piece from it.
+            GenerateNewPiece(PieceQueue[0]);
+            PieceQueue.RemoveAt(0);
+            PieceQueue.Add(ruleset.randomizer.GetNextPiece());
+        }
 
         public void HandleInput()
         {
@@ -234,7 +256,7 @@ namespace TetFun3080
             {
                 if (!rotateClockPressed && !lockedIn && !(currentShape == Pieces.O))
                 {
-                    piecePositions = rotator.RotateClockwise(pilot_position,piecePositions, board);
+                    piecePositions = ruleset.rotator.RotateClockwise(pilot_position,piecePositions, board);
                     rotateClockPressed = true;
                 }
 
@@ -248,7 +270,7 @@ namespace TetFun3080
                 if (!rotateCounterPressed && !lockedIn && !(currentShape == Pieces.O))
                 {
                     rotateCounterPressed = true;
-                    piecePositions = rotator.RotateCounterClockwise(pilot_position,piecePositions, board);
+                    piecePositions = ruleset.rotator.RotateCounterClockwise(pilot_position,piecePositions, board);
                 }
 
             }
@@ -270,7 +292,7 @@ namespace TetFun3080
                 {
                     //do one tick, first frame of input
                     MoveLeft();
-                    dasTimer = dasTime;
+                    dasTimer = ruleset.dasTime;
                 }
                 else
                 {
@@ -322,7 +344,7 @@ namespace TetFun3080
                 {
                     //do one tick, first frame of input
                     MoveRight();
-                    dasTimer = dasTime;
+                    dasTimer = ruleset.dasTime;
                 }
                 else
                 {
@@ -392,18 +414,25 @@ namespace TetFun3080
                 }
 
             }
-            lockInTimer = lockInDelay;
+            lockInTimer = ruleset.lockInDelay;
             pilot_position.Y++; // Move the piece down by one unit
         }
+        private bool hardDropPossible = true;
         public void HardDrop()
         {
             // Logic to drop the piece to the bottom
-            pilot_position = GetHardDropPos();
-            if (InstalockOnHardDrop)
+            if (hardDropPossible)
             {
-                lockInTimer = 0;
-                LockInPiece();
+                pilot_position = GetHardDropPos();
+                if (ruleset.InstalockOnHardDrop)
+                {
+                    lockInTimer = 0;
+                    LockInPiece();
+                }
+            
+                hardDropPossible = false;
             }
+            
         }
         public void ResetPosition()
         {
@@ -417,7 +446,7 @@ namespace TetFun3080
                 if (heldPiece == null)
                 {
                     heldPiece = currentShape;
-                    GenerateNewPiece(randomizer.GetNextPiece());
+                    GenerateNewPiece(ruleset.randomizer.GetNextPiece());
                 }
                 else
                 {
@@ -447,12 +476,13 @@ namespace TetFun3080
                 int linesCleared = board.ScanAndRemoveLines();
                 holdAvailable = true;
                 lockedIn = true;
-                lineClearTimer = appearanceDelay;
+                
+                lineClearTimer = ruleset.appearanceDelay;
                 if (linesCleared > 0)
                 {
                     lineclearSoundInstance.Stop();
                     lineclearSoundInstance.Play();
-                    lineClearTimer += lineclearDelay;
+                    lineClearTimer += ruleset.lineclearDelay;
                     level += linesCleared; 
                 }
                 else
@@ -465,40 +495,38 @@ namespace TetFun3080
 
         public void GenerateNewPiece(Pieces piece)
         {
-            
+            hardDropPossible = true;
             int lastTwoDigits = level % 100;
             if (lastTwoDigits != 99) {
                 level++;
             }
             
             currentShape = piece;
-            switch (piece)
-            {
-                case Pieces.I:
-                    piecePositions = new Vector2[] { new Vector2(-1, 0), new Vector2(0, 0), new Vector2(1, 0), new Vector2(2, 0) };
-                    break;
-                case Pieces.T:
-                    piecePositions = new Vector2[] { new Vector2(-1, 0), new Vector2(0, 0), new Vector2(1, 0), new Vector2(0, 1) };
-                    break;
-                case Pieces.L:
-                    piecePositions = new Vector2[] { new Vector2(-1, 0), new Vector2(-1, 1), new Vector2(0, 0), new Vector2(1, 0) };
-                    break;
-                case Pieces.J:
-                    piecePositions = new Vector2[] { new Vector2(-1, 0), new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1) };
-                    break;
-                case Pieces.S:
-                    piecePositions = new Vector2[] { new Vector2(0, 0), new Vector2(1, 0), new Vector2(0, 1), new Vector2(-1, 1) };
-                    break;
-                case Pieces.Z:
-                    piecePositions = new Vector2[] { new Vector2(-1, 0), new Vector2(0, 0), new Vector2(0, 1), new Vector2(1, 1) };
-                    break;
-                case Pieces.O:
-                    piecePositions = new Vector2[] { new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1) };
-                    break;
-            }
-            
+            piecePositions = GetPiecePositionsFromShape(piece);
+
             pilot_position = board.spawnPosition; // Reset the piece's position to the spawn position on the board
         }
 
+        private Vector2[] GetPiecePositionsFromShape(Pieces piece)
+        {
+            switch (piece)
+            {
+                default: //I
+                    return new Vector2[] { new Vector2(-1, 0), new Vector2(0, 0), new Vector2(1, 0), new Vector2(2, 0) };
+                case Pieces.T:
+                    return new Vector2[] { new Vector2(-1, 0), new Vector2(0, 0), new Vector2(1, 0), new Vector2(0, 1) };
+                case Pieces.L:
+                    return new Vector2[] { new Vector2(-1, 0), new Vector2(-1, 1), new Vector2(0, 0), new Vector2(1, 0) };
+                case Pieces.J:
+                    return new Vector2[] { new Vector2(-1, 0), new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1) };
+                case Pieces.S:
+                    return new Vector2[] { new Vector2(0, 0), new Vector2(1, 0), new Vector2(0, 1), new Vector2(-1, 1) };
+                case Pieces.Z:
+                    return new Vector2[] { new Vector2(-1, 0), new Vector2(0, 0), new Vector2(0, 1), new Vector2(1, 1) };
+                case Pieces.O:
+                    return new Vector2[] { new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1), new Vector2(0, 1) };
+
+            }
+        }
     }
 }

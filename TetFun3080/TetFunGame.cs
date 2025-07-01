@@ -53,7 +53,7 @@ namespace TetFun3080
             // TODO: Add your initialization logic here
             
             base.Initialize();
-            nya = new BoardPlayer(new Board(),_randomizer, player1Input);
+            nya = new BoardPlayer(new Board(),player1Input);
         }
         protected override void LoadContent()
         {

@@ -10,16 +10,21 @@ namespace TetFun3080
     {
         public string Name { get; set; } = "Fallback"; // Name of the ruleset
         //Instances
-        private IRandomizer randomizer;
-        private IRotator rotator;
+        [XmlIgnore]
+        public IRandomizer randomizer;
+        [XmlIgnore]
+        public IRotator rotator;
+
+        public string RandomizerName;
+        public string RotatorName;
 
         //Visual
         public int visibleNextCount = 5; // How many pieces to show in the next queue
-        public bool ghostVisible = true;
+        public bool ghostEnabled = true;
 
         //Gameplay
         public int initialLevel = 0;
-        public int initialGravity = 10;
+        public int gravity = 10;
         public bool holdEnabled = true;
         public int appearanceDelay = 15; // Delay before the piece appears on the board
         public int lineclearDelay = 25; // Delay before lines are cleared
@@ -55,10 +60,10 @@ namespace TetFun3080
                 // Copy values to this Ruleset
                 Name = data.Name;
                 visibleNextCount = data.visibleNextCount;
-                ghostVisible = data.ghostVisible;
+                ghostEnabled = data.ghostEnabled;
 
                 initialLevel = data.initialLevel;
-                initialGravity = data.initialGravity;
+                gravity = data.gravity;
                 holdEnabled = data.holdEnabled;
                 appearanceDelay = data.appearanceDelay;
                 lineclearDelay = data.lineclearDelay;

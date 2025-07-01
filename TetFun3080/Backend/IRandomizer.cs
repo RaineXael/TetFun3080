@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TetFun3080.Backend
 {
-    internal interface IRandomizer
+    public interface IRandomizer
     {
         public Pieces GetNextPiece();
 

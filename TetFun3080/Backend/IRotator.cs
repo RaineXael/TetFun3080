@@ -6,7 +6,7 @@ namespace TetFun3080.Backend
 {
     //Implements different tetris rotation systems and wallkicks
     //(eg nes tetris has no kicks, tgm and guideline have different rotations)
-    internal interface IRotator
+    public interface IRotator
     {
         bool KicksEnabled { get; set; }
 

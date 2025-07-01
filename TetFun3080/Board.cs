@@ -105,7 +105,11 @@ namespace TetFun3080
             foreach(Vector2 offset in piecePositions)
             {
                 Vector2 truepos = pilot_position + offset;
-                boardState[(int)truepos.X, (int)truepos.Y] = (int)currentShape;
+                if (CheckIsEmptyCoord(truepos))
+                {
+                    boardState[(int)truepos.X, (int)truepos.Y] = (int)currentShape;
+                }
+                
             }
         }
     }
