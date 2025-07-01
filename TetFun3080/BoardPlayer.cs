@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -39,8 +40,8 @@ namespace TetFun3080
 
         private IRotator rotator = new RotatorQuick();
 
-        private int appearanceDelay = 15; // Delay before the piece appears on the board
-        private int lineclearDelay = 25; // Delay before lines are cleared
+        private int appearanceDelay = 0; // Delay before the piece appears on the board
+        private int lineclearDelay = 0; // Delay before lines are cleared
 
         private int lineClearTimer = 0; // Timer for line clearing
 
@@ -50,9 +51,17 @@ namespace TetFun3080
         bool ghostVisible = true;
         SpriteFont font;
 
+        int level = 0;
+
+        private bool InstalockOnHardDrop = true;
+
+        SoundEffectInstance lineclearSoundInstance;
+        SoundEffectInstance pieceDropSoundInstance;
 
         private float lockInDelay = 3;
         private float lockInTimer = 0;
+
+        private string soundSkin = "joel";
 
         public BoardPlayer(AssetManager assets, Board board, IRandomizer randomizer, UserInput input)
         {
@@ -60,6 +69,8 @@ namespace TetFun3080
             this.randomizer = randomizer;
             _block_sprite = new SpriteSheet(assets.GetTexture("Sprites/blocks"));
             font = assets.GetFont("Fonts/Font1");
+            pieceDropSoundInstance = assets.GetAudio($"Audio/GameSounds/{soundSkin}/place").CreateInstance();
+            lineclearSoundInstance = assets.GetAudio($"Audio/GameSounds/{soundSkin}/line").CreateInstance();
             _block_sprite.baseSize = 16;
             GenerateNewPiece(randomizer.GetNextPiece());
             this.input = input;
@@ -114,8 +125,8 @@ namespace TetFun3080
                 }
             }
             
-            spriteBatch.DrawString(font, lockInTimer.ToString(), new Vector2(10, 10), Color.White);
-
+            spriteBatch.DrawString(font, heldPiece.ToString(), new Vector2(10, 10), Color.White);
+            spriteBatch.DrawString(font, level.ToString(), new Vector2(10, 128), Color.White);
 
         }
 
@@ -379,6 +390,11 @@ namespace TetFun3080
         {
             // Logic to drop the piece to the bottom
             pilot_position = GetHardDropPos();
+            if (InstalockOnHardDrop)
+            {
+                lockInTimer = 0;
+                LockInPiece();
+            }
         }
         public void ResetPosition()
         {
@@ -387,7 +403,7 @@ namespace TetFun3080
 
         public void HoldPiece()
         {
-            if (holdAvailable)
+            if (holdAvailable && !lockedIn)
             {
                 if (heldPiece == null)
                 {
@@ -425,13 +441,26 @@ namespace TetFun3080
                 lineClearTimer = appearanceDelay;
                 if (linesCleared > 0)
                 {
+                    lineclearSoundInstance.Stop();
+                    lineclearSoundInstance.Play();
                     lineClearTimer += lineclearDelay;
+                    level += linesCleared; 
+                }
+                else
+                {
+                    pieceDropSoundInstance.Stop();
+                    pieceDropSoundInstance.Play();
                 }
             }
         }
 
         public void GenerateNewPiece(Pieces piece)
         {
+            
+            int lastTwoDigits = level % 100;
+            if (lastTwoDigits != 99) {
+                level++;
+            }
             
             currentShape = piece;
             switch (piece)

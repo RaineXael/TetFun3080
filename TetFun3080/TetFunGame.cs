@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.IO;
 using TetFun3080.Backend;
 
 namespace TetFun3080
@@ -16,6 +17,11 @@ namespace TetFun3080
 
         protected UserInput player1Input;
         protected UserInput player2Input;
+
+        protected string customUserPath = "User/";
+
+
+        Sprite aya;
         public TetFunGame()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -26,6 +32,10 @@ namespace TetFun3080
             //do this to uncap framerate
             //_graphics.SynchronizeWithVerticalRetrace = false;
             //IsFixedTimeStep = false;
+
+            Ruleset rule = new Ruleset();
+            rule.SaveRulesetToFile(customUserPath + "DefaultRuleset.xml");
+            rule.LoadRulesetFromContent(customUserPath + "DefaultRuleset.xml");
 
 
             _graphics.ApplyChanges();
@@ -51,7 +61,15 @@ namespace TetFun3080
 
             _assetManager.LoadFont("Fonts/Font1");
             _assetManager.LoadTexture("Sprites/blocks");
+            _assetManager.LoadAudio("Audio/GameSounds/tgm/place");
+            _assetManager.LoadAudio("Audio/GameSounds/tgm/line");
+            _assetManager.LoadAudio("Audio/GameSounds/joel/place");
+            _assetManager.LoadAudio("Audio/GameSounds/joel/line");
             // TODO: use this.Content to load your game content here
+
+            FileStream fileStream = new FileStream(customUserPath + "newSprite.png", FileMode.Open);
+            Texture2D newSprite = Texture2D.FromStream(_graphics.GraphicsDevice, fileStream);
+            fileStream.Dispose();
         }
 
         protected override void Update(GameTime gameTime)

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,18 @@ namespace TetFun3080
     {
         private ContentManager _content;
         private Dictionary<string, Texture2D> _textures;
-        private Dictionary<string, SpriteFont> _fonts; 
+        private Dictionary<string, Texture2D> _userTextures;
+        private Dictionary<string, SpriteFont> _fonts;
+        private Dictionary<string, SoundEffect> _audio;
         public AssetManager(ContentManager content)
         {
             _content = content;
             _textures = new Dictionary<string, Texture2D>();
             _fonts = new Dictionary<string, SpriteFont>();
+            _audio = new Dictionary<string, SoundEffect>();
+       
         }
+
 
         public void LoadTexture(string assetName)
         {
@@ -27,11 +33,20 @@ namespace TetFun3080
                 _textures.Add(assetName, _content.Load<Texture2D>(assetName));
             }
         }
+
+
         public void LoadFont(string assetName)
         {
             if (!_textures.ContainsKey(assetName))
             {
                 _fonts.Add(assetName, _content.Load<SpriteFont>(assetName));
+            }
+        }
+        public void LoadAudio(string assetName)
+        {
+            if (!_textures.ContainsKey(assetName))
+            {
+                _audio.Add(assetName, _content.Load<SoundEffect>(assetName));
             }
         }
 
@@ -56,7 +71,19 @@ namespace TetFun3080
             else
             {
                 // You might want to throw an exception or return a default texture
-                throw new Exception($"Texture '{assetName}' not found in the AssetManager.");
+                throw new Exception($"Font '{assetName}' not found in the AssetManager.");
+            }
+        }
+        public SoundEffect GetAudio(string assetName)
+        {
+            if (_audio.ContainsKey(assetName))
+            {
+                return _audio[assetName];
+            }
+            else
+            {
+                // You might want to throw an exception or return a default texture
+                throw new Exception($"Sound '{assetName}' not found in the AssetManager.");
             }
         }
     }

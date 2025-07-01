@@ -13,11 +13,29 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Audio/joeltet.wav
+#begin Audio/GameSounds/joel/line.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Audio/joeltet.wav
+/build:Audio/GameSounds/joel/line.wav
+
+#begin Audio/GameSounds/joel/place.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/GameSounds/joel/place.wav
+
+#begin Audio/GameSounds/tgm/line.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/GameSounds/tgm/line.wav
+
+#begin Audio/GameSounds/tgm/place.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/GameSounds/tgm/place.wav
 
 #begin Fonts/Font1.spritefont
 /importer:FontDescriptionImporter

@@ -8,6 +8,7 @@ using TetFun3080.Backend;
 
 namespace TetFun3080
 {
+    //Arika Rotation System
     internal class RotatorARS : IRotator
     {
         public bool KicksEnabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
