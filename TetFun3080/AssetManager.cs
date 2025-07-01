@@ -33,9 +33,14 @@ namespace TetFun3080
                 }
                 catch (ContentLoadException)
                 {
-                    FileStream fileStream = new FileStream(customUserPath + assetName, FileMode.Open);
-                    _textures.Add(customUserPath + assetName, Texture2D.FromStream(_graphics.GraphicsDevice, fileStream));
-                    fileStream.Dispose();
+                    if (!_textures.ContainsKey(customUserPath + assetName))
+                    {
+                        FileStream fileStream = new FileStream(customUserPath + assetName, FileMode.Open);
+                        _textures.Add(customUserPath + assetName, Texture2D.FromStream(_graphics.GraphicsDevice, fileStream));
+                        fileStream.Dispose();
+                    }
+                    
+                        
                 }
                 catch (Exception e)
                 {
@@ -105,6 +110,28 @@ namespace TetFun3080
                 // You might want to throw an exception or return a default texture
                 throw new Exception($"Sound '{assetName}' not found in the AssetManager.");
             }
+        }
+
+        public static Ruleset GetRuleset(string rulesetName)
+        {
+
+            
+            try
+            {
+                return Content.Load<Ruleset>(rulesetName);
+                
+            }
+            catch (ContentLoadException)
+            {
+                Ruleset r = new Ruleset();
+                bool result = r.LoadRulesetFromContent(customUserPath + rulesetName);
+                if (!result)
+                {
+                    throw;
+                }
+                return r;
+            }
+            
         }
     }
 }

@@ -42,14 +42,14 @@ namespace TetFun3080
             //everything else set above
         }
 
-        public void LoadRulesetFromContent(string path)
+        public bool LoadRulesetFromContent(string path)
         {
             //string path = Path.Combine("Content", "Rulesets", "DefaultRuleset.xml");
 
             if (!File.Exists(path))
             {
                 Console.WriteLine("Ruleset XML not found. Using default values.");
-                return;
+                return false;
             }
 
             XmlSerializer serializer = new XmlSerializer(typeof(Ruleset));
@@ -73,8 +73,9 @@ namespace TetFun3080
 
                 // Keep existing randomizer/rotator
             }
-
+            
             Console.WriteLine($"Ruleset '{Name}' loaded from XML.");
+            return true;
         }
 
         public void SaveRulesetToFile(string filePath)

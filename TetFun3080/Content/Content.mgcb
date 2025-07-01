@@ -37,6 +37,18 @@
 /processorParam:Quality=Best
 /build:Audio/GameSounds/tgm/place.wav
 
+#begin Audio/Mus/white/loop.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Mus/white/loop.wav
+
+#begin Audio/Mus/white/start.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/Mus/white/start.wav
+
 #begin Fonts/Font1.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

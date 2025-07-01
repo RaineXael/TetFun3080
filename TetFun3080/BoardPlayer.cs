@@ -19,7 +19,7 @@ namespace TetFun3080
         int gravityTimer;
         private Board board;
        
-        private Vector2 boardPosition;
+        public Vector2 boardPosition = new Vector2(32,16);
         
         UserInput input;
 
@@ -30,7 +30,7 @@ namespace TetFun3080
         private Vector2[] piecePositions; // Array to hold the positions of the piece's blocks
         private Vector2 ghost_position; 
 
-        private int boardDrawOffset;
+        private int boardDrawOffset; //For drawing blocks (the buffer, offsets y to account for it)
 
         bool holdAvailable = true;
 
@@ -57,10 +57,10 @@ namespace TetFun3080
 
         private Ruleset ruleset = new Ruleset(); 
 
-        public BoardPlayer(Board board, UserInput input)
+        public BoardPlayer(Board board, UserInput input, Vector2 boardPosition)
         {
             AssetManager.LoadTexture("newSprite.png");
-
+            this.boardPosition = boardPosition;
             this.board = board;
             
             _block_sprite = new SpriteSheet(AssetManager.GetTexture("Sprites/blocks"));
@@ -80,6 +80,8 @@ namespace TetFun3080
             lockInTimer = ruleset.lockInDelay;
 
             testspr = new Sprite(AssetManager.GetTexture("newSprite.png"));
+
+            //ruleset = AssetManager.GetRuleset("Rulesets/TestRuleset");
         }
 
 
@@ -93,9 +95,13 @@ namespace TetFun3080
             {
                 for (int y = 0; y < board.boardState.GetLength(1); y++)
                 {
-                    _block_sprite.Position = new Vector2(x * _block_sprite.baseSize, y * _block_sprite.baseSize - boardDrawOffset);
-                    _block_sprite.DrawSheet(spriteBatch, board.boardState[x, y]);
-                    //_block_sprite.DrawSheet(spriteBatch, 0);
+                    if(y > board.bufferHeight)
+                    {
+                        _block_sprite.Position = new Vector2(x * _block_sprite.baseSize + boardPosition.X, y * _block_sprite.baseSize - boardDrawOffset + boardPosition.Y);
+                        _block_sprite.DrawSheet(spriteBatch, board.boardState[x, y]);
+                        //_block_sprite.DrawSheet(spriteBatch, 0);
+                    }
+
                 }
             }
 
@@ -116,12 +122,15 @@ namespace TetFun3080
 
 
                         _block_sprite.Alpha = 0.5f; // Set transparency for ghost
-                        _block_sprite.Position = new Vector2(gx * _block_sprite.baseSize, gy * _block_sprite.baseSize - boardDrawOffset);
+                        _block_sprite.Position = new Vector2(boardPosition.X + gx * _block_sprite.baseSize, boardPosition.Y + gy * _block_sprite.baseSize - boardDrawOffset);
                         _block_sprite.DrawSheet(spriteBatch, (int)currentShape);
 
                         _block_sprite.Alpha = 1f; // Restore alpha for next draw
                     }
-                    _block_sprite.Position = new Vector2(x * _block_sprite.baseSize, y * _block_sprite.baseSize - boardDrawOffset);
+
+              
+
+                    _block_sprite.Position = new Vector2(boardPosition.X + x * _block_sprite.baseSize, boardPosition.Y + y * _block_sprite.baseSize - boardDrawOffset);
                     _block_sprite.DrawSheet(spriteBatch, (int)currentShape);
 
 
@@ -140,16 +149,16 @@ namespace TetFun3080
                     int x = nextX + (int)piece.X;
                     int y = nextY + (int)piece.Y + (nextSep*i);
 
-                    _block_sprite.Position = new Vector2(x * _block_sprite.baseSize, y * _block_sprite.baseSize);
+                    _block_sprite.Position = new Vector2(boardPosition.X + x * _block_sprite.baseSize, boardPosition.Y + y * _block_sprite.baseSize);
                     _block_sprite.DrawSheet(spriteBatch,(int)PieceQueue[i]);
 
 
                 }
             }
 
-            spriteBatch.DrawString(font, heldPiece.ToString(), new Vector2(10, 10), Color.White);
-            spriteBatch.DrawString(font, hardDropPossible.ToString(), new Vector2(10, 128), Color.White);
-            testspr.Position = new Vector2(180, -48 + board.height*16);
+            spriteBatch.DrawString(font, heldPiece.ToString(), new Vector2(10+ boardPosition.X, 10+ boardPosition.Y), Color.White);
+            spriteBatch.DrawString(font, hardDropPossible.ToString(), new Vector2(10 + boardPosition.X, 128 + boardPosition.Y), Color.White);
+            testspr.Position = new Vector2(boardPosition.X+180, boardPosition.Y - 48 + board.height*16);
             testspr.Draw(spriteBatch);
 
         }

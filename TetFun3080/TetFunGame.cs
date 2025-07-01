@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.IO;
 using TetFun3080.Backend;
 
 namespace TetFun3080
@@ -20,8 +18,6 @@ namespace TetFun3080
 
         
 
-
-        Sprite aya;
         public TetFunGame()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -32,10 +28,6 @@ namespace TetFun3080
             //do this to uncap framerate
             //_graphics.SynchronizeWithVerticalRetrace = false;
             //IsFixedTimeStep = false;
-
-            Ruleset rule = new Ruleset();
-            rule.SaveRulesetToFile("User/" + "DefaultRuleset.xml");
-            rule.LoadRulesetFromContent("User/" + "DefaultRuleset.xml");
 
 
             _graphics.ApplyChanges();
@@ -48,12 +40,14 @@ namespace TetFun3080
         }
         private IRandomizer _randomizer = new SevenBagRandomizer(); // or new SevenBagRandomizer();
         private BoardPlayer nya;
+        private BoardPlayer waur;
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
             
             base.Initialize();
-            nya = new BoardPlayer(new Board(),player1Input);
+            nya = new BoardPlayer(new Board(),player1Input, new Vector2(32,16));
+            waur = new BoardPlayer(new Board(), player2Input, new Vector2(352, 16));
         }
         protected override void LoadContent()
         {
@@ -78,6 +72,7 @@ namespace TetFun3080
 
             // TODO: Add your update logic here
             nya.Update(gameTime);
+            waur.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -87,6 +82,7 @@ namespace TetFun3080
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
             // TODO: Add your drawing code here
             nya.Draw(_spriteBatch);
+            waur.Draw(_spriteBatch);
             base.Draw(gameTime);
             _spriteBatch.End();
         }
