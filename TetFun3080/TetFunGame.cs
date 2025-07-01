@@ -35,6 +35,8 @@ namespace TetFun3080
             AssetManager.Content = Content;
             IsMouseVisible = true;
 
+            AssetManager.fallbackTexture = AssetManager.Content.Load<Texture2D>("Sprites/fallback");
+
             player1Input = new UserInput();
             player2Input = new UserInput(Keys.Left, Keys.Right, Keys.Down, Keys.Up, Keys.Z, Keys.X, Keys.LeftShift);
         }

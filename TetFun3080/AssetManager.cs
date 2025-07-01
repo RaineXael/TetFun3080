@@ -21,6 +21,7 @@ namespace TetFun3080
         private static Dictionary<string, SpriteFont> _fonts = new Dictionary<string, SpriteFont>();
         private static Dictionary<string, SoundEffect> _audio = new Dictionary<string, SoundEffect>();
 
+        public static Texture2D fallbackTexture;
 
 
         public static void LoadTexture(string assetName)
@@ -33,21 +34,25 @@ namespace TetFun3080
                 }
                 catch (ContentLoadException)
                 {
-                    if (!_textures.ContainsKey(customUserPath + assetName))
+                    try
                     {
-                        FileStream fileStream = new FileStream(customUserPath + assetName, FileMode.Open);
-                        _textures.Add(customUserPath + assetName, Texture2D.FromStream(_graphics.GraphicsDevice, fileStream));
-                        fileStream.Dispose();
+                        if (!_textures.ContainsKey(customUserPath + assetName))
+                        {
+                            FileStream fileStream = new FileStream(customUserPath + assetName, FileMode.Open);
+                            _textures.Add(customUserPath + assetName, Texture2D.FromStream(_graphics.GraphicsDevice, fileStream));
+                            fileStream.Dispose();
+                        }
                     }
-                    
-                        
+                    catch (Exception e)
+                    {
+                        // Handle the exception as needed, e.g., log it or rethrow it
+                        Console.WriteLine($"Error loading texture '{assetName}': {e.Message}");
+                        _textures.Add(assetName, fallbackTexture);
+                    }
+
+
                 }
-                catch (Exception e)
-                {
-                    // Handle the exception as needed, e.g., log it or rethrow it
-                    Console.WriteLine($"Error loading texture '{assetName}': {e.Message}");
-                    throw;
-                }
+                
 
 
             }
