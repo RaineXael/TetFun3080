@@ -1,0 +1,15 @@
+{
+  "RandomizerName": null,
+  "RotatorName": null,
+  "visibleNextCount": 5,
+  "ghostEnabled": true,
+  "initialLevel": 0,
+  "gravity": 10,
+  "holdEnabled": true,
+  "appearanceDelay": 15,
+  "lineclearDelay": 25,
+  "dasTime": 10,
+  "lockInDelay": 3.0,
+  "InstalockOnHardDrop": true,
+  "Name": "Fallback"
+}

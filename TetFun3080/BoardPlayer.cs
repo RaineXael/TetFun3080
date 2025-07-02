@@ -55,11 +55,16 @@ namespace TetFun3080
 
         private Sprite testspr;
 
-        private Ruleset ruleset = new Ruleset(); 
+        private int LevelThreshold { get { return (int)MathF.Ceiling((float)level/100)*100; } } // Example threshold for level increase, can be adjusted
+
+        private Ruleset ruleset = new Ruleset();
+
+        Sprite console;
 
         public BoardPlayer(Board board, UserInput input, Vector2 boardPosition)
         {
             AssetManager.LoadTexture("newSprite.png");
+            console = new Sprite(AssetManager.GetTexture("Consoles/default"));
             this.boardPosition = boardPosition;
             this.board = board;
             
@@ -90,12 +95,15 @@ namespace TetFun3080
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            console.Position = boardPosition-new Vector2(112,48);
+            console.Draw(spriteBatch);
+
             _block_sprite.Alpha = 1f;
             for (int x = 0; x < board.boardState.GetLength(0); x++)
             {
                 for (int y = 0; y < board.boardState.GetLength(1); y++)
                 {
-                    if(y > board.bufferHeight)
+                    if(y > board.bufferHeight && board.boardState[x, y] != 0)
                     {
                         _block_sprite.Position = new Vector2(x * _block_sprite.baseSize + boardPosition.X, y * _block_sprite.baseSize - boardDrawOffset + boardPosition.Y);
                         _block_sprite.DrawSheet(spriteBatch, board.boardState[x, y]);
@@ -138,7 +146,7 @@ namespace TetFun3080
             }
 
 
-            int nextX = board.width + 2;
+            int nextX = board.width + 3;
             int nextY = 1;
             int nextSep = 3;
             for (int i = 0; i < ruleset.visibleNextCount; i++)
@@ -149,19 +157,36 @@ namespace TetFun3080
                     int x = nextX + (int)piece.X;
                     int y = nextY + (int)piece.Y + (nextSep*i);
 
-                    _block_sprite.Position = new Vector2(boardPosition.X + x * _block_sprite.baseSize, boardPosition.Y + y * _block_sprite.baseSize);
+                    _block_sprite.Position = new Vector2(boardPosition.X + x * _block_sprite.baseSize, -8 + boardPosition.Y + y * _block_sprite.baseSize);
                     _block_sprite.DrawSheet(spriteBatch,(int)PieceQueue[i]);
 
 
                 }
             }
+            if(heldPiece != null)
+            {
+                // Draw the held piece
+                
+                foreach (Vector2 piece in GetPiecePositionsFromShape(heldPiece.Value))
+                {
+                    int x = (-1 + (int)piece.X) * 16;
+                    int y = (1 + (int)piece.Y) * 16;
+                    _block_sprite.Position = new Vector2(boardPosition.X - 4*16 + x,y+ boardPosition.Y);
+                    _block_sprite.DrawSheet(spriteBatch, (int)heldPiece.Value);
+                }
+            }
 
-            spriteBatch.DrawString(font, heldPiece.ToString(), new Vector2(10+ boardPosition.X, 10+ boardPosition.Y), Color.White);
-            spriteBatch.DrawString(font, hardDropPossible.ToString(), new Vector2(10 + boardPosition.X, 128 + boardPosition.Y), Color.White);
-            testspr.Position = new Vector2(boardPosition.X+180, boardPosition.Y - 48 + board.height*16);
+           
+
+            spriteBatch.DrawString(font, level.ToString(), new Vector2(208 + boardPosition.X, 274 + boardPosition.Y), Color.White);
+            spriteBatch.DrawString(font, LevelThreshold.ToString(), new Vector2(208 + boardPosition.X, 294 + boardPosition.Y), Color.White);
+
+            testspr.Position = new Vector2(boardPosition.X-64-16, boardPosition.Y + 80 );
             testspr.Draw(spriteBatch);
 
         }
+
+      
 
         public void RecieveDamage()
         {
@@ -175,8 +200,9 @@ namespace TetFun3080
         private bool rightPressed = false;
         public void Update(GameTime gameTime)
         {
-            
+  
             gravityTimer--;
+            if (gravityTimer < 0)
             if (gravityTimer < 0)
             {
                 gravityTimer = ruleset.gravity;
@@ -259,7 +285,7 @@ namespace TetFun3080
             }
             if (input.IsDropDown)
             {
-                MoveDown();
+                MoveDown(true);
             }
             if (input.IsRotateClockwiseDown)
             {
@@ -402,12 +428,18 @@ namespace TetFun3080
             pilot_position.X++; // Move the piece down by one unit
         }
         bool blockBottomHit = false;
-        public void MoveDown()
+        int score = 0;
+        public void MoveDown(bool grantScore = false)
         {
             foreach(Vector2 blockOffset in piecePositions)
             {
                 Vector2 blockpos = blockOffset + pilot_position;
                 blockpos.Y += 1;
+                if (grantScore)
+                {
+                    score++;
+                }
+               
                 if (blockpos.Y >= board.height+board.bufferHeight ||board.boardState[(int)blockpos.X, (int)blockpos.Y] != 0)
                 {
                     //Lockinplace run every frame when the bottom is reached.

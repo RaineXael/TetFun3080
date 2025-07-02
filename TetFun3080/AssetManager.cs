@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TetFun3080.Backend;
 
 namespace TetFun3080
 {
@@ -119,24 +120,29 @@ namespace TetFun3080
 
         public static Ruleset GetRuleset(string rulesetName)
         {
+            //Searches the content folder for a ruleset JSON
+            //if not found, search the User Ruleset folder for it
 
-            
-            try
+            //If unfound, return a default ruleset
+
+            string contentPath = Path.Combine("Content", "Rulesets", rulesetName + ".json");
+            string userPath = Path.Combine(customUserPath, "Rulesets", rulesetName + ".json");
+
+            if (File.Exists(contentPath))
             {
-                return Content.Load<Ruleset>(rulesetName);
-                
+                return new JSONLoader().GetRulesetFromJSONFile(contentPath);
             }
-            catch (ContentLoadException)
+            else if (File.Exists(userPath))
             {
-                Ruleset r = new Ruleset();
-                bool result = r.LoadRulesetFromContent(customUserPath + rulesetName);
-                if (!result)
-                {
-                    throw;
-                }
-                return r;
+                return new JSONLoader().GetRulesetFromJSONFile(userPath);
             }
-            
+            else
+            {
+                Console.WriteLine($"Ruleset '{rulesetName}' not found. Using default ruleset.");
+                return new Ruleset(); // Return a default ruleset
+            }
+
+
         }
     }
 }

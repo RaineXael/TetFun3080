@@ -7,7 +7,7 @@ namespace TetFun3080
 {
     public class TetFunGame : Game
     {
-        public float UI_SCALE = 2f;
+        public float UI_SCALE = 1f;
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -16,14 +16,14 @@ namespace TetFun3080
         protected UserInput player1Input;
         protected UserInput player2Input;
 
-        
+        JSONLoader jsonLoader = new JSONLoader();
 
         public TetFunGame()
         {
             _graphics = new GraphicsDeviceManager(this);
             AssetManager._graphics = _graphics;
-            _graphics.PreferredBackBufferWidth = 320 * (int)UI_SCALE;
-            _graphics.PreferredBackBufferHeight = 180 * (int)UI_SCALE;
+            _graphics.PreferredBackBufferWidth = 960 * (int)UI_SCALE;
+            _graphics.PreferredBackBufferHeight = 540 * (int)UI_SCALE;
 
             //do this to uncap framerate
             //_graphics.SynchronizeWithVerticalRetrace = false;
@@ -35,7 +35,10 @@ namespace TetFun3080
             AssetManager.Content = Content;
             IsMouseVisible = true;
 
-            AssetManager.fallbackTexture = AssetManager.Content.Load<Texture2D>("Sprites/fallback");
+            
+
+            jsonLoader.SaveRulesetToJSONFile(new Ruleset(), "User/ruleset.json");
+
 
             player1Input = new UserInput();
             player2Input = new UserInput(Keys.Left, Keys.Right, Keys.Down, Keys.Up, Keys.Z, Keys.X, Keys.LeftShift);
@@ -48,33 +51,35 @@ namespace TetFun3080
             // TODO: Add your initialization logic here
             
             base.Initialize();
-            nya = new BoardPlayer(new Board(),player1Input, new Vector2(32,16));
-            waur = new BoardPlayer(new Board(), player2Input, new Vector2(352, 16));
+            nya = new BoardPlayer(new Board(),player1Input, new Vector2(168,100));
+            waur = new BoardPlayer(new Board(), player2Input, new Vector2(630, 100));
         }
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            
 
+            AssetManager.fallbackTexture = AssetManager.Content.Load<Texture2D>("Sprites/fallback");
             AssetManager.LoadFont("Fonts/Font1");
+            AssetManager.LoadTexture("Sprites/one");
             AssetManager.LoadTexture("Sprites/blocks");
+            AssetManager.LoadTexture("Consoles/default");
             AssetManager.LoadAudio("Audio/GameSounds/tgm/place");
             AssetManager.LoadAudio("Audio/GameSounds/tgm/line");
             AssetManager.LoadAudio("Audio/GameSounds/joel/place");
             AssetManager.LoadAudio("Audio/GameSounds/joel/line");
             // TODO: use this.Content to load your game content here
-
-            
+            DebugConsole.Font = AssetManager.GetFont("Fonts/Font1");
+            DebugConsole.BackgroundTex = AssetManager.GetTexture("Sprites/one");
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            DebugConsole.Update(gameTime);
             // TODO: Add your update logic here
             nya.Update(gameTime);
-            waur.Update(gameTime);
+            //waur.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -86,6 +91,7 @@ namespace TetFun3080
             nya.Draw(_spriteBatch);
             waur.Draw(_spriteBatch);
             base.Draw(gameTime);
+            DebugConsole.Draw(_spriteBatch);
             _spriteBatch.End();
         }
     }

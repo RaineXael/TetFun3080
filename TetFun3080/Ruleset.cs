@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.Xml.Serialization;
 using TetFun3080.Backend;
@@ -10,9 +11,9 @@ namespace TetFun3080
     {
         public string Name { get; set; } = "Fallback"; // Name of the ruleset
         //Instances
-        [XmlIgnore]
+        [JsonIgnore]
         public IRandomizer randomizer;
-        [XmlIgnore]
+        [JsonIgnore]
         public IRotator rotator;
 
         public string RandomizerName;
