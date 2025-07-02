@@ -18,12 +18,11 @@ namespace TetFun3080
         public static GraphicsDeviceManager _graphics;
         public static ContentManager Content;
         private static Dictionary<string, Texture2D> _textures = new Dictionary<string, Texture2D>();
-        private static Dictionary<string, Texture2D> _userTextures = new Dictionary<string, Texture2D>();
         private static Dictionary<string, SpriteFont> _fonts = new Dictionary<string, SpriteFont>();
         private static Dictionary<string, SoundEffect> _audio = new Dictionary<string, SoundEffect>();
-
+        private static Dictionary<string, Effect> _effects = new Dictionary<string, Effect>();
         public static Texture2D fallbackTexture;
-
+        public static SoundEffect fallbackSound;
 
         public static void LoadTexture(string assetName)
         {
@@ -48,7 +47,7 @@ namespace TetFun3080
                     {
                         // Handle the exception as needed, e.g., log it or rethrow it
                         Console.WriteLine($"Error loading texture '{assetName}': {e.Message}");
-                        _textures.Add(assetName, fallbackTexture);
+                       
                     }
 
 
@@ -59,40 +58,46 @@ namespace TetFun3080
             }
         }
 
-
-
-
-        public static void LoadFont(string assetName)
-        {
-            if (!_textures.ContainsKey(assetName))
-            {
-                _fonts.Add(assetName, Content.Load<SpriteFont>(assetName));
-            }
-        }
-        public static void LoadAudio(string assetName)
-        {
-            if (!_textures.ContainsKey(assetName))
-            {
-                _audio.Add(assetName, Content.Load<SoundEffect>(assetName));
-            }
-        }
-
         public static Texture2D GetTexture(string assetName)
         {
             if (_textures.ContainsKey(assetName))
             {
                 return _textures[assetName];
             }
-            else if(_textures.ContainsKey(customUserPath + assetName))
+            else if (_textures.ContainsKey(customUserPath + assetName))
             {
                 return _textures[customUserPath + assetName];
             }
             else
             {
                 // You might want to throw an exception or return a default texture
-                throw new Exception($"Texture '{assetName}' not found in the AssetManager.");
+                DebugConsole.Log($"Texture '{assetName}' not found in the AssetManager.");
+                return fallbackTexture;
             }
         }
+
+
+
+        public static void LoadAudio(string assetName)
+        {
+            try
+            {
+                if (!_audio.ContainsKey(assetName))
+                {
+                    _audio.Add(assetName, Content.Load<SoundEffect>(assetName));
+                }
+                else
+                {
+                    Console.WriteLine($"Error loading audio '{assetName}'");
+                }
+            }
+            catch(ContentLoadException e)
+            {
+                Console.WriteLine($"Error loading audio '{assetName}'");
+            }
+        }
+
+
         public static SpriteFont GetFont(string assetName)
         {
             if (_fonts.ContainsKey(assetName))
@@ -102,7 +107,15 @@ namespace TetFun3080
             else
             {
                 // You might want to throw an exception or return a default texture
-                throw new Exception($"Font '{assetName}' not found in the AssetManager.");
+                DebugConsole.Log($"Font '{assetName}' not found in the AssetManager.");
+                return null;
+            }
+        }
+        public static void LoadFont(string assetName)
+        {
+            if (!_fonts.ContainsKey(assetName))
+            {
+                _fonts.Add(assetName, Content.Load<SpriteFont>(assetName));
             }
         }
         public static SoundEffect GetAudio(string assetName)
@@ -114,7 +127,8 @@ namespace TetFun3080
             else
             {
                 // You might want to throw an exception or return a default texture
-                throw new Exception($"Sound '{assetName}' not found in the AssetManager.");
+                DebugConsole.Log($"Sound '{assetName}' not found in the AssetManager.");
+                return fallbackSound;
             }
         }
 
@@ -143,6 +157,37 @@ namespace TetFun3080
             }
 
 
+        }
+
+        public static void LoadEffect(string assetName)
+        {
+            if (!_effects.ContainsKey(assetName))
+            {
+                try
+                {
+                    _effects.Add(assetName, Content.Load<Effect>(assetName));
+                }
+                catch (ContentLoadException e)
+                {
+
+                    // Handle the exception as needed, e.g., log it or rethrow it
+                    DebugConsole.Log($"Error loading texture '{assetName}': {e.Message}");
+                }
+            }
+        }
+
+        public static Effect GetEffect(string assetName)
+        {
+            if (_effects.ContainsKey(assetName))
+            {
+                return _effects[assetName];
+            }    
+            else
+            {
+                // You might want to throw an exception or return a default texture
+                DebugConsole.Log($"Texture '{assetName}' not found in the AssetManager.");
+                return null;
+            }
         }
     }
 }

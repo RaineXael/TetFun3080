@@ -9,7 +9,7 @@ using TetFun3080.Backend;
 
 namespace TetFun3080
 {
-    internal class GameLevel : ILevel
+    internal class SoloGameLevel : ILevel
     {
         private List<IEntity> _entities = new List<IEntity>();
         public List<IEntity> entities

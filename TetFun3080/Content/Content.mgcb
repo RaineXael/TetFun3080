@@ -13,6 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Audio/fallback.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/fallback.wav
+
 #begin Audio/GameSounds/joel/line.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -25,17 +31,59 @@
 /processorParam:Quality=Best
 /build:Audio/GameSounds/joel/place.wav
 
+#begin Audio/GameSounds/tgm/i.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/GameSounds/tgm/i.wav;Audio/GameSounds/tgm/i
+
+#begin Audio/GameSounds/tgm/j.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/GameSounds/tgm/j.wav;Audio/GameSounds/tgm/j
+
+#begin Audio/GameSounds/tgm/l.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/GameSounds/tgm/l.wav;Audio/GameSounds/tgm/l
+
 #begin Audio/GameSounds/tgm/line.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Audio/GameSounds/tgm/line.wav
 
+#begin Audio/GameSounds/tgm/o.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/GameSounds/tgm/o.wav;Audio/GameSounds/tgm/o
+
 #begin Audio/GameSounds/tgm/place.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Audio/GameSounds/tgm/place.wav
+
+#begin Audio/GameSounds/tgm/s.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/GameSounds/tgm/s.wav;Audio/GameSounds/tgm/s
+
+#begin Audio/GameSounds/tgm/t.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/GameSounds/tgm/t.wav;Audio/GameSounds/tgm/t
+
+#begin Audio/GameSounds/tgm/z.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/GameSounds/tgm/z.wav;Audio/GameSounds/tgm/z
 
 #begin Audio/Mus/white/loop.wav
 /importer:WavImporter
@@ -70,6 +118,24 @@
 
 #begin Rulesets/ruleset.json
 /copy:Rulesets/ruleset.json
+
+#begin Shaders/Wave.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Wave.fx
+
+#begin Sprites/Backgrounds/default.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Backgrounds/default.png
 
 #begin Sprites/blocks.png
 /importer:TextureImporter

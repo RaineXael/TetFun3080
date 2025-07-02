@@ -51,7 +51,7 @@ namespace TetFun3080
         private SoundEffectInstance pieceDropSoundInstance;
         private SpriteFont font;
 
-        private string soundSkin =  "tgm";
+        private string soundSkin =  "joel";
 
         private Sprite testspr;
 
@@ -74,11 +74,12 @@ namespace TetFun3080
             pieceDropSoundInstance = AssetManager.GetAudio($"Audio/GameSounds/{soundSkin}/place").CreateInstance();
             lineclearSoundInstance = AssetManager.GetAudio($"Audio/GameSounds/{soundSkin}/line").CreateInstance();
             _block_sprite.baseSize = 16;
-            GenerateNewPiece(ruleset.randomizer.GetNextPiece());
+            
             for(int i = 0; i < 5; i++)
             {
                 PieceQueue.Add(ruleset.randomizer.GetNextPiece());
             }
+            GenerateNewPieceFromQueue();
             this.input = input;
             boardDrawOffset = board.bufferHeight * 16;
             gravityTimer = ruleset.gravity;
@@ -87,9 +88,29 @@ namespace TetFun3080
             testspr = new Sprite(AssetManager.GetTexture("newSprite.png"));
 
             //ruleset = AssetManager.GetRuleset("Rulesets/TestRuleset");
+            LoadSoundTheme(soundSkin);
         }
 
+        List<SoundEffect> NextSpawnSounds = new List<SoundEffect>();
 
+        public void LoadSoundTheme(string skinName)
+        {
+            AssetManager.LoadAudio($"Audio/GameSounds/{skinName}/z");
+            AssetManager.LoadAudio($"Audio/GameSounds/{skinName}/s");
+            AssetManager.LoadAudio($"Audio/GameSounds/{skinName}/i");
+            AssetManager.LoadAudio($"Audio/GameSounds/{skinName}/o");
+            AssetManager.LoadAudio($"Audio/GameSounds/{skinName}/t");
+            AssetManager.LoadAudio($"Audio/GameSounds/{skinName}/j");
+            AssetManager.LoadAudio($"Audio/GameSounds/{skinName}/l");
+
+            NextSpawnSounds.Add(AssetManager.GetAudio($"Audio/GameSounds/{skinName}/z"));
+            NextSpawnSounds.Add(AssetManager.GetAudio($"Audio/GameSounds/{skinName}/s"));
+            NextSpawnSounds.Add(AssetManager.GetAudio($"Audio/GameSounds/{skinName}/i"));
+            NextSpawnSounds.Add(AssetManager.GetAudio($"Audio/GameSounds/{skinName}/o"));
+            NextSpawnSounds.Add(AssetManager.GetAudio($"Audio/GameSounds/{skinName}/t"));
+            NextSpawnSounds.Add(AssetManager.GetAudio($"Audio/GameSounds/{skinName}/j"));
+            NextSpawnSounds.Add(AssetManager.GetAudio($"Audio/GameSounds/{skinName}/l"));
+        }
 
         
 
@@ -238,9 +259,11 @@ namespace TetFun3080
         private void GenerateNewPieceFromQueue()
         {
             //take 0 queue item, remove it, and generate a new piece from it.
-            GenerateNewPiece(PieceQueue[0]);
+            
+            SpawnPiece(PieceQueue[0]);
             PieceQueue.RemoveAt(0);
             PieceQueue.Add(ruleset.randomizer.GetNextPiece());
+            PlayNextSpawnSound();
         }
 
         public void HandleInput()
@@ -487,14 +510,14 @@ namespace TetFun3080
                 if (heldPiece == null)
                 {
                     heldPiece = currentShape;
-                    GenerateNewPiece(ruleset.randomizer.GetNextPiece());
+                    GenerateNewPieceFromQueue();
                 }
                 else
                 {
                     Pieces placeholder = (Pieces)heldPiece;
                     heldPiece = currentShape;
                     currentShape = placeholder;
-                    GenerateNewPiece(currentShape);
+                    SpawnPiece(currentShape);
                 }
                 
              
@@ -534,8 +557,9 @@ namespace TetFun3080
             }
         }
 
-        public void GenerateNewPiece(Pieces piece)
+        private void SpawnPiece(Pieces piece)
         {
+            
             hardDropPossible = true;
             int lastTwoDigits = level % 100;
             if (lastTwoDigits != 99) {
@@ -544,8 +568,17 @@ namespace TetFun3080
             
             currentShape = piece;
             piecePositions = GetPiecePositionsFromShape(piece);
-
+            
             pilot_position = board.spawnPosition; // Reset the piece's position to the spawn position on the board
+        }
+
+        private void PlayNextSpawnSound()
+        {
+            // Play a sound based on the next piece type
+            if (NextSpawnSounds.Count > 0)
+            {
+                NextSpawnSounds[(int)PieceQueue[0]-1].Play();
+            }
         }
 
         private Vector2[] GetPiecePositionsFromShape(Pieces piece)
