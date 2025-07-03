@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using TetFun3080.Backend;
 
-namespace TetFun3080
+namespace TetFun3080.Levels
 {
     internal class SoloGameLevel : ILevel
     {
@@ -17,6 +17,8 @@ namespace TetFun3080
 
         Texture2D _tempBG;
         Effect _distortionEffect;
+
+        GameMode mode;
 
         private List<IEntity> _entities = new List<IEntity>();
         public List<IEntity> entities
@@ -32,11 +34,19 @@ namespace TetFun3080
             player1Input = new UserInput();
             player2Input = new UserInput(Keys.Left, Keys.Right, Keys.Down, Keys.Up, Keys.Z, Keys.X, Keys.LeftShift);
 
+            mode = jsonLoader.LoadGameModeFromFile("Content/Rulesets/ruleset.json");
+
             nya = new Player(player1Input, new Vector2(168, 100));
             waur = new Player(player2Input, new Vector2(630, 100));
+
+            nya.BeginGameMode(mode);
+            waur.BeginGameMode(mode);
+
             AssetManager.LoadEffect("Shaders/Wave");
             _distortionEffect = AssetManager.GetEffect("Shaders/Wave");
             _tempBG = AssetManager.GetTexture("Sprites/Backgrounds/default");
+
+            
         }
 
         public void OnExit()
@@ -44,12 +54,6 @@ namespace TetFun3080
             throw new NotImplementedException();
         }
 
-
-
-    
-
-
-        
         public void OnPause()
         {
             throw new NotImplementedException();

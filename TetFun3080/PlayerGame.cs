@@ -60,16 +60,19 @@ namespace TetFun3080
 
         public Vector2 Position { get; set; }
 
-        private Ruleset ruleset = new Ruleset();
+        private GameMode gameMode;
+        private Ruleset ruleset;
 
 
-
-        public PlayerGame(Board board, UserInput input, Vector2 Position)
+        public PlayerGame(Board board, UserInput input, Vector2 Position, GameMode mode)
         {
             AssetManager.LoadTexture("newSprite.png");
 
             this.Position = Position;
             this.board = board;
+
+            gameMode = mode;
+            ruleset = gameMode.GetRulesetFromLevel(level);
 
             _block_sprite = new SpriteSheet(AssetManager.GetTexture("Sprites/blocks"));
             testspr = new SpriteSheet(AssetManager.GetTexture("Sprites/blocks"));
@@ -87,9 +90,9 @@ namespace TetFun3080
             boardDrawOffset = board.bufferHeight * 16;
             gravityTimer = ruleset.gravity;
             lockInTimer = ruleset.lockInDelay;
-
+            
             testspr = new Sprite(AssetManager.GetTexture("newSprite.png"));
-
+            
             //ruleset = AssetManager.GetRuleset("Rulesets/TestRuleset");
             LoadSoundTheme(soundSkin);
         }
@@ -566,7 +569,7 @@ namespace TetFun3080
                     lineclearSoundInstance.Stop();
                     lineclearSoundInstance.Play();
                     lineClearTimer += ruleset.lineclearDelay;
-                    level += linesCleared;
+                    IncrementLevel(linesCleared, true); // Increment level based on lines cleared
                 }
                 else
                 {
@@ -576,15 +579,29 @@ namespace TetFun3080
             }
         }
 
+        private void IncrementLevel(int count = 1, bool lineclear = true)
+        {
+            if (!lineclear)
+            {
+                int lastTwoDigits = level % 100;
+                if (lastTwoDigits == 99)
+                {
+                    return;
+                }
+            }
+            level += count;
+
+            ruleset = gameMode.GetRulesetFromLevel(level);
+
+        }
+
         private void SpawnPiece(Pieces piece)
         {
 
             hardDropPossible = true;
-            int lastTwoDigits = level % 100;
-            if (lastTwoDigits != 99)
-            {
-                level++;
-            }
+            
+            IncrementLevel(1, false); // Increment level by 1 if not at a level threshold
+            
 
             currentShape = piece;
             piecePositions = GetPiecePositionsFromShape(piece);

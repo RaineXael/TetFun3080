@@ -18,15 +18,20 @@ namespace TetFun3080
 
         private Sprite console;
 
+        public void BeginGameMode(GameMode mode)
+        {
+            currentEntity = new PlayerGame(new Board(), _input, Position, mode);
+
+        }
+
         public Player(UserInput input, Vector2 spawnPos)
         {
            Position = spawnPos;
             _input = input;
             console = new Sprite(AssetManager.GetTexture("Consoles/default"));
-            currentEntity = new PlayerGame(new Board(), _input, spawnPos);
-            //currentEntity = new PlayerMenu(Position);
+            //currentEntity = new PlayerGame(new Board(), _input, Position, new GameMode());
+            currentEntity = new PlayerMenu(Position);
         }
-
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {

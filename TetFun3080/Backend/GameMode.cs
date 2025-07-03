@@ -15,6 +15,21 @@ namespace TetFun3080.Backend
         public List<GameModeLevel> levels = new List<GameModeLevel>() { new GameModeLevel(0, new Ruleset()), new GameModeLevel(200, new Ruleset()) };
 
 
+        public Ruleset GetRulesetFromLevel(int level)
+        {
+            GameModeLevel current = levels[0];
+
+            foreach (GameModeLevel l in levels)
+            {
+                if (l.Level <= level && l.Level > current.Level)
+                {
+                    current = l;
+                }
+            }
+            return current.Ruleset;
+
+        }
+
     }
     [Serializable]
     public class GameModeLevel
@@ -22,8 +37,8 @@ namespace TetFun3080.Backend
 
         public GameModeLevel(int level, Ruleset ruleset)
         {
-            Level = 0;
-            Ruleset = new Ruleset();
+            Level = level;
+            Ruleset = ruleset;
         }
 
         public int Level { get; set; }

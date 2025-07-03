@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using TetFun3080.Backend;
+using TetFun3080.Levels;
 
 namespace TetFun3080
 {
@@ -36,8 +37,7 @@ namespace TetFun3080
             IsMouseVisible = true;
 
 
-            JSONLoader jsonLoader = new JSONLoader();
-            jsonLoader.SaveGameModeToJSONFile(new GameMode(), "./ligma.json" );
+            
 
         }
  

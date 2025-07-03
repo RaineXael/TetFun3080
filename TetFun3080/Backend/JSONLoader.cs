@@ -63,5 +63,20 @@ namespace TetFun3080.Backend
             }
         }
 
+        internal GameMode LoadGameModeFromFile(string url)
+        {
+            try
+            {
+                string jsonContent = File.ReadAllText(url);
+                JObject jsonObject = JObject.Parse(jsonContent);
+                GameMode gamemode = jsonObject.ToObject<GameMode>();
+                return gamemode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading gamemode from JSON file: {ex.Message}");
+                return null;
+            }
+        }
     }
 }

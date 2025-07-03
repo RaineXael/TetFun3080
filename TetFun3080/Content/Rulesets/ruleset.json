@@ -1,15 +1,40 @@
 {
-  "RandomizerName": null,
-  "RotatorName": null,
-  "visibleNextCount": 5,
-  "ghostEnabled": true,
-  "initialLevel": 0,
-  "gravity": 10,
-  "holdEnabled": true,
-  "appearanceDelay": 15,
-  "lineclearDelay": 25,
-  "dasTime": 10,
-  "lockInDelay": 3.0,
-  "InstalockOnHardDrop": true,
-  "Name": "Fallback"
+  "levels": [
+    {
+      "Level": 0,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 10,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 100,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 0,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    }
+  ],
+  "Name": "Fallback",
+  "Description": "Oh! You're not supposed to see this."
 }
