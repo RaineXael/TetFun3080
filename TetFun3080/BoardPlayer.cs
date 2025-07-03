@@ -10,6 +10,7 @@ using TetFun3080.Backend;
 
 
 //The object responsible for drawing and input handling the board.
+//The object representing a game playing player. For menuing, see Player.cs or PlayerMenu.cs
 
 namespace TetFun3080
 {
@@ -51,7 +52,7 @@ namespace TetFun3080
         private SoundEffectInstance pieceDropSoundInstance;
         private SpriteFont font;
 
-        private string soundSkin =  "joel";
+        private string soundSkin =  "tgm";
 
         private Sprite testspr;
 
@@ -114,7 +115,7 @@ namespace TetFun3080
 
         
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             console.Position = boardPosition-new Vector2(112,48);
             console.Draw(spriteBatch);

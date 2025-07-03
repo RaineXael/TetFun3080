@@ -38,6 +38,7 @@ namespace TetFun3080
 
         public Ruleset()
         {
+            //randomizer = new SevenBagRandomizer();
             randomizer = new SevenBagRandomizer();
             rotator = new RotatorQuick();
             //everything else set above

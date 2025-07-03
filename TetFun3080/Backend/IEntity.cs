@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace TetFun3080.Backend
 {
-    internal interface IEntity
+    public interface IEntity
     {
         void Update(GameTime gameTime);
-        void Draw(SpriteBatch spriteBatch);
+        void Draw(SpriteBatch spriteBatch, GameTime gameTime);
     }
 }

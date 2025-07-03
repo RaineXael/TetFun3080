@@ -7,19 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using TetFun3080.Backend;
 
-namespace TetFun3080.Content
+namespace TetFun3080
 {
-    public class Menu : IEntity
+    internal class PlayerMenu : IEntity
     {
-        private string[] Items { get; set; }
-        
-
-        public Menu(string[] items)
-        {
-            Items = items;
-        }
-        
-
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             throw new NotImplementedException();

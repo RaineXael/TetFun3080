@@ -1,16 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TetFun3080.Backend;
 
 namespace TetFun3080
 {
     internal class SoloGameLevel : ILevel
     {
+        protected UserInput player1Input;
+        protected UserInput player2Input;
+
+        private BoardPlayer nya;
+        private BoardPlayer waur;
+
+        Texture2D _tempBG;
+        Effect _distortionEffect;
+
         private List<IEntity> _entities = new List<IEntity>();
         public List<IEntity> entities
         {
@@ -18,14 +25,19 @@ namespace TetFun3080
             set => _entities = value;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void OnEnter()
         {
-            throw new NotImplementedException();
+            JSONLoader jsonLoader = new JSONLoader();
+            player1Input = new UserInput();
+            player2Input = new UserInput(Keys.Left, Keys.Right, Keys.Down, Keys.Up, Keys.Z, Keys.X, Keys.LeftShift);
+
+            nya = new BoardPlayer(new Board(), player1Input, new Vector2(168, 100));
+            waur = new BoardPlayer(new Board(), player2Input, new Vector2(630, 100));
+            AssetManager.LoadEffect("Shaders/Wave");
+            _distortionEffect = AssetManager.GetEffect("Shaders/Wave");
+            _tempBG = AssetManager.GetTexture("Sprites/Backgrounds/default");
         }
 
         public void OnExit()
@@ -33,14 +45,51 @@ namespace TetFun3080
             throw new NotImplementedException();
         }
 
+
+
+    
+
+
+        
         public void OnPause()
         {
             throw new NotImplementedException();
         }
 
+        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        {
+            _distortionEffect.Parameters["Time"].SetValue((float)gameTime.TotalGameTime.TotalSeconds);
+            _distortionEffect.Parameters["Texture"].SetValue(_tempBG);
+            Matrix worldViewProjection = Matrix.CreateOrthographicOffCenter(
+    0, 960,
+    540, 0,
+    0, 1);
+            _distortionEffect.Parameters["WorldViewProjection"].SetValue(worldViewProjection);
+            spriteBatch.Begin(
+                SpriteSortMode.Deferred,
+                BlendState.AlphaBlend,
+                SamplerState.LinearClamp,
+                DepthStencilState.None,
+                RasterizerState.CullCounterClockwise,
+                _distortionEffect
+            );
+
+
+            spriteBatch.Draw(_tempBG, new Vector2(0, 0), Color.White);
+
+            // End the SpriteBatch for this pass.
+            spriteBatch.End();
+
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
+            nya.Draw(spriteBatch, gameTime);
+            waur.Draw(spriteBatch, gameTime);
+            spriteBatch.End();
+        }
+
         public void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            nya.Update(gameTime);
+            //waur.Update(gameTime);
         }
     }
 }

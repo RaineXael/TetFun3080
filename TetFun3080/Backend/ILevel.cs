@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TetFun3080.Backend
 {
-    internal interface ILevel :IEntity
+    public interface ILevel :IEntity
     {
         public void OnEnter();
         public void OnExit();
