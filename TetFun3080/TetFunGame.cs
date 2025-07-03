@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 using TetFun3080.Backend;
 
 namespace TetFun3080
@@ -33,6 +34,10 @@ namespace TetFun3080
             Content.RootDirectory = "Content";
             AssetManager.Content = Content;
             IsMouseVisible = true;
+
+
+            JSONLoader jsonLoader = new JSONLoader();
+            jsonLoader.SaveGameModeToJSONFile(new GameMode(), "./ligma.json" );
 
         }
  

@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection.PortableExecutable;
-using TetFun3080.Backend;
 
-namespace TetFun3080
+namespace TetFun3080.Backend
 {
     public class JSONLoader
     {
@@ -37,6 +37,31 @@ namespace TetFun3080
             }
         }
 
-    
+        public void SaveRulesetCollectionToJSONFile(List<Ruleset> rulesetCollection, string filePath)
+        {
+            try
+            {
+                string jsonContent = JsonConvert.SerializeObject(rulesetCollection, Formatting.Indented);
+                File.WriteAllText(filePath, jsonContent);
+                Console.WriteLine($"Successfully saved ruleset collection to {filePath}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving ruleset collection to JSON file: {ex.Message}");
+            }
+        }
+        public void SaveGameModeToJSONFile(GameMode gamemode, string filePath)
+        {
+            try
+            {
+                string jsonContent = JsonConvert.SerializeObject(gamemode, Formatting.Indented);
+                File.WriteAllText(filePath, jsonContent);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving gamemode to JSON file: {ex.Message}");
+            }
+        }
+
     }
 }

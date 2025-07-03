@@ -11,14 +11,34 @@ namespace TetFun3080
 {
     class Player : IEntity
     {
+        public Vector2 Position { get; set; }
+        private UserInput _input;
+
+        private IEntity currentEntity;
+
+        private Sprite console;
+
+        public Player(UserInput input, Vector2 spawnPos)
+        {
+           Position = spawnPos;
+            _input = input;
+            console = new Sprite(AssetManager.GetTexture("Consoles/default"));
+            currentEntity = new PlayerGame(new Board(), _input, spawnPos);
+            //currentEntity = new PlayerMenu(Position);
+        }
+
+
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            throw new NotImplementedException();
+            console.Position = Position - new Vector2(112, 48);
+            console.Draw(spriteBatch);
+
+            currentEntity.Draw(spriteBatch, gameTime);
         }
 
         public void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            currentEntity.Update(gameTime);
         }
     }
 }

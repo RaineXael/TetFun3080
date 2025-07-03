@@ -12,8 +12,8 @@ namespace TetFun3080
         protected UserInput player1Input;
         protected UserInput player2Input;
 
-        private BoardPlayer nya;
-        private BoardPlayer waur;
+        private Player nya;
+        private Player waur;
 
         Texture2D _tempBG;
         Effect _distortionEffect;
@@ -24,8 +24,7 @@ namespace TetFun3080
             get => _entities;
             set => _entities = value;
         }
-
-
+        public Vector2 Position { get; set; }
 
         public void OnEnter()
         {
@@ -33,8 +32,8 @@ namespace TetFun3080
             player1Input = new UserInput();
             player2Input = new UserInput(Keys.Left, Keys.Right, Keys.Down, Keys.Up, Keys.Z, Keys.X, Keys.LeftShift);
 
-            nya = new BoardPlayer(new Board(), player1Input, new Vector2(168, 100));
-            waur = new BoardPlayer(new Board(), player2Input, new Vector2(630, 100));
+            nya = new Player(player1Input, new Vector2(168, 100));
+            waur = new Player(player2Input, new Vector2(630, 100));
             AssetManager.LoadEffect("Shaders/Wave");
             _distortionEffect = AssetManager.GetEffect("Shaders/Wave");
             _tempBG = AssetManager.GetTexture("Sprites/Backgrounds/default");

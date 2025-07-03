@@ -5,27 +5,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TetFun3080.Backend;
 
-namespace TetFun3080.Content
+namespace TetFun3080.Menu
 {
-    public class Menu : IEntity
+    internal class MenuItemSelector : IMenuItem
     {
-        private string[] Items { get; set; }
-        
+        SpriteFont Font { get; set; }
+        public Vector2 Position { get; set ; }
 
-        public Menu(string[] items)
+        public MenuItemSelector()
         {
-            Items = items;
+            Font = AssetManager.GetFont("Fonts/Font1");
         }
-        
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        {
+            //spriteBatch.DrawString(Font, Items[i], textPosition, Color.White);
+        }
+
+        public void Update(GameTime gameTime)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(GameTime gameTime)
+        public void OnSelect()
         {
             throw new NotImplementedException();
         }
