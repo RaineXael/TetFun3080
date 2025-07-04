@@ -23,7 +23,11 @@ namespace TetFun3080
 
         public void BeginGameMode(GameMode mode)
         {
-            currentEntity = new PlayerGame(new Board(), _input, Position, mode, this);
+            //temp, use tgm style ruleset for first release
+            GameMode temp = new JSONLoader().LoadGameModeFromFile("Content/Rulesets/tgm2.json");
+            currentEntity = new PlayerGame(new Board(), _input, Position, temp, this);
+
+            //currentEntity = new PlayerGame(new Board(), _input, Position, mode, this);
         }
 
         public void BeginMenu()

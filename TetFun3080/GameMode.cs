@@ -12,7 +12,7 @@ namespace TetFun3080
     {
         public string Name { get; set; } = "Fallback"; // Name of the ruleset
         public string Description { get; set; } = "Oh! You're not supposed to see this.";
-        public List<GameModeLevel> levels = new List<GameModeLevel>() { new GameModeLevel(0, new Ruleset()), new GameModeLevel(200, new Ruleset()) };
+        public List<GameModeLevel> levels = new List<GameModeLevel>();
 
 
         public Ruleset GetRulesetFromLevel(int level)

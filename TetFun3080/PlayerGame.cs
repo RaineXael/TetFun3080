@@ -96,6 +96,8 @@ namespace TetFun3080
 
             //ruleset = AssetManager.GetRuleset("Rulesets/TestRuleset");
             LoadSoundTheme(soundSkin);
+
+            level = 830;
         }
 
         List<SoundEffect> NextSpawnSounds = new List<SoundEffect>();

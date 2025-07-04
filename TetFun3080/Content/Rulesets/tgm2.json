@@ -1,0 +1,347 @@
+{
+  "levels": [
+    {
+      "Level": 0,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 30,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 30,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 12,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 60,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 6,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 100,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 5,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 120,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 4,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 140,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 3,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 5,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 170,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 2,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 200,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 30,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 220,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 15,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 230,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 9,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 233,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 4,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 236,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 3,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 239,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 2,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 243,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 1,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 247,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 0,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 40,
+        "dasTime": 16,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+
+    {
+      "Level": 500,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 0,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 25,
+        "dasTime": 10,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 600,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 0,
+        "holdEnabled": true,
+        "appearanceDelay": 25,
+        "lineclearDelay": 16,
+        "dasTime": 10,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 700,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 0,
+        "holdEnabled": true,
+        "appearanceDelay": 16,
+        "lineclearDelay": 12,
+        "dasTime": 10,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 800,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 0,
+        "holdEnabled": true,
+        "appearanceDelay": 12,
+        "lineclearDelay": 6,
+        "dasTime": 10,
+        "lockInDelay": 3.0,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 900,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 5,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": 0,
+        "holdEnabled": true,
+        "appearanceDelay": 12,
+        "lineclearDelay": 6,
+        "dasTime": 8,
+        "lockInDelay": 1.7,
+        "InstalockOnHardDrop": false
+      }
+    }
+  ],
+  "Name": "MTGM2",
+  "Description": "The Second Master"
+}

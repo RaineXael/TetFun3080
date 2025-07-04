@@ -13,7 +13,7 @@ namespace TetFun3080.Levels
         protected UserInput player2Input;
 
         private Player nya;
-        private Player waur;
+  
 
         Texture2D _tempBG;
         Effect _distortionEffect;
@@ -39,8 +39,8 @@ namespace TetFun3080.Levels
 
             mode = jsonLoader.LoadGameModeFromFile("Content/Rulesets/ruleset.json");
 
-            nya = new Player(player1Input, new Vector2(168, 100));
-            waur = new Player(player2Input, new Vector2(630, 100));
+            nya = new Player(player1Input, new Vector2(400, 100));
+    
 
          
 
@@ -48,7 +48,7 @@ namespace TetFun3080.Levels
             _distortionEffect = AssetManager.GetEffect("Shaders/Wave");
             _tempBG = AssetManager.GetTexture("Sprites/Backgrounds/default");
 
-            MusicManager.PlayMusic("Audio/Mus/menu");
+            
         }
 
         public void OnExit()
@@ -87,7 +87,7 @@ namespace TetFun3080.Levels
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
             nya.Draw(spriteBatch, gameTime);
-            waur.Draw(spriteBatch, gameTime);
+    
 
       
             spriteBatch.End();
@@ -97,7 +97,7 @@ namespace TetFun3080.Levels
         {
        
             nya.Update(gameTime);
-            waur.Update(gameTime);
+     
         }
     }
 }

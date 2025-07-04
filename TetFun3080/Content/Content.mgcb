@@ -269,6 +269,9 @@
 #begin Rulesets/ruleset.json
 /copy:Rulesets/ruleset.json
 
+#begin Rulesets/tgm2.json
+/copy:Rulesets/tgm2.json
+
 #begin Shaders/Wave.fx
 /importer:EffectImporter
 /processor:EffectProcessor
