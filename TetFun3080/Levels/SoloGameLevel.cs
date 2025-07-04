@@ -48,7 +48,7 @@ namespace TetFun3080.Levels
             _distortionEffect = AssetManager.GetEffect("Shaders/Wave");
             _tempBG = AssetManager.GetTexture("Sprites/Backgrounds/default");
 
-            
+            MusicManager.PlayMusic("Audio/Mus/menu");
         }
 
         public void OnExit()

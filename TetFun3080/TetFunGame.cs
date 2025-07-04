@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.IO;
 using TetFun3080.Backend;
 using TetFun3080.Levels;
 
@@ -66,6 +68,9 @@ namespace TetFun3080
 
             AssetManager.LoadTexture("Sprites/Backgrounds/default");
 
+            Song song = new Song("asdasd", "asdasdasd", 1);
+            string jsonContent = JsonConvert.SerializeObject(song, Formatting.Indented);
+            File.WriteAllText("./song.json", jsonContent);
         }
 
         protected override void Update(GameTime gameTime)
@@ -76,6 +81,8 @@ namespace TetFun3080
             
             LevelManager.Update(gameTime);
             base.Update(gameTime);
+
+            MusicManager.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)

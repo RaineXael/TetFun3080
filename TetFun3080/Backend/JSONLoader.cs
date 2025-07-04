@@ -78,5 +78,21 @@ namespace TetFun3080.Backend
                 return null;
             }
         }
+
+        internal Song LoadSongMetadata(string url)
+        {
+            try
+            {
+                string jsonContent = File.ReadAllText(url);
+                JObject jsonObject = JObject.Parse(jsonContent);
+                Song song = jsonObject.ToObject<Song>();
+                return song;
+            }
+            catch (Exception ex)
+            {
+                DebugConsole.LogError($"Error loading gamemode from JSON file: {ex.Message}");
+                return null;
+            }
+        }
     }
 }

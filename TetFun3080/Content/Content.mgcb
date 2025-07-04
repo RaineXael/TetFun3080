@@ -121,30 +121,36 @@
 /processorParam:Quality=Best
 /build:Audio/MenuSounds/talk.wav
 
+#begin Audio/Mus/menu/data.json
+/copy:Audio/Mus/menu/data.json
+
+#begin Audio/Mus/menu/initial.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Mus/menu/initial.wav
+
+#begin Audio/Mus/menu/loop.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Mus/menu/loop.wav
+
+#begin Audio/Mus/white/data.json
+/copy:Audio/Mus/white/data.json
+
+#begin Audio/Mus/white/initial.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Mus/white/initial.wav
+
 #begin Audio/Mus/white/loop.wav
 /importer:WavImporter
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Audio/Mus/white/loop.wav
 
-#begin Audio/Mus/white/start.wav
-/importer:WavImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Audio/Mus/white/start.wav
-
-#begin Companions/default/attack.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Companions/default/attack.png
-
 #begin Companions/default/attack.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -168,30 +174,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Companions/default/attackget.png
-
-#begin Companions/default/attackget.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Companions/default/attackget.png
-
-#begin Companions/default/dire.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Companions/default/dire.png
 
 #begin Companions/default/dire.png
 /importer:TextureImporter
@@ -229,30 +211,6 @@
 /processorParam:TextureFormat=Color
 /build:Companions/default/line.png
 
-#begin Companions/default/line.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Companions/default/line.png
-
-#begin Companions/default/lose.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Companions/default/lose.png
-
 #begin Companions/default/lose.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -276,30 +234,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Companions/default/wait.png
-
-#begin Companions/default/wait.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Companions/default/wait.png
-
-#begin Companions/default/win.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Companions/default/win.png
 
 #begin Companions/default/win.png
 /importer:TextureImporter

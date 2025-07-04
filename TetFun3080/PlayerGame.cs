@@ -92,7 +92,8 @@ namespace TetFun3080
             gravityTimer = ruleset.gravity;
             lockInTimer = ruleset.lockInDelay;
            
-            
+            MusicManager.PlayMusic($"Audio/Mus/white");
+
             //ruleset = AssetManager.GetRuleset("Rulesets/TestRuleset");
             LoadSoundTheme(soundSkin);
         }

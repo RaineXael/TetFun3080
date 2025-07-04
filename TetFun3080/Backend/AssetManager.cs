@@ -20,6 +20,7 @@ namespace TetFun3080
         private static Dictionary<string, Texture2D> _textures = new Dictionary<string, Texture2D>();
         private static Dictionary<string, SpriteFont> _fonts = new Dictionary<string, SpriteFont>();
         private static Dictionary<string, SoundEffect> _audio = new Dictionary<string, SoundEffect>();
+        private static Dictionary<string, Song> _songs = new Dictionary<string, Song>();
         private static Dictionary<string, Effect> _effects = new Dictionary<string, Effect>();
         public static Texture2D fallbackTexture;
         public static SoundEffect fallbackSound;
@@ -77,6 +78,49 @@ namespace TetFun3080
         }
 
 
+        public static void LoadSong(string assetName)
+        {
+            try
+            {
+                if (!_songs.ContainsKey(assetName))
+                {
+                    Song song = new JSONLoader().LoadSongMetadata("./Content/"+assetName + "/data.json");
+                    if (song == null)
+                    {
+                        song = new Song("", "", 0);
+                        DebugConsole.LogError("Song Data loading failed for " + "./Content/" + assetName + "/data.json");
+                    }
+
+                    LoadAudio(assetName + "/initial");
+                    LoadAudio(assetName + "/loop");
+                    song.initial = GetAudio(assetName + "/initial");
+                    song.loop = GetAudio(assetName + "/loop");
+                    _songs.Add(assetName, song);
+                }
+                else
+                {
+                    Console.WriteLine($"Error loading audio '{assetName}'");
+                }
+            }
+            catch (ContentLoadException e)
+            {
+                Console.WriteLine($"Error loading audio '{assetName}'");
+            }
+        }
+
+        public static Song GetSong(string assetName)
+        {
+            if (_songs.ContainsKey(assetName))
+            {
+                return _songs[assetName];
+            }
+            else
+            {
+                // You might want to throw an exception or return a default texture
+                DebugConsole.LogError($"Song '{assetName}' not found in the AssetManager.");
+                return null;
+            }
+        }
 
         public static void LoadAudio(string assetName)
         {
