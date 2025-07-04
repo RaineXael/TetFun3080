@@ -12,6 +12,8 @@ namespace TetFun3080.Menu
 {
     public class MenuParent : IEntity
     {
+        
+
         private Vector2 padding = new Vector2(16, 16);
         private int separator = 16;
         private List<IMenuItem> Items { get; set; }
@@ -26,6 +28,8 @@ namespace TetFun3080.Menu
         bool childFocused = false; // Track if a child menu is focused
         MenuParent? parentMenu;
         MenuParent? childMenu;
+
+
 
         public MenuParent(Vector2 pos, UserInput input, string[] items)
         {
@@ -81,7 +85,10 @@ namespace TetFun3080.Menu
             Items[selectedIndex].OnSetSelected(true);
             DebugConsole.LogError("Selected index is now: " + selectedIndex);
         }
-
+        //We need to have this separate from this class so we can have functionality untied to this class
+        //either derive classes for each menu or make somthing a la unity event system (how)
+        //below fn and vars temp
+        public Player PParent; 
         private void SelectItem()
         {
            switch (selectedIndex)
@@ -93,6 +100,7 @@ namespace TetFun3080.Menu
                 case 1:
                     // Action for the second item
                     DebugConsole.Log("Freeplay");
+                    PParent.BeginGameMode(new GameMode());
                     break;
                 case 2:
                     // Action for the second item

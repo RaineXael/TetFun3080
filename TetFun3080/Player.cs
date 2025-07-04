@@ -9,7 +9,7 @@ using TetFun3080.Backend;
 
 namespace TetFun3080
 {
-    class Player : IEntity
+    public class Player : IEntity
     {
         public Vector2 Position { get; set; }
         private UserInput _input;
@@ -30,7 +30,8 @@ namespace TetFun3080
             _input = input;
             console = new Sprite(AssetManager.GetTexture("Consoles/default"));
             
-            currentEntity = new PlayerMenu(Position, _input);
+            currentEntity = new PlayerMenu(Position, _input,this);
+
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)

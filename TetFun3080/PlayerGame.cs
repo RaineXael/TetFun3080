@@ -269,7 +269,7 @@ namespace TetFun3080
         {
             //take 0 queue item, remove it, and generate a new piece from it.
 
-            SpawnPiece(PieceQueue[0]);
+            SpawnPiece(PieceQueue[0],false);
             PieceQueue.RemoveAt(0);
             PieceQueue.Add(ruleset.randomizer.GetNextPiece());
             PlayNextSpawnSound();
@@ -539,7 +539,7 @@ namespace TetFun3080
                     Pieces placeholder = (Pieces)heldPiece;
                     heldPiece = currentShape;
                     currentShape = placeholder;
-                    SpawnPiece(currentShape);
+                    SpawnPiece(currentShape, true);
                 }
 
 
@@ -570,6 +570,29 @@ namespace TetFun3080
                     lineclearSoundInstance.Play();
                     lineClearTimer += ruleset.lineclearDelay;
                     IncrementLevel(linesCleared, true); // Increment level based on lines cleared
+
+                    int multLevel = level / 100;
+
+                    switch (linesCleared)
+                    {
+                        case 1:
+                            score += 100 * multLevel;
+                            break;
+                        case 2:
+                            score += 300 * multLevel;
+                            break;
+                        case 3:
+                            score += multLevel * 500;
+                            break;
+                        case 4:
+                            score += multLevel * 800;
+                            break;
+                        default:
+                            score += multLevel * linesCleared*100 +800; // Fallback for 4+lines somehow
+                            break;
+
+                        //insert more for tspins and such
+                    }
                 }
                 else
                 {
@@ -595,12 +618,16 @@ namespace TetFun3080
 
         }
 
-        private void SpawnPiece(Pieces piece)
+        private void SpawnPiece(Pieces piece, bool fromHold)
         {
 
             hardDropPossible = true;
+
+            if (!fromHold)
+            {
+                IncrementLevel(1, false); // Increment level by 1 if not at a level threshold
+            }
             
-            IncrementLevel(1, false); // Increment level by 1 if not at a level threshold
             
 
             currentShape = piece;

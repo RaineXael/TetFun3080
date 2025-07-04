@@ -8,14 +8,20 @@ namespace TetFun3080
 {
     internal class PlayerMenu : IEntity
     {
+        private Player parent;
+
         public Vector2 Position { get; set; }
         public MenuParent menu;
         private UserInput input;
-        public PlayerMenu(Vector2 pos, UserInput input)
+        public PlayerMenu(Vector2 pos, UserInput input, Player parent)
         {
+            this.parent = parent;
            Position = pos;
            menu = new MenuParent(Position, input, new string[] { "Campaign", "Freeplay", "Customize","Settings", "Exit" });
            this.input = input;
+
+            //temp for menu functionality
+            menu.PParent = parent;
         }
 
         

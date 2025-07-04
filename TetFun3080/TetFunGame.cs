@@ -15,10 +15,6 @@ namespace TetFun3080
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-
-
-
-
         public TetFunGame()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -30,7 +26,6 @@ namespace TetFun3080
             //_graphics.SynchronizeWithVerticalRetrace = false;
             //IsFixedTimeStep = false;
 
-
             _graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             AssetManager.Content = Content;
@@ -38,7 +33,6 @@ namespace TetFun3080
 
             GameManager.game = this;
             
-
         }
  
         
