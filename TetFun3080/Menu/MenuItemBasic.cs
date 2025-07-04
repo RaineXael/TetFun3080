@@ -1,12 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TetFun3080.Backend;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace TetFun3080.Menu
 {
@@ -16,10 +11,12 @@ namespace TetFun3080.Menu
         public Vector2 Position { get; set; }
         string Title { get; set; }
 
-        public MenuItemBasic(string itemText)
+        private bool selected;
+
+        public MenuItemBasic(string itemText, Vector2 pos)
         {
             Title = itemText;
-            Position = Vector2.Zero; // Default position, can be set later
+            Position = pos; 
             Font = AssetManager.GetFont("Fonts/Font1");
         }
 
@@ -27,7 +24,16 @@ namespace TetFun3080.Menu
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             // Implement drawing logic here
-            spriteBatch.DrawString(Font, Title, Position, Color.White);
+            if (selected)
+            {
+                // Draw a background or highlight for the selected item
+                spriteBatch.DrawString(Font, Title, Position, Color.Yellow);
+            }
+            else
+            {
+                spriteBatch.DrawString(Font, Title, Position, Color.White);
+            }
+                
 
         }
         public void Update(GameTime gameTime)
@@ -38,6 +44,11 @@ namespace TetFun3080.Menu
         public void OnSelect()
         {
             throw new NotImplementedException();
+        }
+
+        public void OnSetSelected(bool selected)
+        {
+            this.selected = selected;
         }
     }
 

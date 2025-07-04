@@ -85,6 +85,42 @@
 /processorParam:Quality=Best
 /build:Audio/GameSounds/tgm/z.wav;Audio/GameSounds/tgm/z
 
+#begin Audio/MenuSounds/backout.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/MenuSounds/backout.wav
+
+#begin Audio/MenuSounds/buzzer.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/MenuSounds/buzzer.wav
+
+#begin Audio/MenuSounds/move.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/MenuSounds/move.wav
+
+#begin Audio/MenuSounds/save.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/MenuSounds/save.wav
+
+#begin Audio/MenuSounds/select.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/MenuSounds/select.wav
+
+#begin Audio/MenuSounds/talk.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/MenuSounds/talk.wav
+
 #begin Audio/Mus/white/loop.wav
 /importer:WavImporter
 /processor:SongProcessor

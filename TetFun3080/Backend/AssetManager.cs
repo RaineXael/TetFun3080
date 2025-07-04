@@ -71,7 +71,7 @@ namespace TetFun3080
             else
             {
                 // You might want to throw an exception or return a default texture
-                DebugConsole.Log($"Texture '{assetName}' not found in the AssetManager.");
+                DebugConsole.LogError($"Texture '{assetName}' not found in the AssetManager.");
                 return fallbackTexture;
             }
         }
@@ -107,7 +107,7 @@ namespace TetFun3080
             else
             {
                 // You might want to throw an exception or return a default texture
-                DebugConsole.Log($"Font '{assetName}' not found in the AssetManager.");
+                DebugConsole.LogError($"Font '{assetName}' not found in the AssetManager.");
                 return null;
             }
         }
@@ -127,7 +127,7 @@ namespace TetFun3080
             else
             {
                 // You might want to throw an exception or return a default texture
-                DebugConsole.Log($"Sound '{assetName}' not found in the AssetManager.");
+                DebugConsole.LogError($"Sound '{assetName}' not found in the AssetManager.");
                 return fallbackSound;
             }
         }
@@ -171,7 +171,7 @@ namespace TetFun3080
                 {
 
                     // Handle the exception as needed, e.g., log it or rethrow it
-                    DebugConsole.Log($"Error loading texture '{assetName}': {e.Message}");
+                    DebugConsole.LogError($"Error loading texture '{assetName}': {e.Message}");
                 }
             }
         }
@@ -185,7 +185,7 @@ namespace TetFun3080
             else
             {
                 // You might want to throw an exception or return a default texture
-                DebugConsole.Log($"Texture '{assetName}' not found in the AssetManager.");
+                DebugConsole.LogError($"Texture '{assetName}' not found in the AssetManager.");
                 return null;
             }
         }

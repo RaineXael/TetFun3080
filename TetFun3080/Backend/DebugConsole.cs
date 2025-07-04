@@ -22,7 +22,7 @@ namespace TetFun3080.Backend
         public static void Update(GameTime gameTime)
         {
             // Toggle visibility with a key press (e.g., F1)
-            if (Keyboard.GetState().IsKeyDown(Keys.F1))
+            if (Keyboard.GetState().IsKeyDown(Keys.OemTilde))
             {
                 if (!keyHeld)
                 {
@@ -56,6 +56,16 @@ namespace TetFun3080.Backend
             {
                 messages.RemoveAt(0);
             }
+        }
+        public static void LogError(string message)
+        {
+          //Placeholder for now, same with warn.
+
+            Log(message);
+        }
+        public static void LogWarn(string message)
+        {
+           Log(message);
         }
     }
 }

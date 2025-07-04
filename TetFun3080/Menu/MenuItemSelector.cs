@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TetFun3080.Backend;
 
 namespace TetFun3080.Menu
 {
@@ -28,7 +29,7 @@ namespace TetFun3080.Menu
             throw new NotImplementedException();
         }
 
-        public void OnSelect()
+        public void OnSetSelected(bool selected)
         {
             throw new NotImplementedException();
         }

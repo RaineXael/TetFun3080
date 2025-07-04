@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using TetFun3080.Backend;
 
-namespace TetFun3080.Backend
+namespace TetFun3080
 {
     [Serializable]
     public class GameMode

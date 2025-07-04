@@ -29,8 +29,8 @@ namespace TetFun3080
            Position = spawnPos;
             _input = input;
             console = new Sprite(AssetManager.GetTexture("Consoles/default"));
-            //currentEntity = new PlayerGame(new Board(), _input, Position, new GameMode());
-            currentEntity = new PlayerMenu(Position);
+            
+            currentEntity = new PlayerMenu(Position, _input);
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)

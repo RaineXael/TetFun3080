@@ -39,8 +39,8 @@ namespace TetFun3080.Levels
             nya = new Player(player1Input, new Vector2(168, 100));
             waur = new Player(player2Input, new Vector2(630, 100));
 
-            nya.BeginGameMode(mode);
-            waur.BeginGameMode(mode);
+            //nya.BeginGameMode(mode);
+            //waur.BeginGameMode(mode);
 
             AssetManager.LoadEffect("Shaders/Wave");
             _distortionEffect = AssetManager.GetEffect("Shaders/Wave");

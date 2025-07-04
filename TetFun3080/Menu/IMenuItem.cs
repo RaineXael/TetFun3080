@@ -9,7 +9,7 @@ namespace TetFun3080.Menu
 {
     internal interface IMenuItem:IEntity
     {
-        void OnSelect();
+        void OnSetSelected(bool selected);
 
     }
 }

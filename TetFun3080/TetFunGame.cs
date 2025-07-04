@@ -36,7 +36,7 @@ namespace TetFun3080
             AssetManager.Content = Content;
             IsMouseVisible = true;
 
-
+            GameManager.game = this;
             
 
         }
