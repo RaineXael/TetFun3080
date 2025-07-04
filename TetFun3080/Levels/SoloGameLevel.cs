@@ -20,6 +20,8 @@ namespace TetFun3080.Levels
 
         GameMode mode;
 
+    
+
         private List<IEntity> _entities = new List<IEntity>();
         public List<IEntity> entities
         {
@@ -30,6 +32,7 @@ namespace TetFun3080.Levels
 
         public void OnEnter()
         {
+
             JSONLoader jsonLoader = new JSONLoader();
             player1Input = new UserInput();
             player2Input = new UserInput(Keys.Left, Keys.Right, Keys.Down, Keys.Up, Keys.Z, Keys.X, Keys.LeftShift);
@@ -39,8 +42,7 @@ namespace TetFun3080.Levels
             nya = new Player(player1Input, new Vector2(168, 100));
             waur = new Player(player2Input, new Vector2(630, 100));
 
-            //nya.BeginGameMode(mode);
-            //waur.BeginGameMode(mode);
+         
 
             AssetManager.LoadEffect("Shaders/Wave");
             _distortionEffect = AssetManager.GetEffect("Shaders/Wave");
@@ -86,13 +88,16 @@ namespace TetFun3080.Levels
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
             nya.Draw(spriteBatch, gameTime);
             waur.Draw(spriteBatch, gameTime);
+
+      
             spriteBatch.End();
         }
 
         public void Update(GameTime gameTime)
         {
+       
             nya.Update(gameTime);
-            //waur.Update(gameTime);
+            waur.Update(gameTime);
         }
     }
 }

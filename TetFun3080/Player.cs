@@ -11,6 +11,9 @@ namespace TetFun3080
 {
     public class Player : IEntity
     {
+
+        private Companion companion;
+
         public Vector2 Position { get; set; }
         private UserInput _input;
 
@@ -20,8 +23,12 @@ namespace TetFun3080
 
         public void BeginGameMode(GameMode mode)
         {
-            currentEntity = new PlayerGame(new Board(), _input, Position, mode);
+            currentEntity = new PlayerGame(new Board(), _input, Position, mode, this);
+        }
 
+        public void BeginMenu()
+        {
+            currentEntity = new PlayerMenu(Position, _input, this);
         }
 
         public Player(UserInput input, Vector2 spawnPos)
@@ -29,7 +36,7 @@ namespace TetFun3080
            Position = spawnPos;
             _input = input;
             console = new Sprite(AssetManager.GetTexture("Consoles/default"));
-            
+            companion = new Companion("Companions/default",new Vector2(Position.X-36-60, Position.Y-36+104));
             currentEntity = new PlayerMenu(Position, _input,this);
 
         }
@@ -40,11 +47,14 @@ namespace TetFun3080
             console.Draw(spriteBatch);
 
             currentEntity.Draw(spriteBatch, gameTime);
+            companion.Draw(spriteBatch, gameTime);
         }
 
         public void Update(GameTime gameTime)
         {
+            companion.Update(gameTime);
             currentEntity.Update(gameTime);
+            
         }
     }
 }

@@ -16,11 +16,10 @@ namespace TetFun3080
 {
     internal class PlayerGame : IEntity
     {
+        private Player parent;
 
         int gravityTimer;
         private Board board;
-
-
 
         UserInput input;
 
@@ -54,8 +53,6 @@ namespace TetFun3080
 
         private string soundSkin = "tgm";
 
-        private Sprite testspr;
-
         private int LevelThreshold { get { return (int)MathF.Ceiling((float)level / 100) * 100; } } // Example threshold for level increase, can be adjusted
 
         public Vector2 Position { get; set; }
@@ -63,19 +60,23 @@ namespace TetFun3080
         private GameMode gameMode;
         private Ruleset ruleset;
 
+        //Events
+        public EventHandler OnLineClear;
+        public EventHandler OnDeath;
 
-        public PlayerGame(Board board, UserInput input, Vector2 Position, GameMode mode)
+
+        public PlayerGame(Board board, UserInput input, Vector2 Position, GameMode mode, Player parent)
         {
             AssetManager.LoadTexture("newSprite.png");
-
+            this.parent = parent;
             this.Position = Position;
             this.board = board;
 
             gameMode = mode;
             ruleset = gameMode.GetRulesetFromLevel(level);
 
-            _block_sprite = new SpriteSheet(AssetManager.GetTexture("Sprites/blocks"));
-            testspr = new SpriteSheet(AssetManager.GetTexture("Sprites/blocks"));
+            _block_sprite = new SpriteSheet(AssetManager.GetTexture("Sprites/blocks"),16);
+            
             font = AssetManager.GetFont("Fonts/Font1");
             pieceDropSoundInstance = AssetManager.GetAudio($"Audio/GameSounds/{soundSkin}/place").CreateInstance();
             lineclearSoundInstance = AssetManager.GetAudio($"Audio/GameSounds/{soundSkin}/line").CreateInstance();
@@ -90,8 +91,7 @@ namespace TetFun3080
             boardDrawOffset = board.bufferHeight * 16;
             gravityTimer = ruleset.gravity;
             lockInTimer = ruleset.lockInDelay;
-            
-            testspr = new Sprite(AssetManager.GetTexture("newSprite.png"));
+           
             
             //ruleset = AssetManager.GetRuleset("Rulesets/TestRuleset");
             LoadSoundTheme(soundSkin);
@@ -132,13 +132,14 @@ namespace TetFun3080
                     if (y > board.bufferHeight && board.boardState[x, y] != 0)
                     {
                         _block_sprite.Position = new Vector2(x * _block_sprite.baseSize + Position.X, y * _block_sprite.baseSize - boardDrawOffset + Position.Y);
-                        _block_sprite.DrawSheet(spriteBatch, board.boardState[x, y]);
+                        _block_sprite.spriteIndex = board.boardState[x, y];
+                        _block_sprite.Draw(spriteBatch);
                         //_block_sprite.DrawSheet(spriteBatch, 0);
                     }
 
                 }
             }
-
+            
             if (!lockedIn)
             {
                 foreach (Vector2 piece in piecePositions)
@@ -157,7 +158,8 @@ namespace TetFun3080
 
                         _block_sprite.Alpha = 0.5f; // Set transparency for ghost
                         _block_sprite.Position = new Vector2(Position.X + gx * _block_sprite.baseSize, Position.Y + gy * _block_sprite.baseSize - boardDrawOffset);
-                        _block_sprite.DrawSheet(spriteBatch, (int)currentShape);
+                        _block_sprite.spriteIndex = (int)currentShape;
+                        _block_sprite.Draw(spriteBatch);
 
                         _block_sprite.Alpha = 1f; // Restore alpha for next draw
                     }
@@ -165,7 +167,8 @@ namespace TetFun3080
 
 
                     _block_sprite.Position = new Vector2(Position.X + x * _block_sprite.baseSize, Position.Y + y * _block_sprite.baseSize - boardDrawOffset);
-                    _block_sprite.DrawSheet(spriteBatch, (int)currentShape);
+                    _block_sprite.spriteIndex = (int)currentShape;
+                    _block_sprite.Draw(spriteBatch);
 
 
                 }
@@ -186,7 +189,8 @@ namespace TetFun3080
                     int y = nextY + (int)piece.Y + (nextSep * i);
 
                     _block_sprite.Position = new Vector2(Position.X + x * _block_sprite.baseSize, -8 + Position.Y + y * _block_sprite.baseSize);
-                    _block_sprite.DrawSheet(spriteBatch, (int)PieceQueue[i]);
+                    _block_sprite.spriteIndex = (int)PieceQueue[i];
+                    _block_sprite.Draw(spriteBatch);
 
 
                 }
@@ -200,7 +204,8 @@ namespace TetFun3080
                     int x = (-1 + (int)piece.X) * 16;
                     int y = (1 + (int)piece.Y) * 16;
                     _block_sprite.Position = new Vector2(Position.X - 4 * 16 + x, y + Position.Y);
-                    _block_sprite.DrawSheet(spriteBatch, (int)heldPiece.Value);
+                    _block_sprite.spriteIndex = (int)heldPiece.Value;
+                    _block_sprite.Draw(spriteBatch);
                 }
             }
 
@@ -210,9 +215,7 @@ namespace TetFun3080
             spriteBatch.DrawString(font, LevelThreshold.ToString(), new Vector2(208 + Position.X, 294 + Position.Y), Color.White);
             spriteBatch.DrawString(font, score.ToString(), new Vector2(Position.X, Position.Y - 32), Color.White);
             
-            
-            testspr.Position = new Vector2(Position.X - 64 - 16, Position.Y + 80);
-            testspr.Draw(spriteBatch);
+          
 
         }
 
@@ -627,13 +630,28 @@ namespace TetFun3080
             {
                 IncrementLevel(1, false); // Increment level by 1 if not at a level threshold
             }
-            
-            
 
             currentShape = piece;
             piecePositions = GetPiecePositionsFromShape(piece);
 
             pilot_position = board.spawnPosition; // Reset the piece's position to the spawn position on the board
+
+            //check if any pieces collide w/ the piece, if so, end game.
+            foreach (Vector2 blockOffset in piecePositions)
+            {
+                Vector2 blockpos = blockOffset + pilot_position;
+                if (!board.CheckIsEmptyCoord(pilot_position + blockOffset))
+                {
+                    // Game over condition
+                    OnTopOut();
+                    return;
+                }
+            }
+        }
+
+        private void OnTopOut()
+        {
+            parent.BeginMenu();
         }
 
         private void PlayNextSpawnSound()

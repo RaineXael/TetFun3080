@@ -20,10 +20,15 @@ namespace TetFun3080.Backend
             Alpha = 1;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, Position, Color*Alpha);
         }
-   
+
+        public virtual void Update(GameTime gameTime)
+        {
+            // Default implementation does nothing
+        }
+
     }
 }
