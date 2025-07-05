@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace TetFun3080
+namespace TetFun3080.Gameplay
 {
     [Serializable]
     public class GameMode

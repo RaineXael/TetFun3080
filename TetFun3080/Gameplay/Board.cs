@@ -9,7 +9,7 @@ using TetFun3080.Backend;
 
 //Board data class responsible for holding the current board state and clearing certain blocks (not gameplay)
 
-namespace TetFun3080
+namespace TetFun3080.Gameplay
 {
     public class Board
     {
@@ -25,7 +25,7 @@ namespace TetFun3080
             this.width = width;
             this.height = height;
             this.bufferHeight = bufferHeight;
-            spawnPosition = new Vector2((width/2)-1, height);
+            spawnPosition = new Vector2(width/2-1, height);
             SetupBoard();
         }
 

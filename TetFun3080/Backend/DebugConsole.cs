@@ -7,6 +7,7 @@ using System.Linq;
 
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TetFun3080.Backend
 {
@@ -18,6 +19,8 @@ namespace TetFun3080.Backend
         static List<string> messages = new List<string>();
 
         private static bool keyHeld = false;
+
+        private static TextObject text = new TextObject("");
 
         public static void Update(GameTime gameTime)
         {
@@ -37,14 +40,17 @@ namespace TetFun3080.Backend
             }
         }
 
-        public static void Draw(SpriteBatch spriteBatch)
+        public static void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             if (visible)
             {
-                spriteBatch.Draw(BackgroundTex, new Rectangle(0,0, 960, 540), new Color(0.5f, 0.5f, 0.5f, 0.5f));
+                spriteBatch.Draw(BackgroundTex, new Rectangle(0,0, (int)(960 * ScreenManager.screenScale), (int)(540 * ScreenManager.screenScale)), new Color(0.5f, 0.5f, 0.5f, 0.5f));
                 for (int i = 0; i < messages.Count; i++)
                 {
-                    spriteBatch.DrawString(Font, messages[i], new Vector2(10, 10 + i * Font.LineSpacing), Color.White);
+                    text.Position = new Vector2(10, 10 + i * Font.LineSpacing);
+                    text.Text = messages[i];
+                    text.Draw(spriteBatch, gameTime);
+                    //spriteBatch.DrawString(Font, messages[i], new Vector2(10, 10 + i * Font.LineSpacing), Color.White);
                 }
             }
         }

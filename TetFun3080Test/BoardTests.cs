@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TetFun3080;
+using TetFun3080.Gameplay;
 
 namespace TetFun3080Test
 {

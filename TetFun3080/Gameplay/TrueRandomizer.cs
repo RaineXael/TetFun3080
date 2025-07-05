@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TetFun3080.Backend;
 
-namespace TetFun3080
+namespace TetFun3080.Gameplay
 {
     internal class TrueRandomizer : IRandomizer
     {

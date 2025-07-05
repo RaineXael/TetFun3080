@@ -12,7 +12,7 @@ using TetFun3080.Backend;
 //The object responsible for drawing and input handling the board.
 //The object representing a game playing player. For menuing, see Player.cs or PlayerMenu.cs
 
-namespace TetFun3080
+namespace TetFun3080.Gameplay
 {
     internal class PlayerGame : IEntity
     {
@@ -199,7 +199,7 @@ namespace TetFun3080
                 {
                     // Draw the main (solid) piece
                     int x = nextX + (int)piece.X;
-                    int y = nextY + (int)piece.Y + (nextSep * i);
+                    int y = nextY + (int)piece.Y + nextSep * i;
 
                     _block_sprite.Position = new Vector2(Position.X + x * _block_sprite.baseSize, -8 + Position.Y + y * _block_sprite.baseSize) * ScreenManager.screenScale;
                     _block_sprite.spriteIndex = (int)PieceQueue[i];
@@ -223,16 +223,26 @@ namespace TetFun3080
             }
 
 
+            levelText.Text = level.ToString();
+            levelText.Position = new Vector2(208 + Position.X, 274 + Position.Y);
+            levelText.Draw(spriteBatch, gameTime);
 
-            spriteBatch.DrawString(font, level.ToString(), new Vector2(208 + Position.X, 274 + Position.Y) * ScreenManager.screenScale, Color.White);
-            spriteBatch.DrawString(font, LevelThreshold.ToString(), new Vector2(208 + Position.X, 294 + Position.Y) * ScreenManager.screenScale, Color.White);
-            spriteBatch.DrawString(font, score.ToString(), new Vector2(Position.X, Position.Y - 32) * ScreenManager.screenScale, Color.White);
+            levelThresholdText.Text = LevelThreshold.ToString();
+            levelThresholdText.Position = new Vector2(208 + Position.X, 294 + Position.Y);
+            levelThresholdText.Draw(spriteBatch, gameTime);
+
+            scoreText.Text = score.ToString();
+            scoreText.Position = new Vector2(Position.X, Position.Y - 32);
+            scoreText.Draw(spriteBatch, gameTime);
+
 
 
 
         }
 
-
+        private TextObject levelText = new TextObject("");
+        private TextObject levelThresholdText = new TextObject("");
+        private TextObject scoreText = new TextObject("");
 
         public void RecieveDamage()
         {

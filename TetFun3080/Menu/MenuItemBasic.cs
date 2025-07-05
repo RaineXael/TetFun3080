@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using TetFun3080.Backend;
 
 
 namespace TetFun3080.Menu
@@ -13,11 +14,16 @@ namespace TetFun3080.Menu
 
         private bool selected;
 
+        private TextObject text;
+
         public MenuItemBasic(string itemText, Vector2 pos)
         {
             Title = itemText;
             Position = pos; 
             Font = AssetManager.GetFont("Fonts/Font1");
+            text = new TextObject(Title);
+            text.Position = pos / ScreenManager.screenScale;
+            
         }
 
 
@@ -27,11 +33,11 @@ namespace TetFun3080.Menu
             if (selected)
             {
                 // Draw a background or highlight for the selected item
-                spriteBatch.DrawString(Font, Title, Position, Color.Yellow);
+                text.Draw(spriteBatch, gameTime, Color.Yellow);
             }
             else
             {
-                spriteBatch.DrawString(Font, Title, Position, Color.White);
+                text.Draw(spriteBatch, gameTime, Color.White);
             }
                 
 

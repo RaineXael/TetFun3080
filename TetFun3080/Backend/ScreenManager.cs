@@ -7,13 +7,13 @@ namespace TetFun3080.Backend
     {
         private static int screenWidth = 960;
         private static int screenHeight = 540;
-        public static int screenScale = 2;
+        public static float screenScale = 2;
         internal static GraphicsDeviceManager graphics;
 
-        public static int ScreenWidth {  get { return screenWidth * screenScale; } set { screenWidth = value; } }
-        public static int ScreenHeight { get { return screenHeight * screenScale; } set { screenHeight = value; } }
+        public static int ScreenWidth {  get { return (int)(screenWidth * screenScale); } set { screenWidth = value; } }
+        public static int ScreenHeight { get { return (int)(screenHeight * screenScale); } set { screenHeight = value; } }
 
-        public static void SetResolution(int width, int height, int scale = 1, bool fullscreen = false)
+        public static void SetResolution(int width, int height, float scale = 1, bool fullscreen = false)
         {
             screenWidth = width;
             screenHeight = height;
@@ -21,6 +21,8 @@ namespace TetFun3080.Backend
 
             graphics.PreferredBackBufferWidth = ScreenManager.ScreenWidth;
             graphics.PreferredBackBufferHeight = ScreenManager.ScreenHeight;
+
+            graphics.IsFullScreen = fullscreen;
 
             //do this to uncap framerate
             //_graphics.SynchronizeWithVerticalRetrace = false;

@@ -4,7 +4,7 @@ using System.IO;
 using System.Xml.Serialization;
 using TetFun3080.Backend;
 
-namespace TetFun3080
+namespace TetFun3080.Gameplay
 {
     [Serializable]
     public class Ruleset

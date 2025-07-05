@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TetFun3080.Backend;
+using TetFun3080.Gameplay;
 
 namespace TetFun3080.Menu
 {
@@ -19,7 +20,7 @@ namespace TetFun3080.Menu
         private List<IMenuItem> Items { get; set; }
 
         private Vector2 _position;
-        public Vector2 Position { get => _position + padding; set=> _position = value; }
+        public Vector2 Position { get => _position + (padding * ScreenManager.screenScale); set=> _position = value; }
         
         private int selectedIndex = 0; // Track the currently selected index
 
@@ -39,7 +40,7 @@ namespace TetFun3080.Menu
             foreach (string itemstring in items)
             {
                 this.input = input;
-                MenuItemBasic menuitem = new MenuItemBasic(itemstring, Position + new Vector2(0, i * separator));
+                MenuItemBasic menuitem = new MenuItemBasic(itemstring, Position + new Vector2(0, i * separator * ScreenManager.screenScale));
                
                 Items.Add(menuitem); // Assuming MenuItemBasic takes a string in its constructor
 

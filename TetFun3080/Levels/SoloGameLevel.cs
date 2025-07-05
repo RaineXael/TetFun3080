@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using TetFun3080.Backend;
+using TetFun3080.Gameplay;
 
 namespace TetFun3080.Levels
 {
@@ -50,7 +51,8 @@ namespace TetFun3080.Levels
 
             
         }
-
+        TextObject text = new TextObject("Bad boe Jamo!!");
+        
         public void OnExit()
         {
             throw new NotImplementedException();
@@ -88,7 +90,7 @@ namespace TetFun3080.Levels
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
             nya.Draw(spriteBatch, gameTime);
     
-
+            text.Draw(spriteBatch, gameTime);
       
             spriteBatch.End();
         }

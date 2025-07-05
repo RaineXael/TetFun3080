@@ -1,10 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
 using TetFun3080.Backend;
 using TetFun3080.Menu;
 
-namespace TetFun3080
+namespace TetFun3080.Gameplay
 {
     internal class PlayerMenu : IEntity
     {
@@ -17,7 +16,7 @@ namespace TetFun3080
         {
             MusicManager.PlayMusic("Audio/Mus/menu");
             this.parent = parent;
-           Position = pos;
+           Position = pos * ScreenManager.screenScale;
            menu = new MenuParent(Position, input, new string[] { "Campaign", "Freeplay", "Customize","Settings", "Exit" });
            this.input = input;
 

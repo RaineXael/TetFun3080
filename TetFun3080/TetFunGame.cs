@@ -21,7 +21,8 @@ namespace TetFun3080
         {
             _graphics = new GraphicsDeviceManager(this);
             ScreenManager.graphics = _graphics;
-            ScreenManager.SetResolution(960, 540, 2);
+            
+            ScreenManager.SetResolution(960, 540, 2f, false);
             AssetManager._graphics = _graphics;
             
             
@@ -54,6 +55,7 @@ namespace TetFun3080
             AssetManager.LoadTexture("Sprites/one");
             AssetManager.LoadTexture("Sprites/blocks");
             AssetManager.LoadTexture("Consoles/default");
+            AssetManager.LoadTexture("Fonts/font");
             AssetManager.LoadAudio("Audio/GameSounds/tgm/place");
             AssetManager.LoadAudio("Audio/GameSounds/tgm/line");
             AssetManager.LoadAudio("Audio/GameSounds/joel/place");
@@ -89,7 +91,7 @@ namespace TetFun3080
 
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
             base.Draw(gameTime);
-            DebugConsole.Draw(_spriteBatch);
+            DebugConsole.Draw(_spriteBatch, gameTime);
             _spriteBatch.End();
         }
     }
