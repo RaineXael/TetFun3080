@@ -63,7 +63,7 @@ namespace TetFun3080.Levels
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            _distortionEffect.Parameters["Time"].SetValue((float)gameTime.TotalGameTime.TotalSeconds);
+            _distortionEffect.Parameters["Time"].SetValue((float)gameTime.TotalGameTime.TotalSeconds/2);
             _distortionEffect.Parameters["Texture"].SetValue(_tempBG);
             Matrix worldViewProjection = Matrix.CreateOrthographicOffCenter(
     0, 960,

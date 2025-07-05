@@ -13,7 +13,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 40,
         "dasTime": 16,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -30,7 +30,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 40,
         "dasTime": 16,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -47,7 +47,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 40,
         "dasTime": 16,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -64,7 +64,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 40,
         "dasTime": 16,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -81,7 +81,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 40,
         "dasTime": 16,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -98,7 +98,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 40,
         "dasTime": 5,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -115,7 +115,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 40,
         "dasTime": 16,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -132,7 +132,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 40,
         "dasTime": 16,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -149,7 +149,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 40,
         "dasTime": 16,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -166,7 +166,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 40,
         "dasTime": 16,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -183,7 +183,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 40,
         "dasTime": 16,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -200,7 +200,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 40,
         "dasTime": 16,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -217,7 +217,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 40,
         "dasTime": 16,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -234,7 +234,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 40,
         "dasTime": 16,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -251,7 +251,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 40,
         "dasTime": 16,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -269,7 +269,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 25,
         "dasTime": 10,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -286,7 +286,7 @@
         "appearanceDelay": 25,
         "lineclearDelay": 16,
         "dasTime": 10,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -303,7 +303,7 @@
         "appearanceDelay": 16,
         "lineclearDelay": 12,
         "dasTime": 10,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -320,7 +320,7 @@
         "appearanceDelay": 12,
         "lineclearDelay": 6,
         "dasTime": 10,
-        "lockInDelay": 3.0,
+        "lockInDelay": 30,
         "InstalockOnHardDrop": false
       }
     },
@@ -337,7 +337,7 @@
         "appearanceDelay": 12,
         "lineclearDelay": 6,
         "dasTime": 8,
-        "lockInDelay": 1.7,
+        "lockInDelay": 17,
         "InstalockOnHardDrop": false
       }
     }

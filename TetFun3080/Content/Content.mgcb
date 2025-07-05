@@ -121,6 +121,15 @@
 /processorParam:Quality=Best
 /build:Audio/MenuSounds/talk.wav
 
+#begin Audio/Mus/dire/data.json
+/copy:Audio/Mus/dire/data.json
+
+#begin Audio/Mus/dire/loop.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Mus/dire/loop.wav
+
 #begin Audio/Mus/menu/data.json
 /copy:Audio/Mus/menu/data.json
 

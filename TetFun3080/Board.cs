@@ -89,6 +89,33 @@ namespace TetFun3080
             return clearedLines;
         }
 
+        public int GetStackHeight()
+        {
+            //Returns the size of the stack, the peak of the tower
+            int count = 0;
+            for (int y = height+bufferHeight-1; y >=0; y--)
+            {
+                bool emptyRow = true;
+                for( int x = 0; x < boardState.GetLength(0); x++)
+                {
+                    if (boardState[x,y] != 0)
+                    {
+                        emptyRow = false;
+                        //there's a block, add to count and break
+                        count++;
+                        break;
+                    }
+                    
+                }
+                //If not broken at this point, row is empty
+                if (emptyRow)
+                {
+                    return count;
+                }
+                
+            }
+            return count;
+        }
         public bool CheckIsEmptyCoord(Vector2 pos)
         {
            //Check if the position is within the board bounds

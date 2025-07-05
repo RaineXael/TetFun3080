@@ -28,6 +28,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Audio\Mus\vshard\" />
+    <Folder Include="Content\Audio\Mus\vsnormal\" />
     <Folder Include="Content\Shaders\" />
     <Folder Include="Content\Sprites\Backgrounds\" />
   </ItemGroup>

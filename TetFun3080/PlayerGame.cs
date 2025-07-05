@@ -23,6 +23,9 @@ namespace TetFun3080
 
         UserInput input;
 
+        bool blockBottomHit = false;
+        int score = 0;
+
         public Pieces currentShape = Pieces.I; // Default shape for the pilot piece
 
         public Vector2 pilot_position = new Vector2(0, 0); // Position of the piece on the board
@@ -44,6 +47,8 @@ namespace TetFun3080
 
         int level = 0;
 
+        private bool isDire;
+
         List<Pieces> PieceQueue = new List<Pieces>();
 
         private SpriteSheet _block_sprite;
@@ -63,10 +68,12 @@ namespace TetFun3080
         //Events
         public EventHandler OnLineClear;
         public EventHandler OnDeath;
-
+        public EventHandler OnDire;
+        public EventHandler OnUnDire;
 
         public PlayerGame(Board board, UserInput input, Vector2 Position, GameMode mode, Player parent)
         {
+            level = 900;
             AssetManager.LoadTexture("newSprite.png");
             this.parent = parent;
             this.Position = Position;
@@ -75,8 +82,8 @@ namespace TetFun3080
             gameMode = mode;
             ruleset = gameMode.GetRulesetFromLevel(level);
 
-            _block_sprite = new SpriteSheet(AssetManager.GetTexture("Sprites/blocks"),16);
-            
+            _block_sprite = new SpriteSheet(AssetManager.GetTexture("Sprites/blocks"), 16);
+
             font = AssetManager.GetFont("Fonts/Font1");
             pieceDropSoundInstance = AssetManager.GetAudio($"Audio/GameSounds/{soundSkin}/place").CreateInstance();
             lineclearSoundInstance = AssetManager.GetAudio($"Audio/GameSounds/{soundSkin}/line").CreateInstance();
@@ -91,13 +98,13 @@ namespace TetFun3080
             boardDrawOffset = board.bufferHeight * 16;
             gravityTimer = ruleset.gravity;
             lockInTimer = ruleset.lockInDelay;
-           
+
             MusicManager.PlayMusic($"Audio/Mus/white");
 
             //ruleset = AssetManager.GetRuleset("Rulesets/TestRuleset");
             LoadSoundTheme(soundSkin);
 
-            level = 830;
+
         }
 
         List<SoundEffect> NextSpawnSounds = new List<SoundEffect>();
@@ -142,7 +149,7 @@ namespace TetFun3080
 
                 }
             }
-            
+
             if (!lockedIn)
             {
                 foreach (Vector2 piece in piecePositions)
@@ -217,8 +224,8 @@ namespace TetFun3080
             spriteBatch.DrawString(font, level.ToString(), new Vector2(208 + Position.X, 274 + Position.Y), Color.White);
             spriteBatch.DrawString(font, LevelThreshold.ToString(), new Vector2(208 + Position.X, 294 + Position.Y), Color.White);
             spriteBatch.DrawString(font, score.ToString(), new Vector2(Position.X, Position.Y - 32), Color.White);
-            
-          
+
+
 
         }
 
@@ -257,6 +264,11 @@ namespace TetFun3080
                     lockedIn = false;
                 }
             }
+
+            if (blockBottomHit && !lockedIn)
+            {
+                LockInPiece();
+            }
             HandleInput();
 
             if (ghostVisible)
@@ -275,7 +287,7 @@ namespace TetFun3080
         {
             //take 0 queue item, remove it, and generate a new piece from it.
 
-            SpawnPiece(PieceQueue[0],false);
+            SpawnPiece(PieceQueue[0], false);
             PieceQueue.RemoveAt(0);
             PieceQueue.Add(ruleset.randomizer.GetNextPiece());
             PlayNextSpawnSound();
@@ -323,7 +335,18 @@ namespace TetFun3080
             }
             if (input.IsDropDown)
             {
-                MoveDown(true);
+                if (blockBottomHit)
+                {
+                    if (lockInTimer > 0)
+                    {
+                        lockInTimer = 0;
+                    }
+                }
+                else
+                {
+                    MoveDown(true);
+                }
+
             }
             if (input.IsRotateClockwiseDown)
             {
@@ -401,13 +424,13 @@ namespace TetFun3080
                         //if addscore, take the difference between the original position and the new position, and add it to the score.
                         if (addScore)
                         {
-                            score += 2*((int)boardLookupPosition.Y - (int)originalPos.Y);
+                            score += 2 * ((int)boardLookupPosition.Y - (int)originalPos.Y);
                         }
 
                         return pilot_position + new Vector2(0, i - 1);
 
-                        
-                        
+
+
 
                     }
                 }
@@ -476,8 +499,7 @@ namespace TetFun3080
             }
             pilot_position.X++; // Move the piece down by one unit
         }
-        bool blockBottomHit = false;
-        int score = 0;
+
         public void MoveDown(bool grantScore = false)
         {
             foreach (Vector2 blockOffset in piecePositions)
@@ -486,24 +508,31 @@ namespace TetFun3080
                 blockpos.Y += 1;
 
 
+
                 if (blockpos.Y >= board.height + board.bufferHeight || board.boardState[(int)blockpos.X, (int)blockpos.Y] != 0)
                 {
+                    blockBottomHit = true;
                     //Lockinplace run every frame when the bottom is reached.
                     //Do a timer when done so that still allows player movement & rot.
                     //Timer resets on piece Y move. 
-                    if (!lockedIn)
-                    {
-                        LockInPiece();
-                    }
+                    //if (!lockedIn)
+                    //{
+                    //    LockInPiece();
+                    //}
 
 
                     return;
                 }
-                else if (grantScore && !lockedIn)
+                else
                 {
-                   
-                    score++;
+                    blockBottomHit = false;
+                    if (grantScore && !lockedIn)
+                    {
+
+                        score++;
+                    }
                 }
+
 
             }
             lockInTimer = ruleset.lockInDelay;
@@ -553,6 +582,7 @@ namespace TetFun3080
             }
         }
         private bool lockedIn = false;
+
         public void LockInPiece()
         {
             //Happens when the piece locks into place. 
@@ -561,6 +591,7 @@ namespace TetFun3080
             if (lockInTimer > 0)
             {
                 lockInTimer--;
+
             }
             else
             {
@@ -568,7 +599,7 @@ namespace TetFun3080
                 int linesCleared = board.ScanAndRemoveLines();
                 holdAvailable = true;
                 lockedIn = true;
-
+                //DebugConsole.Log(lockincounter.ToString());
                 lineClearTimer = ruleset.appearanceDelay;
                 if (linesCleared > 0)
                 {
@@ -594,10 +625,10 @@ namespace TetFun3080
                             score += multLevel * 800;
                             break;
                         default:
-                            score += multLevel * linesCleared*100 +800; // Fallback for 4+lines somehow
+                            score += multLevel * linesCleared * 100 + 800; // Fallback for 4+lines somehow
                             break;
 
-                        //insert more for tspins and such
+                            //insert more for tspins and such
                     }
                 }
                 else
@@ -626,7 +657,7 @@ namespace TetFun3080
 
         private void SpawnPiece(Pieces piece, bool fromHold)
         {
-
+            blockBottomHit = false;
             hardDropPossible = true;
 
             if (!fromHold)
@@ -638,6 +669,27 @@ namespace TetFun3080
             piecePositions = GetPiecePositionsFromShape(piece);
 
             pilot_position = board.spawnPosition; // Reset the piece's position to the spawn position on the board
+
+            //check dire status (for mus and companion)
+            if (board.GetStackHeight() >= 16)
+            {
+                if (!isDire)
+                {
+                    isDire = true;
+                    OnDire?.Invoke(this, EventArgs.Empty);
+                    MusicManager.PlayMusic($"Audio/Mus/dire");
+                }
+            }
+            else
+            {
+                if (isDire)
+                {
+                    isDire = false;
+                    OnUnDire?.Invoke(this, EventArgs.Empty);
+                    MusicManager.PlayMusic($"Audio/Mus/white");
+                }
+            }
+
 
             //check if any pieces collide w/ the piece, if so, end game.
             foreach (Vector2 blockOffset in piecePositions)
