@@ -73,7 +73,7 @@ namespace TetFun3080
 
         public PlayerGame(Board board, UserInput input, Vector2 Position, GameMode mode, Player parent)
         {
-            level = 900;
+            level = 00;
             AssetManager.LoadTexture("newSprite.png");
             this.parent = parent;
             this.Position = Position;
@@ -677,7 +677,7 @@ namespace TetFun3080
                 {
                     isDire = true;
                     OnDire?.Invoke(this, EventArgs.Empty);
-                    MusicManager.PlayMusic($"Audio/Mus/dire");
+                    //sirensound.Play();
                 }
             }
             else
@@ -686,7 +686,7 @@ namespace TetFun3080
                 {
                     isDire = false;
                     OnUnDire?.Invoke(this, EventArgs.Empty);
-                    MusicManager.PlayMusic($"Audio/Mus/white");
+                    
                 }
             }
 

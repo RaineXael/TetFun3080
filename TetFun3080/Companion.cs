@@ -61,8 +61,11 @@ namespace TetFun3080
 
             currentAnimation = idleAnim;
         }
-
-        private void ResetAnim(object sender, EventArgs e)
+        public void SetDire(object sender, EventArgs e)
+        {
+            currentAnimation = direAnim;
+        }
+        public void ResetAnim(object sender, EventArgs e)
         {
             currentAnimation = idleAnim;
         }
@@ -128,6 +131,11 @@ namespace TetFun3080
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             currentAnimation.Draw(spriteBatch);
+        }
+
+        internal void SwitchAnimation(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

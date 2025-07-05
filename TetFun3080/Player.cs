@@ -26,12 +26,16 @@ namespace TetFun3080
             //temp, use tgm style ruleset for first release
             GameMode temp = new JSONLoader().LoadGameModeFromFile("Content/Rulesets/tgm2.json");
             currentEntity = new PlayerGame(new Board(), _input, Position, temp, this);
+            PlayerGame game = (PlayerGame)currentEntity;
+            game.OnDire += companion.SetDire;
+            game.OnUnDire += companion.ResetAnim;
 
             //currentEntity = new PlayerGame(new Board(), _input, Position, mode, this);
         }
 
         public void BeginMenu()
         {
+            companion.ResetAnim(this, EventArgs.Empty);
             currentEntity = new PlayerMenu(Position, _input, this);
         }
 
