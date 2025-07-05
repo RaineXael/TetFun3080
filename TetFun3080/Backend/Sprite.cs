@@ -22,7 +22,7 @@ namespace TetFun3080.Backend
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Position, Color*Alpha);
+            spriteBatch.Draw(Texture, Position,null, Color*Alpha,0,Vector2.Zero, Vector2.One * ScreenManager.screenScale, SpriteEffects.None,1);
         }
 
         public virtual void Update(GameTime gameTime)

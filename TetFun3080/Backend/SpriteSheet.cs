@@ -15,8 +15,9 @@ namespace TetFun3080.Backend
         }
 
         public override void Draw(SpriteBatch spriteBatch)
-        { 
-            spriteBatch.Draw(Texture, Position, new Rectangle(spriteIndex * baseSize, 0, baseSize, baseSize), Color * Alpha);
+        {
+            spriteBatch.Draw(Texture, Position, new Rectangle(spriteIndex * baseSize, 0, baseSize, baseSize), Color * Alpha, 0, Vector2.Zero, Vector2.One * ScreenManager.screenScale, SpriteEffects.None, 1);
+        
         }
     }
 }

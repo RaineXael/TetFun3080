@@ -14,6 +14,8 @@ namespace TetFun3080
         public string Description { get; set; } = "Oh! You're not supposed to see this.";
         public List<GameModeLevel> levels = new List<GameModeLevel>();
 
+        public int LevelLimit = 1000;
+
 
         public Ruleset GetRulesetFromLevel(int level)
         {

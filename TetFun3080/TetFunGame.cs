@@ -12,7 +12,7 @@ namespace TetFun3080
 {
     public class TetFunGame : Game
     {
-        public float UI_SCALE = 1f;
+       
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -20,15 +20,12 @@ namespace TetFun3080
         public TetFunGame()
         {
             _graphics = new GraphicsDeviceManager(this);
+            ScreenManager.graphics = _graphics;
+            ScreenManager.SetResolution(960, 540, 2);
             AssetManager._graphics = _graphics;
-            _graphics.PreferredBackBufferWidth = 960 * (int)UI_SCALE;
-            _graphics.PreferredBackBufferHeight = 540 * (int)UI_SCALE;
+            
+            
 
-            //do this to uncap framerate
-            //_graphics.SynchronizeWithVerticalRetrace = false;
-            //IsFixedTimeStep = false;
-
-            _graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             AssetManager.Content = Content;
             IsMouseVisible = true;

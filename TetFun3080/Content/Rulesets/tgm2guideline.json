@@ -5,16 +5,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 30,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 40,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 16,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -22,16 +22,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 12,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 40,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 16,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -39,16 +39,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 6,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 40,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 16,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -56,16 +56,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 5,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 40,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 16,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -73,16 +73,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 4,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 40,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 16,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -90,16 +90,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 3,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 40,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 5,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -107,16 +107,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 2,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 40,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 16,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -124,16 +124,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 30,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 40,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 16,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -141,16 +141,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 15,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 40,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 16,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -158,16 +158,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 9,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 40,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 16,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -175,16 +175,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 4,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 40,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 16,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -192,16 +192,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 3,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 40,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 16,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -209,16 +209,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 2,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 40,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 16,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -226,16 +226,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 1,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 40,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 16,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -243,16 +243,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 0,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 40,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 16,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
 
@@ -261,16 +261,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 0,
         "holdEnabled": true,
-        "appearanceDelay": 25,
-        "lineclearDelay": 25,
+        "appearanceDelay": 0,
+        "lineclearDelay": 5,
         "dasTime": 10,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -278,16 +278,16 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 0,
         "holdEnabled": true,
-        "appearanceDelay": 25,
+        "appearanceDelay": 0,
         "lineclearDelay": 16,
         "dasTime": 10,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -295,7 +295,7 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 0,
@@ -304,7 +304,7 @@
         "lineclearDelay": 12,
         "dasTime": 10,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -312,7 +312,7 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 0,
@@ -321,7 +321,7 @@
         "lineclearDelay": 6,
         "dasTime": 10,
         "lockInDelay": 30,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     },
     {
@@ -329,7 +329,7 @@
       "Ruleset": {
         "RandomizerName": null,
         "RotatorName": null,
-        "visibleNextCount": 1,
+        "visibleNextCount": 5,
         "ghostEnabled": true,
         "initialLevel": 0,
         "gravity": 0,
@@ -338,10 +338,10 @@
         "lineclearDelay": 6,
         "dasTime": 8,
         "lockInDelay": 17,
-        "InstalockOnHardDrop": false
+        "InstalockOnHardDrop": true
       }
     }
   ],
-  "Name": "MTGM2",
-  "Description": "The Second Master"
+  "Name": "MTGM2GL",
+  "Description": "The Second Master, Up to Date"
 }

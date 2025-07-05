@@ -48,14 +48,14 @@ namespace TetFun3080
             direAnim = new AnimatedSpriteSheet(AssetManager.GetTexture(baseFolderURL + "/dire"), 72, 4);
 
 
-            idleAnim.Position = position;
-            waitAnim.Position = position;
-            lineclearAnim.Position = position;
-            winAnim.Position = position;
-            loseAnim.Position = position;
-            attackAnim.Position = position;
-            attackgetAnim.Position = position;
-            direAnim.Position = position;
+            idleAnim.Position = position * ScreenManager.screenScale;
+            waitAnim.Position = position * ScreenManager.screenScale;
+            lineclearAnim.Position = position * ScreenManager.screenScale;
+            winAnim.Position = position * ScreenManager.screenScale;
+            loseAnim.Position = position * ScreenManager.screenScale;
+            attackAnim.Position = position * ScreenManager.screenScale;
+            attackgetAnim.Position = position * ScreenManager.screenScale;
+            direAnim.Position = position * ScreenManager.screenScale;
 
             waitAnim.OnAnimFinish += ResetAnim;
 

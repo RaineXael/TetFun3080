@@ -34,6 +34,8 @@ namespace TetFun3080
 
         public bool InstalockOnHardDrop = false;
 
+        public bool IRSEnabled = true; //Immediate Rotation (and Hold) system
+
         public Ruleset()
         {
             //randomizer = new SevenBagRandomizer();

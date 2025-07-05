@@ -24,7 +24,7 @@ namespace TetFun3080
         public void BeginGameMode(GameMode mode)
         {
             //temp, use tgm style ruleset for first release
-            GameMode temp = new JSONLoader().LoadGameModeFromFile("Content/Rulesets/tgm2.json");
+            GameMode temp = new JSONLoader().LoadGameModeFromFile("Content/Rulesets/tgm2guideline.json");
             currentEntity = new PlayerGame(new Board(), _input, Position, temp, this);
             PlayerGame game = (PlayerGame)currentEntity;
             game.OnDire += companion.SetDire;
@@ -51,7 +51,7 @@ namespace TetFun3080
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            console.Position = Position - new Vector2(112, 48);
+            console.Position = ScreenManager.screenScale * Position - (new Vector2(112, 48)* ScreenManager.screenScale);
             console.Draw(spriteBatch);
 
             currentEntity.Draw(spriteBatch, gameTime);

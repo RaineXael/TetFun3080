@@ -71,10 +71,12 @@ namespace TetFun3080
         public EventHandler OnDire;
         public EventHandler OnUnDire;
 
+
         public PlayerGame(Board board, UserInput input, Vector2 Position, GameMode mode, Player parent)
         {
             level = 00;
-            AssetManager.LoadTexture("newSprite.png");
+            this.input = input;
+            
             this.parent = parent;
             this.Position = Position;
             this.board = board;
@@ -94,7 +96,7 @@ namespace TetFun3080
                 PieceQueue.Add(ruleset.randomizer.GetNextPiece());
             }
             GenerateNewPieceFromQueue();
-            this.input = input;
+            
             boardDrawOffset = board.bufferHeight * 16;
             gravityTimer = ruleset.gravity;
             lockInTimer = ruleset.lockInDelay;
@@ -135,13 +137,14 @@ namespace TetFun3080
 
 
             _block_sprite.Alpha = 1f;
+            //Board
             for (int x = 0; x < board.boardState.GetLength(0); x++)
             {
                 for (int y = 0; y < board.boardState.GetLength(1); y++)
                 {
                     if (y > board.bufferHeight && board.boardState[x, y] != 0)
                     {
-                        _block_sprite.Position = new Vector2(x * _block_sprite.baseSize + Position.X, y * _block_sprite.baseSize - boardDrawOffset + Position.Y);
+                        _block_sprite.Position = new Vector2(x * _block_sprite.baseSize + Position.X, y * _block_sprite.baseSize - boardDrawOffset + Position.Y) * ScreenManager.screenScale;
                         _block_sprite.spriteIndex = board.boardState[x, y];
                         _block_sprite.Draw(spriteBatch);
                         //_block_sprite.DrawSheet(spriteBatch, 0);
@@ -167,7 +170,7 @@ namespace TetFun3080
 
 
                         _block_sprite.Alpha = 0.5f; // Set transparency for ghost
-                        _block_sprite.Position = new Vector2(Position.X + gx * _block_sprite.baseSize, Position.Y + gy * _block_sprite.baseSize - boardDrawOffset);
+                        _block_sprite.Position = new Vector2(Position.X + gx * _block_sprite.baseSize, Position.Y + gy * _block_sprite.baseSize - boardDrawOffset) * ScreenManager.screenScale;
                         _block_sprite.spriteIndex = (int)currentShape;
                         _block_sprite.Draw(spriteBatch);
 
@@ -176,7 +179,7 @@ namespace TetFun3080
 
 
 
-                    _block_sprite.Position = new Vector2(Position.X + x * _block_sprite.baseSize, Position.Y + y * _block_sprite.baseSize - boardDrawOffset);
+                    _block_sprite.Position = new Vector2(Position.X + x * _block_sprite.baseSize, Position.Y + y * _block_sprite.baseSize - boardDrawOffset) * ScreenManager.screenScale;
                     _block_sprite.spriteIndex = (int)currentShape;
                     _block_sprite.Draw(spriteBatch);
 
@@ -198,7 +201,7 @@ namespace TetFun3080
                     int x = nextX + (int)piece.X;
                     int y = nextY + (int)piece.Y + (nextSep * i);
 
-                    _block_sprite.Position = new Vector2(Position.X + x * _block_sprite.baseSize, -8 + Position.Y + y * _block_sprite.baseSize);
+                    _block_sprite.Position = new Vector2(Position.X + x * _block_sprite.baseSize, -8 + Position.Y + y * _block_sprite.baseSize) * ScreenManager.screenScale;
                     _block_sprite.spriteIndex = (int)PieceQueue[i];
                     _block_sprite.Draw(spriteBatch);
 
@@ -213,7 +216,7 @@ namespace TetFun3080
                 {
                     int x = (-1 + (int)piece.X) * 16;
                     int y = (1 + (int)piece.Y) * 16;
-                    _block_sprite.Position = new Vector2(Position.X - 4 * 16 + x, y + Position.Y);
+                    _block_sprite.Position = new Vector2(Position.X - 4 * 16 + x, y + Position.Y) * ScreenManager.screenScale;
                     _block_sprite.spriteIndex = (int)heldPiece.Value;
                     _block_sprite.Draw(spriteBatch);
                 }
@@ -221,9 +224,9 @@ namespace TetFun3080
 
 
 
-            spriteBatch.DrawString(font, level.ToString(), new Vector2(208 + Position.X, 274 + Position.Y), Color.White);
-            spriteBatch.DrawString(font, LevelThreshold.ToString(), new Vector2(208 + Position.X, 294 + Position.Y), Color.White);
-            spriteBatch.DrawString(font, score.ToString(), new Vector2(Position.X, Position.Y - 32), Color.White);
+            spriteBatch.DrawString(font, level.ToString(), new Vector2(208 + Position.X, 274 + Position.Y) * ScreenManager.screenScale, Color.White);
+            spriteBatch.DrawString(font, LevelThreshold.ToString(), new Vector2(208 + Position.X, 294 + Position.Y) * ScreenManager.screenScale, Color.White);
+            spriteBatch.DrawString(font, score.ToString(), new Vector2(Position.X, Position.Y - 32) * ScreenManager.screenScale, Color.White);
 
 
 
@@ -350,11 +353,12 @@ namespace TetFun3080
             }
             if (input.IsRotateClockwiseDown)
             {
-                if (!rotateClockPressed && !lockedIn && !(currentShape == Pieces.O))
+                if (!rotateClockPressed)
                 {
-                    piecePositions = ruleset.rotator.RotateClockwise(pilot_position, piecePositions, board);
                     rotateClockPressed = true;
+                    RotateClockwise();
                 }
+                
 
             }
             else
@@ -363,11 +367,12 @@ namespace TetFun3080
             }
             if (input.IsRotateCounterClockwiseDown)
             {
-                if (!rotateCounterPressed && !lockedIn && !(currentShape == Pieces.O))
+                if (!rotateCounterPressed)
                 {
                     rotateCounterPressed = true;
-                    piecePositions = ruleset.rotator.RotateCounterClockwise(pilot_position, piecePositions, board);
+                    RotateCounter();
                 }
+              
 
             }
             else
@@ -376,7 +381,35 @@ namespace TetFun3080
             }
             if (input.IsHoldDown)
             {
-                HoldPiece();
+                if(isHoldHeld == false)
+                {
+                    HoldPiece();
+                    isHoldHeld = true;
+                }
+                
+            }
+            else
+            {
+                isHoldHeld = false;
+            }
+        }
+        bool isHoldHeld = false;
+        private void RotateClockwise()
+        {
+            if (!lockedIn && !(currentShape == Pieces.O))
+            {
+                
+                piecePositions = ruleset.rotator.RotateClockwise(pilot_position, piecePositions, board);
+                
+            }
+        }
+
+        private void RotateCounter()
+        {
+            if (!lockedIn && !(currentShape == Pieces.O))
+            {
+                
+                piecePositions = ruleset.rotator.RotateCounterClockwise(pilot_position, piecePositions, board);
             }
         }
 
@@ -564,10 +597,12 @@ namespace TetFun3080
         {
             if (holdAvailable && !lockedIn)
             {
+                holdAvailable = false;
                 if (heldPiece == null)
-                {
+                { 
                     heldPiece = currentShape;
                     GenerateNewPieceFromQueue();
+
                 }
                 else
                 {
@@ -577,8 +612,6 @@ namespace TetFun3080
                     SpawnPiece(currentShape, true);
                 }
 
-
-                holdAvailable = false;
             }
         }
         private bool lockedIn = false;
@@ -659,7 +692,7 @@ namespace TetFun3080
         {
             blockBottomHit = false;
             hardDropPossible = true;
-
+            lockedIn = false;
             if (!fromHold)
             {
                 IncrementLevel(1, false); // Increment level by 1 if not at a level threshold
@@ -669,6 +702,25 @@ namespace TetFun3080
             piecePositions = GetPiecePositionsFromShape(piece);
 
             pilot_position = board.spawnPosition; // Reset the piece's position to the spawn position on the board
+
+            if (ruleset.IRSEnabled)
+            {
+                if (input.IsRotateClockwiseDown)
+                {
+                    DebugConsole.Log("irstate clock");
+                    RotateClockwise();
+                }
+                else if (input.IsRotateCounterClockwiseDown)
+                {
+                    DebugConsole.Log("irstaterighjt");
+                    RotateCounter();
+                }
+                else if(input.IsHoldDown && !fromHold)
+                {
+                    DebugConsole.Log("irshold");
+                    HoldPiece();
+                }
+            }
 
             //check dire status (for mus and companion)
             if (board.GetStackHeight() >= 16)
