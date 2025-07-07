@@ -42,7 +42,7 @@ namespace TetFun3080
             
             base.Initialize();
 
-            LevelManager.SetLevel(new SoloGameLevel());
+            LevelManager.SetLevel(new DuoGameLevel());
 
         }
         protected override void LoadContent()
