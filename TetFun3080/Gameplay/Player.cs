@@ -43,7 +43,7 @@ namespace TetFun3080.Gameplay
         {
            Position = spawnPos;
             _input = input;
-            console = new Sprite(AssetManager.GetTexture("Consoles/default"));
+            console = new Sprite(AssetManager.GetTexture("Consoles/sketch"));
             companion = new Companion("Companions/default",new Vector2(Position.X-36-60, Position.Y-36+104));
             currentEntity = new PlayerMenu(Position, _input,this);
 
@@ -51,8 +51,16 @@ namespace TetFun3080.Gameplay
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            console.Position = ScreenManager.screenScale * Position - new Vector2(112, 48)* ScreenManager.screenScale;
+            console.Color = new Color(0, 0, 0, 200);
+            console.Position = ScreenManager.screenScale * Position - new Vector2(112 - 8, 48 - 16) * ScreenManager.screenScale;
             console.Draw(spriteBatch);
+
+
+            console.Position = ScreenManager.screenScale * Position - new Vector2(112, 48)* ScreenManager.screenScale;
+            console.Color = Color.White;
+            console.Draw(spriteBatch);
+
+            
 
             currentEntity.Draw(spriteBatch, gameTime);
             companion.Draw(spriteBatch, gameTime);

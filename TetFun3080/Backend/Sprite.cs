@@ -8,6 +8,7 @@ namespace TetFun3080.Backend
     {
         public Texture2D Texture { get; private set; }
         public Vector2 Position { get; set; }
+        public Vector2 Scale { get; set; } = new Vector2(1,1);
         public Color Color { get; set; }
         public float Alpha { get; set; }
   
@@ -22,7 +23,7 @@ namespace TetFun3080.Backend
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Position,null, Color*Alpha,0,Vector2.Zero, Vector2.One * ScreenManager.screenScale, SpriteEffects.None,1);
+            spriteBatch.Draw(Texture, Position,null, Color*Alpha,0,Vector2.Zero, Scale * ScreenManager.screenScale, SpriteEffects.None,1);
         }
 
         public virtual void Update(GameTime gameTime)

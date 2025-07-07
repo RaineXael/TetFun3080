@@ -25,7 +25,7 @@ namespace TetFun3080
         private static Dictionary<string, Effect> _effects = new Dictionary<string, Effect>();
         public static Texture2D fallbackTexture;
         public static SoundEffect fallbackSound;
-
+        public static Texture2D contentIconFallbackTexture;
         public static void LoadTexture(string assetName)
         {
             if (!_textures.ContainsKey(assetName))
@@ -77,7 +77,6 @@ namespace TetFun3080
                 return fallbackTexture;
             }
         }
-
 
         public static void LoadSong(string assetName)
         {
@@ -142,27 +141,27 @@ namespace TetFun3080
             }
         }
 
-
-        public static SpriteFont GetFont(string assetName)
-        {
-            if (_fonts.ContainsKey(assetName))
-            {
-                return _fonts[assetName];
-            }
-            else
-            {
-                // You might want to throw an exception or return a default texture
-                DebugConsole.LogError($"Font '{assetName}' not found in the AssetManager.");
-                return null;
-            }
-        }
-        public static void LoadFont(string assetName)
-        {
-            if (!_fonts.ContainsKey(assetName))
-            {
-                _fonts.Add(assetName, Content.Load<SpriteFont>(assetName));
-            }
-        }
+        //UNUSED FOR TETFUN, KEPT FOR GENERAL USE
+        //public static SpriteFont GetFont(string assetName)
+        //{
+        //    if (_fonts.ContainsKey(assetName))
+        //    {
+        //        return _fonts[assetName];
+        //    }
+        //    else
+        //    {
+        //        // You might want to throw an exception or return a default texture
+        //        DebugConsole.LogError($"Font '{assetName}' not found in the AssetManager.");
+        //        return null;
+        //    }
+        //}
+        //public static void LoadFont(string assetName)
+        //{
+        //    if (!_fonts.ContainsKey(assetName))
+        //    {
+        //        _fonts.Add(assetName, Content.Load<SpriteFont>(assetName));
+        //    }
+        //}
         public static SoundEffect GetAudio(string assetName)
         {
             if (_audio.ContainsKey(assetName))
@@ -234,5 +233,10 @@ namespace TetFun3080
                 return null;
             }
         }
+
+
+
+
+
     }
 }

@@ -22,6 +22,8 @@ namespace TetFun3080.Backend
 
         private static TextObject text = new TextObject("");
 
+        private const int lineSpacing = 16;
+
         public static void Update(GameTime gameTime)
         {
             // Toggle visibility with a key press (e.g., F1)
@@ -47,7 +49,7 @@ namespace TetFun3080.Backend
                 spriteBatch.Draw(BackgroundTex, new Rectangle(0,0, (int)(960 * ScreenManager.screenScale), (int)(540 * ScreenManager.screenScale)), new Color(0.5f, 0.5f, 0.5f, 0.5f));
                 for (int i = 0; i < messages.Count; i++)
                 {
-                    text.Position = new Vector2(10, 10 + i * Font.LineSpacing);
+                    text.Position = new Vector2(10, 10 + i * lineSpacing);
                     text.Text = messages[i];
                     text.Draw(spriteBatch, gameTime);
                     //spriteBatch.DrawString(Font, messages[i], new Vector2(10, 10 + i * Font.LineSpacing), Color.White);

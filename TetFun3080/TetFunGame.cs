@@ -51,17 +51,19 @@ namespace TetFun3080
 
             AssetManager.fallbackTexture = AssetManager.Content.Load<Texture2D>("Sprites/fallback");
             AssetManager.fallbackSound = AssetManager.Content.Load<SoundEffect>("Audio/fallback");
-            AssetManager.LoadFont("Fonts/Font1");
+            AssetManager.contentIconFallbackTexture = AssetManager.Content.Load<Texture2D>("Sprites/contentfallback");
             AssetManager.LoadTexture("Sprites/one");
-            AssetManager.LoadTexture("Sprites/blocks");
+            AssetManager.LoadTexture("Blocks/bracket/blocks");
+            AssetManager.LoadTexture("Blocks/default/blocks");
             AssetManager.LoadTexture("Consoles/default");
+            AssetManager.LoadTexture("Consoles/sketch");
             AssetManager.LoadTexture("Fonts/font");
             AssetManager.LoadAudio("Audio/GameSounds/tgm/place");
             AssetManager.LoadAudio("Audio/GameSounds/tgm/line");
             AssetManager.LoadAudio("Audio/GameSounds/joel/place");
             AssetManager.LoadAudio("Audio/GameSounds/joel/line");
             // TODO: use this.Content to load your game content here
-            DebugConsole.Font = AssetManager.GetFont("Fonts/Font1");
+            
             DebugConsole.BackgroundTex = AssetManager.GetTexture("Sprites/one");
 
 

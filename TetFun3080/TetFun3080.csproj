@@ -30,6 +30,7 @@
   <ItemGroup>
     <Folder Include="Content\Audio\Mus\vshard\" />
     <Folder Include="Content\Audio\Mus\vsnormal\" />
+    <Folder Include="Content\Blocks\bracket\" />
     <Folder Include="Content\Shaders\" />
     <Folder Include="Content\Sprites\Backgrounds\" />
   </ItemGroup>

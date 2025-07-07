@@ -160,6 +160,30 @@
 /processorParam:Quality=Best
 /build:Audio/Mus/white/loop.wav
 
+#begin Blocks/bracket/blocks.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Blocks/bracket/blocks.png
+
+#begin Blocks/default/blocks.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Blocks/default/blocks.png
+
 #begin Companions/default/attack.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -256,7 +280,7 @@
 /processorParam:TextureFormat=Color
 /build:Companions/default/win.png
 
-#begin Consoles/default.png
+#begin Consoles/default/console.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -266,9 +290,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Consoles/default.png
+/build:Consoles/default/console.png
 
-#begin Fonts/font.png
+#begin Consoles/sketch/console.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -278,7 +302,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Fonts/font.png
+/build:Consoles/sketch/console.png
 
 #begin Fonts/font.png
 /importer:TextureImporter
@@ -326,17 +350,17 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Backgrounds/default.png
 
-#begin Sprites/blocks.png
+#begin Sprites/contentfallback.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=False
+/processorParam:ColorKeyEnabled=True
 /processorParam:GenerateMipmaps=False
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/blocks.png
+/build:Sprites/contentfallback.png
 
 #begin Sprites/fallback.png
 /importer:TextureImporter

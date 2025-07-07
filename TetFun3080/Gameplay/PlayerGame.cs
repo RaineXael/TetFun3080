@@ -84,9 +84,9 @@ namespace TetFun3080.Gameplay
             gameMode = mode;
             ruleset = gameMode.GetRulesetFromLevel(level);
 
-            _block_sprite = new SpriteSheet(AssetManager.GetTexture("Sprites/blocks"), 16);
+            _block_sprite = new SpriteSheet(AssetManager.GetTexture("Blocks/bracket/blocks"), 16);
 
-            font = AssetManager.GetFont("Fonts/Font1");
+            
             pieceDropSoundInstance = AssetManager.GetAudio($"Audio/GameSounds/{soundSkin}/place").CreateInstance();
             lineclearSoundInstance = AssetManager.GetAudio($"Audio/GameSounds/{soundSkin}/line").CreateInstance();
             _block_sprite.baseSize = 16;

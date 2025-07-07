@@ -10,10 +10,10 @@ namespace TetFun3080.Backend
 {
     public interface IEntity
     {
-        
 
-        
-        void Update(GameTime gameTime);
-        void Draw(SpriteBatch spriteBatch, GameTime gameTime);
+
+
+        abstract void Update(GameTime gameTime);
+        abstract void Draw(SpriteBatch spriteBatch, GameTime gameTime);
     }
 }

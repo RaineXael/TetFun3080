@@ -40,12 +40,16 @@ namespace TetFun3080.Menu
             foreach (string itemstring in items)
             {
                 this.input = input;
-                MenuItemBasic menuitem = new MenuItemBasic(itemstring, Position + new Vector2(0, i * separator * ScreenManager.screenScale));
+                MenuItemBasic menuitem = new MenuItemBasic(itemstring, Position + new Vector2(0, i * separator * ScreenManager.screenScale), (int)(separator * ScreenManager.screenScale));
                
                 Items.Add(menuitem); // Assuming MenuItemBasic takes a string in its constructor
 
                 i++;
             }
+            
+            
+
+            Items.Add(new MenuItemSelector("Selector", Position + new Vector2(0, i * separator * ScreenManager.screenScale),32, input)); // Assuming MenuItemBasic takes a string in its constructor
             Items[selectedIndex].OnSetSelected(true);
         }
         
@@ -92,6 +96,7 @@ namespace TetFun3080.Menu
         public Player PParent; 
         private void SelectItem()
         {
+            Items[selectedIndex].OnInteracted();
            switch (selectedIndex)
             {
                 case 0:
@@ -179,7 +184,10 @@ namespace TetFun3080.Menu
                 leavePressed = false;
             }
 
-
+            foreach(IMenuItem item in Items)
+            {
+                item.Update(gameTime);
+            }
 
         }
     }

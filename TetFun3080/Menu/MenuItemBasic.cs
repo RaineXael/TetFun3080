@@ -8,26 +8,28 @@ namespace TetFun3080.Menu
 {
     internal class MenuItemBasic : IMenuItem
     {
-        SpriteFont Font { get; set; }
+      
         public Vector2 Position { get; set; }
         string Title { get; set; }
 
-        private bool selected;
+        public float Height { get; set; }
+
+        protected bool selected;
 
         private TextObject text;
 
-        public MenuItemBasic(string itemText, Vector2 pos)
+        public MenuItemBasic(string itemText, Vector2 pos, int height)
         {
             Title = itemText;
-            Position = pos; 
-            Font = AssetManager.GetFont("Fonts/Font1");
+            Position = pos;
+
             text = new TextObject(Title);
             text.Position = pos / ScreenManager.screenScale;
-            
+            Height = height * ScreenManager.screenScale;
         }
 
 
-        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             // Implement drawing logic here
             if (selected)
@@ -42,7 +44,7 @@ namespace TetFun3080.Menu
                 
 
         }
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             // Implement update logic here
         }
@@ -52,9 +54,15 @@ namespace TetFun3080.Menu
             throw new NotImplementedException();
         }
 
-        public void OnSetSelected(bool selected)
+        public virtual void OnSetSelected(bool selected)
         {
             this.selected = selected;
+            DebugConsole.Log("selector selected");
+        }
+
+        public virtual void OnInteracted()
+        {
+            
         }
     }
 
