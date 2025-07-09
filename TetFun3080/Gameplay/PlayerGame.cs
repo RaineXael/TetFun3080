@@ -409,7 +409,7 @@ namespace TetFun3080.Gameplay
             if (!lockedIn && !(currentShape == Pieces.O))
             {
                 
-                piecePositions = ruleset.rotator.RotateClockwise(pilot_position, piecePositions, board);
+                piecePositions = ruleset.rotator.RotateClockwise(ref pilot_position, piecePositions, board, currentShape);
                 
             }
         }
@@ -419,7 +419,7 @@ namespace TetFun3080.Gameplay
             if (!lockedIn && !(currentShape == Pieces.O))
             {
                 
-                piecePositions = ruleset.rotator.RotateCounterClockwise(pilot_position, piecePositions, board);
+                piecePositions = ruleset.rotator.RotateCounterClockwise(ref pilot_position, piecePositions, board, currentShape);
             }
         }
 
