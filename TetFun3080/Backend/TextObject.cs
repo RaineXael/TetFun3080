@@ -6,8 +6,17 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace TetFun3080.Backend
 {
+    public enum TextAlignment
+    {
+        Left,
+        Center,
+        Right
+    }
+
+
     public class TextObject : Entity
     {
+        public TextAlignment alignment = TextAlignment.Left;
         public SpriteSheet font;
         public string Text
         {

@@ -84,7 +84,7 @@ namespace TetFun3080.Gameplay
             gameMode = mode;
             ruleset = gameMode.GetRulesetFromLevel(level);
 
-            _block_sprite = new SpriteSheet(AssetManager.GetTexture("Blocks/bracket/blocks"), 16);
+            _block_sprite = new SpriteSheet(AssetManager.GetTexture("Blocks/default/blocks"), 16);
 
             
             pieceDropSoundInstance = AssetManager.GetAudio($"Audio/GameSounds/{soundSkin}/place").CreateInstance();
@@ -700,6 +700,7 @@ namespace TetFun3080.Gameplay
 
         private void SpawnPiece(Pieces piece, bool fromHold)
         {
+            ruleset.rotator.RotationState = 0;
             blockBottomHit = false;
             hardDropPossible = true;
             lockedIn = false;

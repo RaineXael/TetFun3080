@@ -13,12 +13,11 @@ namespace TetFun3080.Gameplay
     {
         public bool KicksEnabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public Vector2 KickCheckLeft(Vector2 pilotPosition, Vector2[] rotatedPieceOffset, Board board)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Vector2 KickCheckRight(Vector2 pilotPosition, Vector2[] rotatedPieceOffset, Board board)
+        int RotationState { get; set;}
+        int IRotator.RotationState { get => RotationState; set => RotationState = value; }
+
+        public bool CheckValidity(Vector2 pilotPiece, Vector2[] pieceOffset, Vector2 overallOffset, Board board)
         {
             throw new NotImplementedException();
         }

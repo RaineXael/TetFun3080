@@ -7,19 +7,7 @@ namespace TetFun3080.Gameplay
 {
     internal class RotatorQuick : IRotator
     {
-        public bool KicksEnabled { get; set; } = true;
-
-        public Vector2 KickCheckLeft(Vector2 pilotPosition, Vector2[] rotatedPieceOffset, Board board)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Vector2 KickCheckRight(Vector2 pilotPosition, Vector2[] rotatedPieceOffset, Board board)
-        {
-            throw new NotImplementedException();
-        }
-
-        
+        public int RotationState { get; set; }
 
         public Vector2[] RotateClockwise(Vector2 pilotPiece, Vector2[] pieceOffset, Board board)
         {
@@ -41,7 +29,7 @@ namespace TetFun3080.Gameplay
                 }
 
             }
-
+            ChangeRotatorState(-1);
             return result;
         }
 
@@ -63,7 +51,27 @@ namespace TetFun3080.Gameplay
                 }
 
             }
+            ChangeRotatorState(1);
             return result;
+        }
+
+        public void ChangeRotatorState(int value)
+        {
+            //0=spawn
+            //1=r
+            //2=2
+            //3=left
+            RotationState += value;
+            if (RotationState >= 4)
+            {
+                RotationState = 0;
+            }
+            if(RotationState < 0)
+            {
+                RotationState = 3;
+            }
+
+            DebugConsole.Log("Rotator State is " +  RotationState.ToString());
         }
     }
 }
