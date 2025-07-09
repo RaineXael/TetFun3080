@@ -40,7 +40,7 @@ namespace TetFun3080.Gameplay
         {
             //randomizer = new SevenBagRandomizer();
             randomizer = new SevenBagRandomizer();
-            rotator = new RotatorQuick();
+            rotator = new RotatorSRS();
             //everything else set above
         }
 
