@@ -69,18 +69,18 @@ namespace TetFun3080.Gameplay
 
             }
 
-            for (int iter = 0; iter < 5; iter++)
-            {
-                Vector2? res = PerformValidCheckFromKickTable(ref pilotPiece, result, board, type, initialRot, endRot, iter);
-                if (res != null)
+             for (int iter = 0; iter < 5; iter++)
                 {
-                    //rotation valid! Apply the tf to the pilot piece and return.
-                    pilotPiece += (Vector2)res;
-                    return result;
+                    Vector2? res = PerformValidCheckFromKickTable(ref pilotPiece, result, board, type, initialRot, endRot, iter);
+                    if (res != null)
+                    {
+                        //rotation valid! Apply the tf to the pilot piece and return.
+                        pilotPiece += (Vector2)res;
+                        return result;
+                    }
                 }
-            }
-            //If no non-null found in all the iterations, return the original offset
-            return pieceOffset;
+                //If no non-null found in all the iterations, return the original offset
+                return pieceOffset;
 
         }
 
@@ -128,16 +128,16 @@ namespace TetFun3080.Gameplay
                         default:
                             break;
                         case 1:
-                            kickedPilotOffset = new Vector2(-1, 0) * oppositeModifier;
+                            kickedPilotOffset = new Vector2(-2, 0) * oppositeModifier;
                             break;
                         case 2:
-                            kickedPilotOffset = new Vector2(-1, 1) * oppositeModifier;
+                            kickedPilotOffset = new Vector2(1, 0) * oppositeModifier;
                             break;
                         case 3:
-                            kickedPilotOffset = new Vector2(0, -2) * oppositeModifier;
+                            kickedPilotOffset = new Vector2(-2, -1) * oppositeModifier;
                             break;
                         case 4:
-                            kickedPilotOffset = new Vector2(-1, -2) * oppositeModifier;
+                            kickedPilotOffset = new Vector2(1, 2) * oppositeModifier;
                             break;
 
                     }
@@ -150,16 +150,16 @@ namespace TetFun3080.Gameplay
                         default:
                             break;
                         case 1:
-                            kickedPilotOffset = new Vector2(1, 0);
+                            kickedPilotOffset = new Vector2(-1, 0);
                             break;
                         case 2:
-                            kickedPilotOffset = new Vector2(1, -1);
+                            kickedPilotOffset = new Vector2(2, 0);
                             break;
                         case 3:
-                            kickedPilotOffset = new Vector2(0, 2);
+                            kickedPilotOffset = new Vector2(-1, 2);
                             break;
                         case 4:
-                            kickedPilotOffset = new Vector2(1, 2);
+                            kickedPilotOffset = new Vector2(2, -1);
                             break;
 
                     }
@@ -172,16 +172,16 @@ namespace TetFun3080.Gameplay
                         default:
                             break;
                         case 1:
-                            kickedPilotOffset = new Vector2(1, 0);
+                            kickedPilotOffset = new Vector2(2, 0);
                             break;
                         case 2:
-                            kickedPilotOffset = new Vector2(1, 1);
+                            kickedPilotOffset = new Vector2(-1, 0);
                             break;
                         case 3:
-                            kickedPilotOffset = new Vector2(0, -2);
+                            kickedPilotOffset = new Vector2(2, 1);
                             break;
                         case 4:
-                            kickedPilotOffset = new Vector2(1, -2);
+                            kickedPilotOffset = new Vector2(-1, -2);
                             break;
 
                     }
@@ -194,16 +194,16 @@ namespace TetFun3080.Gameplay
                         default:
                             break;
                         case 1:
-                            kickedPilotOffset = new Vector2(-1, 0);
+                            kickedPilotOffset = new Vector2(1, 0);
                             break;
                         case 2:
-                            kickedPilotOffset = new Vector2(-1, -1);
+                            kickedPilotOffset = new Vector2(-2, 0);
                             break;
                         case 3:
-                            kickedPilotOffset = new Vector2(0, 2);
+                            kickedPilotOffset = new Vector2(1, -2);
                             break;
                         case 4:
-                            kickedPilotOffset = new Vector2(-1, 2);
+                            kickedPilotOffset = new Vector2(-2, 1);
                             break;
 
                     }
