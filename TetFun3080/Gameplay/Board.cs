@@ -25,7 +25,7 @@ namespace TetFun3080.Gameplay
             this.width = width;
             this.height = height;
             this.bufferHeight = bufferHeight;
-            spawnPosition = new Vector2(width/2-1, height);
+            spawnPosition = new Vector2(width/2-1, height-1);
             SetupBoard();
         }
 
@@ -54,9 +54,10 @@ namespace TetFun3080.Gameplay
         /**
          * Returns the line clear count.
          */
-        public int ScanAndRemoveLines()
+        public List<int> ScanAndRemoveLines()
         {
-            int clearedLines = 0;
+            List<int> result = new List<int>();
+            
             for (int y = 0; y < boardState.GetLength(1); y++)
             {
                 bool lineHasHole = false;
@@ -73,7 +74,7 @@ namespace TetFun3080.Gameplay
                 if (!lineHasHole)
                 {
                     //this line is clear, remove it and downshift all lines above it
-                    clearedLines++;
+                    result.Add(y);
                     for (int x = 0; x < boardState.GetLength(0); x++)
                     {
                         //shift all lines above this line down by one
@@ -86,7 +87,7 @@ namespace TetFun3080.Gameplay
                     }
                 }
             }
-            return clearedLines;
+            return result;
         }
 
         public int GetStackHeight()

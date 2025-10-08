@@ -54,7 +54,6 @@ namespace TetFun3080.Gameplay
         private SpriteSheet _block_sprite;
         private SoundEffectInstance lineclearSoundInstance;
         private SoundEffectInstance pieceDropSoundInstance;
-        private SpriteFont font;
 
         private string soundSkin = "tgm";
 
@@ -71,6 +70,8 @@ namespace TetFun3080.Gameplay
         public EventHandler OnDire;
         public EventHandler OnUnDire;
 
+
+        private BlockEraserParticles clearParticles;
 
         public PlayerGame(Board board, UserInput input, Vector2 Position, GameMode mode, Player parent)
         {
@@ -102,11 +103,11 @@ namespace TetFun3080.Gameplay
             lockInTimer = ruleset.lockInDelay;
 
             MusicManager.PlayMusic($"Audio/Mus/white");
-
+            clearParticles = new BlockEraserParticles(_block_sprite);
             //ruleset = AssetManager.GetRuleset("Rulesets/TestRuleset");
             LoadSoundTheme(soundSkin);
 
-
+            
         }
 
         List<SoundEffect> NextSpawnSounds = new List<SoundEffect>();
@@ -120,7 +121,8 @@ namespace TetFun3080.Gameplay
             AssetManager.LoadAudio($"Audio/GameSounds/{skinName}/t");
             AssetManager.LoadAudio($"Audio/GameSounds/{skinName}/j");
             AssetManager.LoadAudio($"Audio/GameSounds/{skinName}/l");
-
+            AssetManager.LoadAudio($"Audio/GameSounds/{skinName}/bell");
+            bellSound = AssetManager.GetAudio($"Audio/GameSounds/{soundSkin}/bell").CreateInstance();
             NextSpawnSounds.Add(AssetManager.GetAudio($"Audio/GameSounds/{skinName}/z"));
             NextSpawnSounds.Add(AssetManager.GetAudio($"Audio/GameSounds/{skinName}/s"));
             NextSpawnSounds.Add(AssetManager.GetAudio($"Audio/GameSounds/{skinName}/i"));
@@ -135,14 +137,14 @@ namespace TetFun3080.Gameplay
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
 
-
+            
             _block_sprite.Alpha = 1f;
             //Board
             for (int x = 0; x < board.boardState.GetLength(0); x++)
             {
                 for (int y = 0; y < board.boardState.GetLength(1); y++)
                 {
-                    if (y > board.bufferHeight && board.boardState[x, y] != 0)
+                    if (y >= board.bufferHeight && board.boardState[x, y] != 0)
                     {
                         _block_sprite.Position = new Vector2(x * _block_sprite.baseSize + Position.X, y * _block_sprite.baseSize - boardDrawOffset + Position.Y) * ScreenManager.screenScale;
                         _block_sprite.spriteIndex = board.boardState[x, y];
@@ -235,7 +237,7 @@ namespace TetFun3080.Gameplay
             scoreText.Position = new Vector2(Position.X, Position.Y - 32);
             scoreText.Draw(spriteBatch, gameTime);
 
-
+            clearParticles.Draw(spriteBatch, gameTime);
 
 
         }
@@ -256,7 +258,7 @@ namespace TetFun3080.Gameplay
         private bool rightPressed = false;
         public void Update(GameTime gameTime)
         {
-
+            clearParticles.Update(gameTime);
             gravityTimer--;
             if (gravityTimer < 0)
                 if (gravityTimer < 0)
@@ -639,21 +641,31 @@ namespace TetFun3080.Gameplay
             else
             {
                 board.AddBlock(currentShape, pilot_position, piecePositions);
-                int linesCleared = board.ScanAndRemoveLines();
+                List<int> linesCleared = board.ScanAndRemoveLines();
                 holdAvailable = true;
                 lockedIn = true;
                 //DebugConsole.Log(lockincounter.ToString());
                 lineClearTimer = ruleset.appearanceDelay;
-                if (linesCleared > 0)
+                if (linesCleared.Count > 0)
                 {
+                    foreach(int row in linesCleared)
+                    {
+                        DebugConsole.Log(row.ToString());
+                        for(int i = 0; i< board.width; i++)
+                        {
+                            clearParticles.SpawnBlock(Position+new Vector2(i*16,16*(row - board.bufferHeight)), 2);
+                            
+                        }
+                    }
+
                     lineclearSoundInstance.Stop();
                     lineclearSoundInstance.Play();
                     lineClearTimer += ruleset.lineclearDelay;
-                    IncrementLevel(linesCleared, true); // Increment level based on lines cleared
+                    IncrementLevel(linesCleared.Count, true); // Increment level based on lines cleared
 
                     int multLevel = level / 100;
 
-                    switch (linesCleared)
+                    switch (linesCleared.Count)
                     {
                         case 1:
                             score += 100 * multLevel;
@@ -668,7 +680,7 @@ namespace TetFun3080.Gameplay
                             score += multLevel * 800;
                             break;
                         default:
-                            score += multLevel * linesCleared * 100 + 800; // Fallback for 4+lines somehow
+                            score += multLevel * linesCleared.Count * 100 + 800; // Fallback for 4+lines somehow
                             break;
 
                             //insert more for tspins and such
@@ -681,12 +693,14 @@ namespace TetFun3080.Gameplay
                 }
             }
         }
-
+        private SoundEffectInstance bellSound;
+        private bool bellPlayed = false;
         private void IncrementLevel(int count = 1, bool lineclear = true)
         {
+            int lastTwoDigits = level % 100;
             if (!lineclear)
             {
-                int lastTwoDigits = level % 100;
+                
                 if (lastTwoDigits == 99)
                 {
                     return;
@@ -694,7 +708,18 @@ namespace TetFun3080.Gameplay
             }
             level += count;
 
-            ruleset = gameMode.GetRulesetFromLevel(level);
+            if(lastTwoDigits >= 80 && !bellPlayed)
+            {
+                bellPlayed = true;
+                bellSound.Play();
+            }
+            else if(lastTwoDigits > 80)
+            {
+                bellPlayed = false;
+            }
+
+
+                ruleset = gameMode.GetRulesetFromLevel(level);
 
         }
 

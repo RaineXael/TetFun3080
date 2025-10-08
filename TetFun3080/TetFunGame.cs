@@ -12,7 +12,8 @@ namespace TetFun3080
 {
     public class TetFunGame : Game
     {
-       
+        const int BASE_WINDOW_WIDTH = 960;
+        const int BASE_WINDOW_HEIGHT = 540;
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -22,7 +23,7 @@ namespace TetFun3080
             _graphics = new GraphicsDeviceManager(this);
             ScreenManager.graphics = _graphics;
             
-            ScreenManager.SetResolution(960, 540, 1f, false);
+            ScreenManager.SetResolution(BASE_WINDOW_WIDTH, BASE_WINDOW_HEIGHT, 1f, false);
             AssetManager._graphics = _graphics;
             
             
@@ -42,7 +43,7 @@ namespace TetFun3080
             
             base.Initialize();
 
-            LevelManager.SetLevel(new DuoGameLevel());
+            LevelManager.SetLevel(new SoloGameLevel());
 
         }
         protected override void LoadContent()
@@ -68,10 +69,6 @@ namespace TetFun3080
 
 
             AssetManager.LoadTexture("Sprites/Backgrounds/default");
-
-            Song song = new Song("asdasd", "asdasdasd", 1);
-            string jsonContent = JsonConvert.SerializeObject(song, Formatting.Indented);
-            File.WriteAllText("./song.json", jsonContent);
         }
 
         protected override void Update(GameTime gameTime)

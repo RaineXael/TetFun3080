@@ -31,6 +31,12 @@
 /processorParam:Quality=Best
 /build:Audio/GameSounds/joel/place.wav
 
+#begin Audio/GameSounds/tgm/bell.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/GameSounds/tgm/bell.wav
+
 #begin Audio/GameSounds/tgm/i.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
