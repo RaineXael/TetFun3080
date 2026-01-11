@@ -45,7 +45,7 @@ namespace TetFun3080.Menu
             
             
 
-            Items.Add(new MenuItemSelector("Selector Test", Position + new Vector2(0, i * separator * ScreenManager.screenScale),32, input)); // Assuming MenuItemBasic takes a string in its constructor
+            //Items.Add(new MenuItemSelector("Selector Test", Position + new Vector2(0, i * separator * ScreenManager.screenScale),32, input)); // Assuming MenuItemBasic takes a string in its constructor
             Items[selectedIndex].OnSetSelected(true);
         }
         

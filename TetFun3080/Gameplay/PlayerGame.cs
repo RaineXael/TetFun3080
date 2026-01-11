@@ -45,7 +45,7 @@ namespace TetFun3080.Gameplay
 
         private bool ghostVisible = true;
 
-        int level = 0;
+        int level;
 
         private bool isDire;
 
@@ -77,7 +77,7 @@ namespace TetFun3080.Gameplay
 
         public PlayerGame(Board board, UserInput input, Vector2 Position, GameMode mode, Player parent)
         {
-            level = 00;
+            level = 0;
             this.input = input;
             
             this.parent = parent;
@@ -104,7 +104,7 @@ namespace TetFun3080.Gameplay
             gravityTimer = ruleset.gravity;
             lockInTimer = ruleset.lockInDelay;
 
-            MusicManager.PlayMusic($"Audio/Mus/white");
+            CheckMusicToPlay();
             clearParticles = new BlockEraserParticles(_block_sprite);
             //ruleset = AssetManager.GetRuleset("Rulesets/TestRuleset");
             LoadSoundTheme(soundSkin);
@@ -712,29 +712,58 @@ namespace TetFun3080.Gameplay
         private void IncrementLevel(int count = 1, bool lineclear = true)
         {
             int lastTwoDigits = level % 100;
+            int hundredDigit = (int)Math.Abs(level / 100 % 10);
             if (!lineclear)
             {
                 
                 if (lastTwoDigits == 99)
                 {
+                    if (!bellPlayed)
+                    {
+                        bellPlayed = true;
+                        bellSound.Play();
+                    }
+
                     return;
                 }
             }
             level += count;
 
-            if(lastTwoDigits >= 80 && !bellPlayed)
+            if(lastTwoDigits >= 85 && !bellPlayed && (hundredDigit == 4 || hundredDigit == 7 ) )
             {
-                bellPlayed = true;
-                bellSound.Play();
+                //stop music if nearing a checkpoint (500 and 800)
+                MusicManager.PlayMusic("");
             }
-            else if(lastTwoDigits > 80)
+
+            if ((hundredDigit == 5 || hundredDigit == 8) && bellPlayed)
             {
-                bellPlayed = false;
+                CheckMusicToPlay();
+                    bellPlayed = false;
+                
             }
+            
 
 
                 ruleset = gameMode.GetRulesetFromLevel(level);
 
+        }
+
+        private void CheckMusicToPlay()
+        {
+            if (level >= 800)
+            {
+                //play super tense music
+                MusicManager.PlayMusic($"Audio/Mus/dire");
+            }
+            else if (level >= 500)
+            {
+                //play moderately tense music
+                MusicManager.PlayMusic($"Audio/Mus/hard");
+            }
+            else
+            {
+                MusicManager.PlayMusic($"Audio/Mus/normal");
+            }
         }
 
         private void SpawnPiece(Pieces piece, bool fromHold)

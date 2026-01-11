@@ -136,6 +136,21 @@
 /processorParam:Quality=Best
 /build:Audio/Mus/dire/loop.wav
 
+#begin Audio/Mus/hard/data.json
+/copy:Audio/Mus/hard/data.json
+
+#begin Audio/Mus/hard/initial.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Mus/hard/initial.wav
+
+#begin Audio/Mus/hard/loop.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Mus/hard/loop.wav
+
 #begin Audio/Mus/menu/data.json
 /copy:Audio/Mus/menu/data.json
 
@@ -150,6 +165,21 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Audio/Mus/menu/loop.wav
+
+#begin Audio/Mus/normal/data.json
+/copy:Audio/Mus/normal/data.json
+
+#begin Audio/Mus/normal/initial.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Mus/normal/initial.wav
+
+#begin Audio/Mus/normal/loop.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Mus/normal/loop.wav
 
 #begin Audio/Mus/white/data.json
 /copy:Audio/Mus/white/data.json
