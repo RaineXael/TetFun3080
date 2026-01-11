@@ -39,7 +39,7 @@ namespace TetFun3080.Levels
             player1Input = new UserInput();
             player2Input = new UserInput(Keys.Left, Keys.Right, Keys.Down, Keys.Up, Keys.Z, Keys.X, Keys.LeftShift);
 
-            mode = jsonLoader.LoadGameModeFromFile("Content/Rulesets/ruleset.json");
+            mode = jsonLoader.LoadGameModeFromFile("Content/Rulesets/tgm2v2.json");
 
             player1 = new Player(player1Input, new Vector2(400, 100));
 
@@ -52,7 +52,7 @@ namespace TetFun3080.Levels
 
 
         }
-        TextObject text = new TextObject("Bad boe Jamo!!");
+        
 
         public void OnExit()
         {
@@ -98,7 +98,7 @@ namespace TetFun3080.Levels
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
             player1.Draw(spriteBatch, gameTime);
 
-            text.Draw(spriteBatch, gameTime);
+            
         }
 
         public virtual void Update(GameTime gameTime)

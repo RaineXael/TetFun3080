@@ -11,6 +11,7 @@ namespace TetFun3080.Gameplay
 {
     public class Player : IEntity
     {
+        
 
         private Companion companion;
 
@@ -24,7 +25,7 @@ namespace TetFun3080.Gameplay
         public void BeginGameMode(GameMode mode)
         {
             //temp, use tgm style ruleset for first release
-            GameMode temp = new JSONLoader().LoadGameModeFromFile("Content/Rulesets/tgm2.json");
+            GameMode temp = new JSONLoader().LoadGameModeFromFile("Content/Rulesets/tgm2v2.json");
             //GameMode temp = new JSONLoader().LoadGameModeFromFile("Content/Rulesets/tgm2guideline.json");
             currentEntity = new PlayerGame(new Board(), _input, Position, temp, this);
             PlayerGame game = (PlayerGame)currentEntity;

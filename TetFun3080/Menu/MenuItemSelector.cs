@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TetFun3080.Backend;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TetFun3080.Menu
 {
@@ -23,8 +24,11 @@ namespace TetFun3080.Menu
 
         private UserInput input;
 
+        private TextObject selectedTitle;
+
         public MenuItemSelector(string itemText, Vector2 pos, int height, UserInput input) :base(itemText, pos, height)
         {
+            selectedTitle = new TextObject(Items[selectedIndex]);
             icon = new Sprite(AssetManager.contentIconFallbackTexture);
             this.input = input;
             
@@ -48,8 +52,9 @@ namespace TetFun3080.Menu
             {
                 selectedIndex = 0;
             }
-            
-            DebugConsole.Log("Selected index is now: " + selectedIndex);
+
+            selectedTitle.Text = Items[selectedIndex];
+            DebugConsole.Log("Selected index is now: " + selectedIndex + ", " + Items[selectedIndex]);
         }
 
         private void SelectItem()
@@ -60,14 +65,15 @@ namespace TetFun3080.Menu
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             icon.Scale = new Vector2(2, 2);
-            icon.Position = Position + iconOffset +  new Vector2(0,0) * ScreenManager.screenScale;
+            icon.Position = Position + iconOffset +  new Vector2(0,16) * ScreenManager.screenScale;
             icon.Draw(spriteBatch);
             icon.Scale = new Vector2(1, 1);
-            icon.Position = Position + iconOffset + new Vector2(36, 8) * ScreenManager.screenScale;
+            icon.Position = Position + iconOffset + new Vector2(36, 24) * ScreenManager.screenScale;
             icon.Draw(spriteBatch);
-            icon.Position = Position + iconOffset + new Vector2(-20, 8) * ScreenManager.screenScale;
+            icon.Position = Position + iconOffset + new Vector2(-20, 24) * ScreenManager.screenScale;
             icon.Draw(spriteBatch);
-
+            selectedTitle.Position = (Position + new Vector2(0, 16) * ScreenManager.screenScale) / ScreenManager.screenScale;
+            selectedTitle.Draw(spriteBatch, gameTime);
             base.Draw(spriteBatch, gameTime);
         }
 

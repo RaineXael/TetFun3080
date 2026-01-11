@@ -1,11 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TetFun3080.Backend;
 using TetFun3080.Gameplay;
 
@@ -49,7 +45,7 @@ namespace TetFun3080.Menu
             
             
 
-            Items.Add(new MenuItemSelector("Selector", Position + new Vector2(0, i * separator * ScreenManager.screenScale),32, input)); // Assuming MenuItemBasic takes a string in its constructor
+            Items.Add(new MenuItemSelector("Selector Test", Position + new Vector2(0, i * separator * ScreenManager.screenScale),32, input)); // Assuming MenuItemBasic takes a string in its constructor
             Items[selectedIndex].OnSetSelected(true);
         }
         
@@ -100,23 +96,19 @@ namespace TetFun3080.Menu
            switch (selectedIndex)
             {
                 case 0:
-                    // Action for the first item
-                    DebugConsole.Log("Campaign");
-                    break;
-                case 1:
                     // Action for the second item
                     DebugConsole.Log("Freeplay");
                     PParent.BeginGameMode(new GameMode());
                     break;
-                case 2:
+                case 1:
                     // Action for the second item
                     DebugConsole.Log("Customize");
                     break;
-                case 3:
+                case 2:
                     // Action for the second item
                     DebugConsole.Log("Settings");
                     break;
-                case 4:
+                case 3:
                     // Action for the second item
                     DebugConsole.Log("Leave");
                     GameManager.QuitGame();

@@ -17,7 +17,7 @@ namespace TetFun3080.Gameplay
             MusicManager.PlayMusic("Audio/Mus/menu");
             this.parent = parent;
            Position = pos * ScreenManager.screenScale;
-           menu = new MenuParent(Position, input, new string[] { "Campaign", "Freeplay", "Customize","Settings", "Exit" });
+           menu = new MenuParent(Position, input, new string[] {"Freeplay", "Customize","Settings", "Exit" });
            this.input = input;
 
             //temp for menu functionality

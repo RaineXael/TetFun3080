@@ -73,6 +73,8 @@ namespace TetFun3080.Gameplay
 
         private BlockEraserParticles clearParticles;
 
+        private bool invisibleBoard = false;
+
         public PlayerGame(Board board, UserInput input, Vector2 Position, GameMode mode, Player parent)
         {
             level = 00;
@@ -140,18 +142,21 @@ namespace TetFun3080.Gameplay
             
             _block_sprite.Alpha = 1f;
             //Board
-            for (int x = 0; x < board.boardState.GetLength(0); x++)
+            if (!invisibleBoard)
             {
-                for (int y = 0; y < board.boardState.GetLength(1); y++)
+                for (int x = 0; x < board.boardState.GetLength(0); x++)
                 {
-                    if (y >= board.bufferHeight && board.boardState[x, y] != 0)
+                    for (int y = 0; y < board.boardState.GetLength(1); y++)
                     {
-                        _block_sprite.Position = new Vector2(x * _block_sprite.baseSize + Position.X, y * _block_sprite.baseSize - boardDrawOffset + Position.Y) * ScreenManager.screenScale;
-                        _block_sprite.spriteIndex = board.boardState[x, y];
-                        _block_sprite.Draw(spriteBatch);
-                        //_block_sprite.DrawSheet(spriteBatch, 0);
-                    }
+                        if (y >= board.bufferHeight && board.boardState[x, y] != 0)
+                        {
+                            _block_sprite.Position = new Vector2(x * _block_sprite.baseSize + Position.X, y * _block_sprite.baseSize - boardDrawOffset + Position.Y) * ScreenManager.screenScale;
+                            _block_sprite.spriteIndex = board.boardState[x, y];
+                            _block_sprite.Draw(spriteBatch);
+                            //_block_sprite.DrawSheet(spriteBatch, 0);
+                        }
 
+                    }
                 }
             }
 
@@ -237,6 +242,10 @@ namespace TetFun3080.Gameplay
             scoreText.Position = new Vector2(Position.X, Position.Y - 32);
             scoreText.Draw(spriteBatch, gameTime);
 
+            scoreText.Text = ruleset.gravity.ToString();
+            scoreText.Position = new Vector2(0,0);
+            scoreText.Draw(spriteBatch, gameTime);
+
             clearParticles.Draw(spriteBatch, gameTime);
 
 
@@ -261,11 +270,16 @@ namespace TetFun3080.Gameplay
             clearParticles.Update(gameTime);
             gravityTimer--;
             if (gravityTimer < 0)
-                if (gravityTimer < 0)
+            {
+                while (gravityTimer < 0)
                 {
-                    gravityTimer = ruleset.gravity;
+                    gravityTimer += 1;
                     MoveDown();
                 }
+                gravityTimer = ruleset.gravity;
+            }
+            
+
 
             if (lockedIn)
             {
