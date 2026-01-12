@@ -65,6 +65,12 @@ namespace TetFun3080
         {
             currentAnimation = direAnim;
         }
+
+        public void SetLineClear(object sender, EventArgs e)
+        {
+            currentAnimation = lineclearAnim;
+        }
+
         public void ResetAnim(object sender, EventArgs e)
         {
             currentAnimation = idleAnim;

@@ -1,0 +1,108 @@
+{
+  "levels": [
+    {
+      "Level": 0,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 1,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": -20,
+        "holdEnabled": true,
+        "appearanceDelay": 18,
+        "lineclearDelay": 12,
+        "dasTime": 12,
+        "lockInDelay": 30,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 100,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 1,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": -20,
+        "holdEnabled": true,
+        "appearanceDelay": 14,
+        "lineclearDelay": 6,
+        "dasTime": 12,
+        "lockInDelay": 26,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 200,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 1,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": -20,
+        "holdEnabled": true,
+        "appearanceDelay": 14,
+        "lineclearDelay": 6,
+        "dasTime": 11,
+        "lockInDelay": 22,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 300,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 1,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": -20,
+        "holdEnabled": true,
+        "appearanceDelay": 8,
+        "lineclearDelay": 6,
+        "dasTime": 10,
+        "lockInDelay": 18,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 400,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 1,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": -20,
+        "holdEnabled": true,
+        "appearanceDelay": 7,
+        "lineclearDelay": 5,
+        "dasTime": 8,
+        "lockInDelay": 15,
+        "InstalockOnHardDrop": false
+      }
+    },
+    {
+      "Level": 500,
+      "Ruleset": {
+        "RandomizerName": null,
+        "RotatorName": null,
+        "visibleNextCount": 1,
+        "ghostEnabled": true,
+        "initialLevel": 0,
+        "gravity": -20,
+        "holdEnabled": true,
+        "appearanceDelay": 8,
+        "lineclearDelay": 4,
+        "dasTime": 8,
+        "lockInDelay": 15,
+        "InstalockOnHardDrop": false
+      }
+    }
+  ],
+  "Name": "TADEATH",
+  "Description": "The Second Death"
+}

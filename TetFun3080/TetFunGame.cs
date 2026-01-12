@@ -23,7 +23,7 @@ namespace TetFun3080
             _graphics = new GraphicsDeviceManager(this);
             ScreenManager.graphics = _graphics;
             
-            ScreenManager.SetResolution(BASE_WINDOW_WIDTH, BASE_WINDOW_HEIGHT, 1f, false);
+            ScreenManager.SetResolution(BASE_WINDOW_WIDTH, BASE_WINDOW_HEIGHT, 2f, false);
             AssetManager._graphics = _graphics;
             
             

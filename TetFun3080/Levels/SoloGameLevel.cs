@@ -39,7 +39,7 @@ namespace TetFun3080.Levels
             player1Input = new UserInput();
             player2Input = new UserInput(Keys.Left, Keys.Right, Keys.Down, Keys.Up, Keys.Z, Keys.X, Keys.LeftShift);
 
-            mode = jsonLoader.LoadGameModeFromFile("Content/Rulesets/tgm2v2.json");
+            //mode = jsonLoader.LoadGameModeFromFile("Content/Rulesets/tgm2v2.json");
 
             player1 = new Player(player1Input, new Vector2(400, 100));
 

@@ -368,6 +368,9 @@
 #begin Rulesets/tgm2guideline.json
 /copy:Rulesets/tgm2guideline.json
 
+#begin Rulesets/tgm2shi.json
+/copy:Rulesets/tgm2shi.json
+
 #begin Rulesets/tgm2v2.json
 /copy:Rulesets/tgm2v2.json
 

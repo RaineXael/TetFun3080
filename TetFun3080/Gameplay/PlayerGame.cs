@@ -77,7 +77,7 @@ namespace TetFun3080.Gameplay
 
         public PlayerGame(Board board, UserInput input, Vector2 Position, GameMode mode, Player parent)
         {
-            level = 0;
+            level = 470;
             this.input = input;
             
             this.parent = parent;
@@ -670,6 +670,8 @@ namespace TetFun3080.Gameplay
                             
                         }
                     }
+
+                    OnLineClear?.Invoke(this, EventArgs.Empty);
 
                     lineclearSoundInstance.Stop();
                     lineclearSoundInstance.Play();
