@@ -12,6 +12,8 @@ namespace TetFun3080.Backend
     {
         //Music Manager. Handles fadeouts, midlevel transitions, priority and looping.
 
+        private static float globalVolume = 0.5f;
+
         private static SoundEffectInstance currentSongInitial;
         private static SoundEffectInstance currentSongLoop;
 
@@ -35,6 +37,8 @@ namespace TetFun3080.Backend
                 currentInstance = currentSongInitial;
                 currentInstance.IsLooped = false;
 
+                currentInstance.Volume = globalVolume;
+
                 currentInstance.Play();
             }
         }
@@ -45,6 +49,7 @@ namespace TetFun3080.Backend
             {
 
                 currentInstance = currentSongLoop;
+                currentInstance.Volume = globalVolume;
                 currentInstance.IsLooped = true;
                 currentInstance.Play();
                 currentSongInitial = null; // Clear the initial song after it has played

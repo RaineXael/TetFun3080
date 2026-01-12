@@ -242,7 +242,7 @@ namespace TetFun3080.Gameplay
             scoreText.Position = new Vector2(Position.X, Position.Y - 32);
             scoreText.Draw(spriteBatch, gameTime);
 
-            scoreText.Text = ruleset.gravity.ToString();
+            scoreText.Text = dasTimer.ToString();
             scoreText.Position = new Vector2(0,0);
             scoreText.Draw(spriteBatch, gameTime);
 
@@ -439,30 +439,7 @@ namespace TetFun3080.Gameplay
             }
         }
 
-        public void PressLeft()
-        {
-            if (!lockedIn)
-            {
-                if (!leftPressed)
-                {
-                    //do one tick, first frame of input
-                    MoveLeft();
-                    dasTimer = ruleset.dasTime;
-                }
-                else
-                {
-                    //wait for dastimer to run out, then move
-                    if (dasTimer > 0)
-                    {
-                        dasTimer--;
-                    }
-                    else
-                    {
-                        MoveLeft();
-                    }
-                }
-            }
-        }
+       
 
         private Vector2 GetHardDropPos(bool addScore = false)
         {
@@ -502,10 +479,33 @@ namespace TetFun3080.Gameplay
         }
 
 
+        public void PressLeft()
+        {
+            
+                if (!leftPressed)
+                {
+                    //do one tick, first frame of input
+                    MoveLeft();
+                    dasTimer = ruleset.dasTime;
+                }
+                else
+                {
+                    //wait for dastimer to run out, then move
+                    if (dasTimer > 0)
+                    {
+                        dasTimer--;
+                    }
+                    else
+                    {
+                        MoveLeft();
+                    }
+                }
+                
+        }
+
         public void PressRight()
         {
-            if (!lockedIn)
-            {
+           
                 if (!rightPressed)
                 {
                     //do one tick, first frame of input
@@ -524,7 +524,9 @@ namespace TetFun3080.Gameplay
                         MoveRight();
                     }
                 }
-            }
+            
+                
+            
         }
 
         private void MoveLeft()
@@ -578,19 +580,16 @@ namespace TetFun3080.Gameplay
                     //{
                     //    LockInPiece();
                     //}
-
-
                     return;
                 }
-                else
-                {
-                    blockBottomHit = false;
-                    if (grantScore && !lockedIn)
-                    {
 
-                        score++;
-                    }
+
+                blockBottomHit = false;
+                if (grantScore && !lockedIn)
+                {
+                    score++;
                 }
+
 
 
             }
