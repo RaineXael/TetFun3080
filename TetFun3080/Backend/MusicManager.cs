@@ -12,7 +12,7 @@ namespace TetFun3080.Backend
     {
         //Music Manager. Handles fadeouts, midlevel transitions, priority and looping.
 
-        private static float globalVolume = 0.5f;
+        private static float globalVolume = 0.75f;
 
         private static SoundEffectInstance currentSongInitial;
         private static SoundEffectInstance currentSongLoop;

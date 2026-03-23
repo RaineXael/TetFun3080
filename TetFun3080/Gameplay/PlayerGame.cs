@@ -77,7 +77,7 @@ namespace TetFun3080.Gameplay
 
         public PlayerGame(Board board, UserInput input, Vector2 Position, GameMode mode, Player parent)
         {
-            level = 470;
+            level = 780;
             this.input = input;
             
             this.parent = parent;
